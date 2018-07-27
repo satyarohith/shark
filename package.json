@@ -1,0 +1,10 @@
+{
+  "name": "unknown",
+  "version": "0.0.1",
+  "description": "An Interactive command line tool for most operations of DigitalOcean.",
+  "main": "cli.js",
+  "repository": "github.com/satyarohith/unknown",
+  "author": "Satya Rohith <satyarohith@gmx.com>",
+  "license": "MIT",
+  "private": false
+}
