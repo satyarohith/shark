@@ -6,5 +6,12 @@
   "repository": "github.com/satyarohith/unknown",
   "author": "Satya Rohith <satyarohith@gmx.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "configstore": "^4.0.0",
+    "do-wrapper": "^3.14.3",
+    "inquirer": "^6.0.0",
+    "yargs": "^12.0.1"
+  }
 }
