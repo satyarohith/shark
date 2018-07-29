@@ -1,5 +1,5 @@
 {
-  "name": "unknown",
+  "name": "shark",
   "version": "0.0.1",
   "description": "An Interactive command line tool for most operations of DigitalOcean.",
   "main": "cli.js",

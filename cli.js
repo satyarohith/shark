@@ -2,26 +2,24 @@
 
 // =============  REQUIRE STATEMENTS ==================
 const argv = require('yargs').argv;
-const chalk = require('chalk');
-const inquirer = require('inquirer');
 const ConfigStore = require('configstore');
 const pkg = require('./package.json');
-const DigitalOcean = require('do-wrapper').default;
-
 const config = new ConfigStore(pkg.name);
+const DigitalOcean = require('do-wrapper').default;
+const chalk = require('chalk');
 
-const Create = require('./questions/create');
-const Delete = require('./questions/delete');
-const List = require('./questions/list');
-
+const Create = require('./create');
+const Delete = require('./delete');
+const List = require('./list');
+const { verifyAccount } = require('./util');
 if (!config.has('do_api_access_token')) {
   (async () => {
     try {
       let answers = await Create.accessToken();
-      config.set('do_api_access_token', answers.do_api_access_token);
-      // Verify access token after/before setting config
+      // If token is valid verifAccount sets the token
+      await verifyAccount(answers.do_api_access_token, config);
     } catch (error) {
-      console.log('Error ACCESS_TOKEN:', error);
+      console.log('Error while setting accessToken', error);
     }
   })();
 }
@@ -30,25 +28,6 @@ const ACCESS_TOKEN = config.get('do_api_access_token');
 
 const DoAPI = new DigitalOcean(ACCESS_TOKEN, 10);
 
-// Create Droplet JSON example
-// {
-//   "name": "example.com",
-//   "region": "nyc3",
-//   "size": "s-1vcpu-1gb",
-//   "image": "ubuntu-16-04-x64",
-//   "ssh_keys": null,
-//   "backups": false,
-//   "ipv6": true,
-//   "user_data": null,
-//   "private_networking": null,
-//   "volumes": null,
-//   "tags": [
-//     "web"
-//   ]
-// }
-
-// ==================== Actions / Function Declarations ====================
-// create droplet
 async function createDroplet() {
   droplet = await Create.droplet();
   console.log(droplet.tags);
@@ -70,13 +49,22 @@ async function createDroplet() {
 
 // listDroplets
 function listDroplets() {
-  console.log('List Droplet fnc ran');
   DoAPI.dropletsGetAll().then(list => {
     if (list.body.droplets.length === 0) {
       console.log("Sorry you don't have any droplets");
     } else {
+      console.log(`You have ${chalk.magenta(list.body.meta.total)} Droplets`);
       list.body.droplets.map(droplet => {
-        console.log(`Name: ${droplet.name} id: ${droplet.id}`);
+        console.log(
+          `--------------------------------
+  ${chalk.inverse('Name:')}   ${droplet.name}
+  ${chalk.inverse('Id:')}     ${droplet.id}
+  ${chalk.inverse('Memory:')} ${droplet.memory}
+  ${chalk.inverse('Image:')}  ${droplet.image.slug}
+  ${chalk.inverse('Status:')} ${droplet.status}
+  ${chalk.inverse('Region:')} ${droplet.region.name}
+           `
+        );
       });
     }
   });
@@ -95,28 +83,22 @@ async function deleteDroplet() {
   }
 }
 
-// Getting ssh Key
-// let ssh_keys;
-// Do.accountGetKeys().then(data => {
-//   if (data.body.ssh_keys) {
-//     ssh_keys = data.body.ssh_keys;
-//     console.log(ssh_keys);
-//   }
-// });
-// Getting images (Working but cannot filter)// TODO: @satyarohith
-// let query = {
-//   type: 'distribution',
-//   page: 5
-// };
-// Do.imagesGetAll(query)
-//   .then(data => console.log(data.body))
-//   .catch(err => console.error(err));
-//============================== Questions ==============================
-
-//============================== Invokations Here ==============================
-if (argv._.includes('delete') && argv._.includes('droplet')) {
+if (argv._[0] === 'delete' && argv._[1] === 'droplet') {
   deleteDroplet();
 }
-if (argv._.includes('create') && argv._.includes('droplet')) {
+if (argv._[0] === 'create' && argv._[1] === 'droplet') {
   createDroplet();
+}
+if (argv._[0] === 'list' && argv._[1] === 'droplet') {
+  listDroplets();
+}
+if (argv._[0] === 'delete' && argv._[1] === 'token') {
+  if (config.has('do_api_access_token')) {
+    config.delete('do_api_access_token');
+    console.log(
+      `${chalk.red(AccessToken)} Successfully Removed from your System!`
+    );
+  } else {
+    console.log(chalk.red('You do not have any access tokens to remove'));
+  }
 }
