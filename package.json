@@ -7,6 +7,9 @@
   "author": "Satya Rohith <satyarohith@gmx.com>",
   "license": "MIT",
   "private": false,
+  "bin": {
+    "shark": "./cli.js"
+  },
   "dependencies": {
     "chalk": "^2.4.1",
     "configstore": "^4.0.0",
