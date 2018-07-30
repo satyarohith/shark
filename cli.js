@@ -70,6 +70,23 @@ function listDroplets() {
   });
 }
 
+function listDomains() {
+  DoAPI.domainsGetAll()
+    .then(data => {
+      if (data.body.meta.total === 0) {
+        console.log("You don't have any domains");
+      }
+      data.body.domains.map((domain, index) => {
+        console.log(`${index + 1}. ${domain.name}`);
+      });
+    })
+    .catch(error =>
+      console.log(`
+    There was an error while fetching your domains.
+    ${error.id} : ${error.message}`)
+    );
+}
+
 async function createDomain() {
   let answers = await Create.domain();
   DoAPI.domainsCreate(answers.domain_name)
@@ -87,16 +104,42 @@ async function createDomain() {
     );
 }
 
+async function deleteDomain() {
+  let answers = await Delete.domain();
+  DoAPI.domainsDelete(answers.domain_name)
+    .then(data => {
+      if ((data.response.statusCode = 204)) {
+        console.log(`${answers.domain_name} has been successfully removed!`);
+      }
+    })
+    .catch(err =>
+      console.log(`An ${err.id} occurred. Please refer ${err.message}`)
+    );
+}
+
 async function deleteDroplet() {
-  try {
-    let answers = await Delete.droplet();
-    DoAPI.dropletsDelete(answers.droplet_id)
-      .then(console.log(`Success fully deleted droplet ${answers.droplet_id}`))
-      .catch(err => {
-        console.log('An Error occurred while Creating droplet:', err);
-      });
-  } catch (error) {
-    console.log('Error while Deleting droplet', error);
+  let answers = await Delete.droplet();
+  DoAPI.dropletsDelete(answers.droplet_id)
+    .then(data => {
+      if (data.response.statusCode === 204) {
+        console.log(
+          `Droplet ${answers.droplet_id} has been deleted successfully!`
+        );
+      }
+    })
+    .catch(err => {
+      console.log('An Error occurred while Creating droplet:', err);
+    });
+}
+
+function deleteToken() {
+  if (config.has('do_api_access_token')) {
+    config.delete('do_api_access_token');
+    console.log(
+      `${chalk.red(AccessToken)} Successfully Removed from your System!`
+    );
+  } else {
+    console.log(chalk.red('You do not have any access tokens to remove'));
   }
 }
 
@@ -106,27 +149,31 @@ if (argv._[0] === 'create') {
     createDroplet();
   } else if (argv._[1] === 'domain') {
     createDomain();
-  } else if (!argv._[1] && !argv._[2]) {
+  } else if (!argv._[1]) {
     Create.init();
   }
 }
+
 // delete
+if (argv._[0] === 'delete') {
+  if (argv._[1] === 'droplet') {
+    deleteDroplet();
+  } else if (argv._[1] === 'domain') {
+    deleteDomain();
+  } else if (argv._[1] === 'token') {
+    deleteToken();
+  } else if (!argv._[1]) {
+    Delete.init();
+  }
+}
 
 // list
-if (argv._[0] === 'delete' && argv._[1] === 'droplet') {
-  deleteDroplet();
-}
-
-if (argv._[0] === 'list' && argv._[1] === 'droplet') {
-  listDroplets();
-}
-if (argv._[0] === 'delete' && argv._[1] === 'token') {
-  if (config.has('do_api_access_token')) {
-    config.delete('do_api_access_token');
-    console.log(
-      `${chalk.red(AccessToken)} Successfully Removed from your System!`
-    );
-  } else {
-    console.log(chalk.red('You do not have any access tokens to remove'));
+if (argv._[0] === 'list') {
+  if (argv._[1] === 'droplet' || argv._[1] === 'droplets') {
+    listDroplets();
+  } else if (argv._[1] === 'domain' || argv._[1] === 'domains') {
+    listDomains();
+  } else if (!argv._[1]) {
+    List.init();
   }
 }
