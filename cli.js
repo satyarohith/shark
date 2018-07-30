@@ -70,6 +70,23 @@ function listDroplets() {
   });
 }
 
+async function createDomain() {
+  let answers = await Create.domain();
+  DoAPI.domainsCreate(answers.domain_name)
+    .then(data => {
+      if (data.body.domain.name) {
+        console.log(
+          `Domain ${data.body.domain.name} has been successfully created. 🎉`
+        );
+      }
+    })
+    .catch(err =>
+      console.error(
+        `An ${err.id} occurred. Please try a valid name ${err.message}`
+      )
+    );
+}
+
 async function deleteDroplet() {
   try {
     let answers = await Delete.droplet();
@@ -83,12 +100,23 @@ async function deleteDroplet() {
   }
 }
 
+// create
+if (argv._[0] === 'create') {
+  if (argv._[1] === 'droplet') {
+    createDroplet();
+  } else if (argv._[1] === 'domain') {
+    createDomain();
+  } else if (!argv._[1] && !argv._[2]) {
+    Create.init();
+  }
+}
+// delete
+
+// list
 if (argv._[0] === 'delete' && argv._[1] === 'droplet') {
   deleteDroplet();
 }
-if (argv._[0] === 'create' && argv._[1] === 'droplet') {
-  createDroplet();
-}
+
 if (argv._[0] === 'list' && argv._[1] === 'droplet') {
   listDroplets();
 }
