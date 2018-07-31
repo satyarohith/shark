@@ -17,8 +17,8 @@ module.exports = {
             value: 'domains'
           },
           {
-            name: 'Spaces',
-            value: 'spaces'
+            name: 'SSh Keys',
+            value: 'ssh_keys'
           }
         ]
       }

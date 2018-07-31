@@ -1,4 +1,4 @@
-const { DoAPI } = require('../util');
+const { DoAPI, spinner } = require('../util');
 const List = require('../inquirer/list');
 
 module.exports = {
@@ -11,28 +11,36 @@ module.exports = {
       case 'droplets':
         module.exports.droplets();
         break;
+      case 'ssh_keys':
+        module.exports.sshKeys();
+        break;
       default:
         break;
     }
   },
-  domains: () => {
-    DoAPI.domainsGetAll()
-      .then(data => {
-        if (data.body.meta.total === 0) {
-          console.log("You don't have any domains");
-        }
+  domains: async () => {
+    try {
+      spinner.start('Loading domains...');
+      let data = await DoAPI.domainsGetAll();
+      spinner.stop();
+      if (data.body.meta.total === 0) {
+        console.log("You don't have any domains");
+      } else {
         data.body.domains.map((domain, index) => {
           console.log(`${index + 1}. ${domain.name}`);
         });
-      })
-      .catch(error =>
-        console.log(`
-      There was an error while fetching your domains.
-      ${error.id} : ${error.message}`)
-      );
+      }
+    } catch (error) {
+      console.log(`
+      An error ocurred while fetching your domains.
+      ${error.id} : ${error.message}`);
+    }
   },
-  droplets: () => {
-    DoAPI.dropletsGetAll().then(list => {
+  droplets: async () => {
+    try {
+      spinner.start('Loading Droplets...');
+      let list = await DoAPI.dropletsGetAll();
+      spinner.stop();
       if (list.body.droplets.length === 0) {
         console.log("Sorry you don't have any droplets");
       } else {
@@ -50,6 +58,28 @@ module.exports = {
           );
         });
       }
-    });
+    } catch (error) {
+      console.log(`
+      An error ocurred while fetching your droplets.
+      ${error.id} : ${error.message}`);
+    }
+  },
+  sshKeys: async () => {
+    try {
+      spinner.start('Loading sshkeys...');
+      let data = await DoAPI.accountGetKeys();
+      spinner.stop();
+      if (data.body.meta.total === 0) {
+        console.log("You don't have any keys under your account");
+      } else {
+        data.body.ssh_keys.map((key, index) => {
+          console.log(`${index + 1}. ${key.name}  id: ${key.id}`);
+        });
+      }
+    } catch (error) {
+      console.log(`
+      An error ocurred while fetching your sshkeys.
+      ${error.id} : ${error.message}`);
+    }
   }
 };

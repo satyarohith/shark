@@ -3,7 +3,6 @@ const { DoAPI } = require('../util');
 
 module.exports = {
   init: async () => {
-    console.log('Create Init has been called!');
     let answers = await Create.init();
     switch (answers.create) {
       case 'droplet':
