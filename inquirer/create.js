@@ -7,7 +7,11 @@ module.exports = {
         type: 'list',
         name: 'create',
         message: 'What do you want to create?',
-        choices: ['Droplet', 'Spaces', 'Domain']
+        choices: [
+          { name: 'Droplet', value: 'droplet' },
+          { name: 'Spaces', value: 'spaces' },
+          { name: 'Domain', value: 'domain' }
+        ]
       }
     ];
 

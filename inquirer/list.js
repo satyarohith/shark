@@ -1,3 +1,5 @@
+const inquirer = require('inquirer');
+
 module.exports = {
   init: () => {
     const questions = [
@@ -7,12 +9,12 @@ module.exports = {
         message: 'What do you want to list?',
         choices: [
           {
-            name: 'Droplet',
-            value: 'droplet'
+            name: 'Droplets',
+            value: 'droplets'
           },
           {
             name: 'Domains',
-            value: 'domain'
+            value: 'domains'
           },
           {
             name: 'Spaces',
