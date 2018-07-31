@@ -4,12 +4,11 @@
 const argv = require('yargs').argv;
 
 const { initAccount } = require('./util');
-
-initAccount();
-
 const Create = require('./actions/create');
 const Delete = require('./actions/delete');
 const List = require('./actions/list');
+
+initAccount();
 
 switch (argv._[0]) {
   case 'create':

@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const Create = require('./inquirer/create');
 const pkg = require('./package.json');
 const ConfigStore = require('configstore');
+const Ora = require('ora');
 
 const config = new ConfigStore(pkg.name);
 
@@ -37,5 +38,6 @@ module.exports = {
   DoAPI: (() => {
     const ACCESS_TOKEN = config.get('do_api_access_token');
     return new DigitalOcean(ACCESS_TOKEN, 10);
-  })()
+  })(),
+  spinner: (() => new Ora())()
 };

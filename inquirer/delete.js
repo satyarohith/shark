@@ -2,6 +2,22 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 
 module.exports = {
+  init: () => {
+    const questions = [
+      {
+        type: 'list',
+        name: 'delete',
+        message: 'What do you want to Delete?',
+        choices: [
+          { name: 'Droplet', value: 'droplet' },
+          { name: 'Spaces', value: 'spaces' },
+          { name: 'Domain', value: 'domain' }
+        ]
+      }
+    ];
+
+    return inquirer.prompt(questions);
+  },
   domain: () => {
     const questions = [
       {
