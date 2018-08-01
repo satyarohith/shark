@@ -7,7 +7,7 @@ const { initAccount } = require('./util');
 const Create = require('./actions/create');
 const Delete = require('./actions/delete');
 const List = require('./actions/list');
-
+const { Init } = require('./actions/init');
 initAccount();
 
 switch (argv._[0]) {
@@ -62,7 +62,6 @@ switch (argv._[0]) {
     }
     break;
   default:
-    const init = () => console.log('No commands passed!');
-    init();
+    Init();
     break;
 }

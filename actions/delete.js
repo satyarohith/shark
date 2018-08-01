@@ -18,34 +18,33 @@ module.exports = {
     }
   },
   droplet: async () => {
-    let answers = await Delete.droplet();
-    spinner.start('Deleting your droplet..');
-    DoAPI.dropletsDelete(answers.droplet_id)
-      .then(data => {
-        spinner.stop();
-        if (data.response.statusCode === 204) {
-          console.log(
-            `Droplet ${answers.droplet_id} has been deleted successfully!`
-          );
-        }
-      })
-      .catch(err => {
-        console.log('An Error occurred while deleting your droplet:', err);
-      });
+    try {
+      let answers = await Delete.droplet();
+      spinner.start('Deleting your droplet..');
+      let data = await DoAPI.dropletsDelete(answers.droplet_id);
+      spinner.stop();
+      if (data.response.statusCode === 204) {
+        console.log(
+          `Droplet ${answers.droplet_id} has been deleted successfully!`
+        );
+      }
+    } catch (error) {
+      console.log('An Error occurred while deleting your droplet:', error);
+    }
   },
   domain: async () => {
-    let answers = await Delete.domain();
-    spinner.start('Deleting your domain...');
-    DoAPI.domainsDelete(answers.domain_name)
-      .then(data => {
-        spinner.stop();
-        if ((data.response.statusCode = 204)) {
-          console.log(`${answers.domain_name} has been successfully removed!`);
-        }
-      })
-      .catch(err =>
-        console.log(`An ${err.id} occurred. Please refer ${err.message}`)
-      );
+    try {
+      let answers = await Delete.domain();
+      spinner.start('Deleting your domain...');
+      let data = await DoAPI.domainsDelete(answers.domain_name);
+      spinner.stop();
+      if ((data.response.statusCode = 204)) {
+        console.log(`${answers.domain_name} has been successfully removed!`);
+      }
+    } catch (error) {
+      spinner.stop();
+      console.log(`${error.id} : ${error.message}`);
+    }
   },
   token: () => {
     if (config.has('do_api_access_token')) {
