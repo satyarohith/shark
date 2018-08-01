@@ -16,35 +16,36 @@ module.exports = {
     }
   },
   domain: async () => {
-    let answers = await Create.domain();
-    DoAPI.domainsCreate(answers.domain_name)
-      .then(data => {
-        if (data.body.domain.name) {
-          console.log(
-            `Domain ${data.body.domain.name} has been successfully created. 🎉`
-          );
-        }
-      })
-      .catch(err =>
-        console.error(
-          `An ${err.id} occurred. Please try a valid name ${err.message}`
-        )
+    try {
+      let answers = await Create.domain();
+      spinner.start(`Creating ${answers.domain_name}...`);
+      let data = await DoAPI.domainsCreate(answers.domain_name);
+      spinner.stop();
+      if (data.body.domain.name) {
+        console.log(
+          `Domain ${data.body.domain.name} has been successfully created. 🎉`
+        );
+      }
+    } catch (error) {
+      console.error(
+        `An ${error.id} occurred. Please try a valid name ${error.message}`
       );
+    }
   },
   droplet: async () => {
-    droplet = await Create.droplet();
-    console.log(droplet.tags);
-    console.log(`Creating ${droplet.name}...`);
-    DoAPI.dropletsCreate(droplet)
-      .then(data => {
-        let droplet = data.body.droplet;
+    try {
+      droplet = await Create.droplet();
+      spinner.start(`Creating ${droplet.name}...`);
+      let data = await DoAPI.dropletsCreate(droplet);
+      let droplet = data.body.droplet;
+      spinner.stop();
+      if (droplet.name) {
         console.log(`Created ${droplet.name}! and its id is ${droplet.id}`);
-      })
-      .catch(error => {
-        console.log(error);
-        console.error(
-          `An ${error.id} occurred while creating droplet: ${error.message}`
-        );
-      });
+      }
+    } catch (error) {
+      console.error(
+        `An ${error.id} occurred while creating droplet: ${error.message}`
+      );
+    }
   }
 };

@@ -42,7 +42,7 @@ module.exports = {
       let list = await DoAPI.dropletsGetAll();
       spinner.stop();
       if (list.body.droplets.length === 0) {
-        console.log("Sorry you don't have any droplets");
+        console.log("You don't have any droplets");
       } else {
         console.log(`You have ${chalk.magenta(list.body.meta.total)} Droplets`);
         list.body.droplets.map(droplet => {
