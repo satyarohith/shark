@@ -1,5 +1,5 @@
 const Create = require('../inquirer/create');
-const { DoAPI } = require('../util');
+const { DoAPI, spinner } = require('../util');
 
 module.exports = {
   init: async () => {
