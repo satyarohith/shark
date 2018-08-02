@@ -1,5 +1,6 @@
 const Create = require('../inquirer/create');
 const { DoAPI, spinner } = require('../util');
+const chalk = require('chalk');
 
 module.exports = {
   init: async () => {
@@ -51,9 +52,9 @@ module.exports = {
       );
     }
   },
-  ssh_key: async () => {
+  sshkey: async () => {
     try {
-      answers = await Create.ssh_key();
+      answers = await Create.sshkey();
       spinner.start('Adding your key...');
       let data = await DoAPI.accountAddKey(answers);
       spinner.stop();

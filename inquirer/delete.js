@@ -11,7 +11,8 @@ module.exports = {
         choices: [
           { name: 'Droplet', value: 'droplet' },
           { name: 'Spaces', value: 'spaces' },
-          { name: 'Domain', value: 'domain' }
+          { name: 'Domain', value: 'domain' },
+          { name: 'SSH Key', value: 'ssh_key' }
         ]
       }
     ];
@@ -36,6 +37,17 @@ module.exports = {
         type: 'input',
         name: 'droplet_id',
         message: 'Enter the droplet id you want to delete:'
+      }
+    ];
+
+    return inquirer.prompt(questions);
+  },
+  sshkey: () => {
+    const questions = [
+      {
+        type: 'input',
+        name: 'ssh_key_id',
+        message: 'Enter sshkey id to delete:'
       }
     ];
 
