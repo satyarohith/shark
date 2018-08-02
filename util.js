@@ -44,5 +44,16 @@ module.exports = {
     return new DigitalOcean(ACCESS_TOKEN, 10);
   })(),
   spinner: (() => new Ora())(),
-  config: config
+  config: config,
+  callMatchingMethod: (object, method) => {
+    if (object.hasOwnProperty(method)) {
+      object[method]();
+    } else if (object.hasOwnProperty('init')) {
+      object.init();
+    } else {
+      console.error(
+        `Couldn\'t find the method/property ${method} in ${object} `
+      );
+    }
+  }
 };
