@@ -10,7 +10,8 @@ module.exports = {
         choices: [
           { name: 'Droplet', value: 'droplet' },
           { name: 'Spaces', value: 'spaces' },
-          { name: 'Domain', value: 'domain' }
+          { name: 'Domain', value: 'domain' },
+          { name: 'SSH Key', value: 'ssh_key' }
         ]
       }
     ];
@@ -175,6 +176,22 @@ module.exports = {
       //   type: 'input',
       //   name: 'dropletsQuantity'
       // }
+    ];
+
+    return inquirer.prompt(questions);
+  },
+  ssh_key: () => {
+    const questions = [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Give a name to your key:'
+      },
+      {
+        type: 'input',
+        name: 'public_key',
+        message: 'Paste your public key:'
+      }
     ];
 
     return inquirer.prompt(questions);

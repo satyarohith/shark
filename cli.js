@@ -20,6 +20,9 @@ switch (argv._[0]) {
         case 'domain':
           Create.domain();
           break;
+        case 'ssh_key':
+          Create.ssh_key();
+          break;
         default:
           Create.init();
           break;
