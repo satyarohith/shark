@@ -9,24 +9,28 @@ const config = new ConfigStore(pkg.name);
 
 module.exports = {
   initAccount: async () => {
-    const verifyAccount = accesstoken => {
-      const DoAPI = new DigitalOcean(accesstoken, 5);
-      DoAPI.account()
-        .then(data => {
+    const verifyAccount = async accesstoken => {
+      try {
+        const DoAPI = new DigitalOcean(accesstoken, 5);
+        module.exports.spinner.start('Verifying your account...');
+        let data = await DoAPI.account();
+        let account = data.body.account;
+        if (account) {
+          module.exports.spinner.succeed('Account verified!');
           config.set('do_api_access_token', accesstoken);
-          let account = data.body.account;
           console.log(`
-        ${chalk.green('Hi! Your access token is valid.')}
-        Email: ${account.email}
-        Droplet Limit: ${account.droplet_limit}
-        Floating IP Limit: ${account.floating_ip_limit}
-        `);
-        })
-        .catch(() => {
-          console.error(`
+          ${chalk.green('Hi! Your access token is valid.')}
+          Email: ${account.email}
+          Droplet Limit: ${account.droplet_limit}
+          Floating IP Limit: ${account.floating_ip_limit}
+          `);
+        }
+      } catch (error) {
+        module.exports.spinner.fail('Verification failed!');
+        console.error(`
           ${chalk.red('Please make sure you are using a valid access token')}
           `);
-        });
+      }
     };
 
     if (!config.has('do_api_access_token')) {
@@ -39,5 +43,6 @@ module.exports = {
     const ACCESS_TOKEN = config.get('do_api_access_token');
     return new DigitalOcean(ACCESS_TOKEN, 10);
   })(),
-  spinner: (() => new Ora())()
+  spinner: (() => new Ora())(),
+  config: config
 };
