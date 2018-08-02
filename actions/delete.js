@@ -1,5 +1,6 @@
 const Delete = require('../inquirer/delete');
-const { DoAPI, spinner } = require('../util');
+const { DoAPI, spinner, config } = require('../util');
+const chalk = require('chalk');
 
 module.exports = {
   init: async () => {
@@ -13,6 +14,10 @@ module.exports = {
         break;
       case 'token':
         module.exports.token();
+        break;
+      case 'ssh_key':
+        module.exports.sshkey();
+        break;
       default:
         break;
     }
@@ -29,6 +34,7 @@ module.exports = {
         );
       }
     } catch (error) {
+      spinner.stop();
       console.log('An Error occurred while deleting your droplet:', error);
     }
   },
@@ -44,6 +50,24 @@ module.exports = {
     } catch (error) {
       spinner.stop();
       console.log(`${error.id} : ${error.message}`);
+    }
+  },
+  sshkey: async () => {
+    try {
+      let answers = await Delete.sshkey();
+      spinner.start('Deleting your key...');
+      let data = await DoAPI.accountDeleteKey(answers.ssh_key_id);
+      spinner.stop();
+      if ((data.response.statusCode = 204)) {
+        console.log(
+          `ssh_key with id: ${
+            answers.ssh_key_id
+          } has been successfully removed!`
+        );
+      }
+    } catch (error) {
+      spinner.stop();
+      console.error(`${error.message}`);
     }
   },
   token: () => {

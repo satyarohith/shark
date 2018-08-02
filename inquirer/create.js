@@ -180,7 +180,7 @@ module.exports = {
 
     return inquirer.prompt(questions);
   },
-  ssh_key: () => {
+  sshkey: () => {
     const questions = [
       {
         type: 'input',
