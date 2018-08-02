@@ -11,6 +11,9 @@ module.exports = {
       case 'domain':
         module.exports.domain();
         break;
+      case 'ssh_key':
+        module.exports.ssh_key();
+        break;
       default:
         break;
     }
@@ -46,6 +49,26 @@ module.exports = {
       console.error(
         `An ${error.id} occurred while creating droplet: ${error.message}`
       );
+    }
+  },
+  ssh_key: async () => {
+    try {
+      answers = await Create.ssh_key();
+      spinner.start('Adding your key...');
+      let data = await DoAPI.accountAddKey(answers);
+      spinner.stop();
+      if (data.body.ssh_key.id) {
+        console.log(
+          `SSH_KEY: ${chalk.green(
+            data.body.ssh_key.name
+          )} with Id: ${chalk.blue(
+            data.body.ssh_key.id
+          )} has been succesfully created!`
+        );
+      }
+    } catch (error) {
+      spinner.stop();
+      console.error(`${error.message}`);
     }
   }
 };
