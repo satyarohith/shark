@@ -1,6 +1,7 @@
+//TODO handle returns if the domains, droplets, .., are 0
 module.exports = {
   // loadDomains loads the domains of the user and returns an array of them.
-  loadDomains: async (DoAPI, spinner) => {
+  loadAvailableDomains: async (DoAPI, spinner) => {
     try {
       spinner.start('Loading your domains..');
       let data = await DoAPI.domainsGetAll();
