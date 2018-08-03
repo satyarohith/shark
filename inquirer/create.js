@@ -1,5 +1,13 @@
 const inquirer = require('inquirer');
 const chalk = require('chalk');
+const {
+  loadDomains,
+  loadAvailableRegions,
+  loadAvailableSizes,
+  loadAvailableImages,
+  loadAvailableSSHKEYS
+} = require('./loaders');
+
 module.exports = {
   init: () => {
     const questions = [
@@ -40,7 +48,7 @@ module.exports = {
     ];
     return inquirer.prompt(questions);
   },
-  droplet: () => {
+  droplet: async (DoAPI, spinner) => {
     const questions = [
       {
         type: 'input',
@@ -51,131 +59,55 @@ module.exports = {
         type: 'list',
         name: 'image',
         message: 'Which Distribution do you want to use?',
-        choices: [
-          {
-            name: 'Ubuntu 18.4.1 x64',
-            value: 'ubuntu-18-04-x64'
-          },
-          {
-            name: 'Ubuntu 16.4.4 x64',
-            value: 'ubuntu-16-04-x64'
-          },
-          {
-            name: 'CentOS 7.5 x64',
-            value: 'centos-7-x64'
-          },
-          {
-            name: 'CentOS 6.9 x64',
-            value: 'centos-6-x64'
-          }
-        ]
+        choices: await loadAvailableImages(DoAPI, spinner)
       },
       {
         type: 'list',
         name: 'size',
         message: 'How stronger your computer should be?',
-        choices: [
-          {
-            name: '1GB-1vCPU-25GBSSD-1TBtransfer-$5/mo',
-            value: 's-1vcpu-1gb'
-          },
-          {
-            name: '2GB-1vCPU-50GBSSD-2TBtransfer-$10/mo',
-            value: 's-1vcpu-1gb'
-          },
-          {
-            name: '3GB-1vCPU-60GBSSD-3TBtransfer-$15/mo',
-            value: 's-1vcpu-1gb'
-          },
-          {
-            name: '2GB-2vCPU-60GBSSD-3TBtransfer-$15/mo',
-            value: 's-1vcpu-1gb'
-          }
-        ]
+        choices: await loadAvailableSizes(DoAPI, spinner)
       },
       {
         type: 'list',
         name: 'region',
         message: 'Choose your data center!',
+        choices: await loadAvailableRegions(DoAPI, spinner)
+      },
+      {
+        type: 'checkbox',
+        name: 'dropletAddOps',
+        message: 'Add any additional options',
         choices: [
+          new inquirer.Separator(' == Additional Options == '),
           {
-            name: 'New York 1',
-            value: 'nyc1'
+            name: 'Private networking',
+            value: 'private_networking'
           },
           {
-            name: 'Singapore 1',
-            value: 'sgp1'
+            name: 'IPv6',
+            value: 'ipv6'
           },
           {
-            name: 'London 1',
-            value: 'lon1'
-          },
-          {
-            name: 'New York 3',
-            value: 'nyc3'
-          },
-          {
-            name: 'Amsterdam 3',
-            value: 'ams3'
-          },
-          {
-            name: 'Frankfurt 1',
-            value: 'fra1'
-          },
-          {
-            name: 'Toronto 1',
-            value: 'tor1'
-          },
-          {
-            name: 'San Francisco 2',
-            value: 'sfo2'
-          },
-          {
-            name: 'Bangalore 1',
-            value: 'blr1'
+            name: 'Monitoring',
+            value: 'monitoring'
           }
         ]
       },
-      // {
-      //   type: 'checkbox',
-      //   name: 'dropletAddOps',
-      //   message: 'Add any additional options',
-      //   choices: [
-      //     new inquirer.Separator(' == Additional Options == '),
-      //     {
-      //       name: 'Private networking',
-      //       value: true
-      //     },
-      //     {
-      //       name: 'IPv6',
-      //       value: true
-      //     },
-      //     {
-      //       name: 'User data',
-      //       value: true
-      //     },
-      //     {
-      //       name: 'Monitoring',
-      //       value: true
-      //     }
-      //   ]
-      // },
       {
         type: 'input',
         name: 'tags',
         message: 'Add any droplet tags',
-        filter: input => [input]
+        filter: input => {
+          let tags = input.split(' ');
+          return tags;
+        }
+      },
+      {
+        type: 'checkbox',
+        name: 'ssh_keys',
+        message: 'Select your SSH keys',
+        choices: await loadAvailableSSHKEYS(DoAPI, spinner)
       }
-      // {
-      //   type: 'checkbox',
-      //   name: 'clientSSHKeys',
-      //   message: 'Select your SSH keys',
-      //   choices: [new inquirer.Separator(' == Select your SSH Keys == ')]
-      // },
-      // {
-      //   type: 'input',
-      //   name: 'dropletsQuantity'
-      // }
     ];
 
     return inquirer.prompt(questions);
@@ -191,6 +123,18 @@ module.exports = {
         type: 'input',
         name: 'public_key',
         message: 'Paste your public key:'
+      }
+    ];
+
+    return inquirer.prompt(questions);
+  },
+  domainRecord: async (DoAPI, spinner) => {
+    const questions = [
+      {
+        type: 'list',
+        name: 'name',
+        message: 'Domain Name:',
+        choices: await loadDomains(DoAPI, spinner)
       }
     ];
 
