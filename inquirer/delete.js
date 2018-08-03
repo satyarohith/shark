@@ -1,6 +1,10 @@
 const inquirer = require('inquirer');
 const chalk = require('chalk');
-
+const {
+  loadAvailableDroplets,
+  loadAvailableDomains,
+  loadAvailableSSHKEYS
+} = require('./loaders');
 module.exports = {
   init: () => {
     const questions = [
@@ -19,35 +23,37 @@ module.exports = {
 
     return inquirer.prompt(questions);
   },
-  domain: () => {
+  domain: async (DoAPI, spinner) => {
     const questions = [
       {
-        type: 'input',
+        type: 'list',
         name: 'domain_name',
-        filter: input => input.toLowerCase(),
-        message: chalk.red('Enter the domain name')
+        message: chalk.red('Select the domain you want to delete:'),
+        choices: await loadAvailableDomains(DoAPI, spinner)
       }
     ];
 
     return inquirer.prompt(questions);
   },
-  droplet: () => {
+  droplet: async (DoAPI, spinner) => {
     const questions = [
       {
-        type: 'input',
+        type: 'list',
         name: 'droplet_id',
-        message: 'Enter the droplet id you want to delete:'
+        message: 'Select the droplet you want to delete:',
+        choices: await loadAvailableDroplets(DoAPI, spinner)
       }
     ];
 
     return inquirer.prompt(questions);
   },
-  sshkey: () => {
+  ssh_key: async (DoAPI, spinner) => {
     const questions = [
       {
-        type: 'input',
+        type: 'list',
         name: 'ssh_key_id',
-        message: 'Enter sshkey id to delete:'
+        message: 'Select ssh_key you want to delete:',
+        choices: await loadAvailableSSHKEYS(DoAPI, spinner)
       }
     ];
 
