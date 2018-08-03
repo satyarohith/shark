@@ -1,30 +1,15 @@
 const Delete = require('../inquirer/delete');
-const { DoAPI, spinner, config } = require('../util');
+const { DoAPI, spinner, config, callMatchingMethod } = require('../util');
 const chalk = require('chalk');
 
 module.exports = {
   init: async () => {
     let answers = await Delete.init();
-    switch (answers.delete) {
-      case 'droplet':
-        module.exports.droplet();
-        break;
-      case 'domain':
-        module.exports.domain();
-        break;
-      case 'token':
-        module.exports.token();
-        break;
-      case 'ssh_key':
-        module.exports.sshkey();
-        break;
-      default:
-        break;
-    }
+    callMatchingMethod(module.exports, answers.delete);
   },
   droplet: async () => {
     try {
-      let answers = await Delete.droplet();
+      let answers = await Delete.droplet(DoAPI, spinner);
       spinner.start('Deleting your droplet..');
       let data = await DoAPI.dropletsDelete(answers.droplet_id);
       spinner.stop();
@@ -40,7 +25,7 @@ module.exports = {
   },
   domain: async () => {
     try {
-      let answers = await Delete.domain();
+      let answers = await Delete.domain(DoAPI, spinner);
       spinner.start('Deleting your domain...');
       let data = await DoAPI.domainsDelete(answers.domain_name);
       spinner.stop();
@@ -52,9 +37,9 @@ module.exports = {
       console.log(`${error.id} : ${error.message}`);
     }
   },
-  sshkey: async () => {
+  ssh_key: async () => {
     try {
-      let answers = await Delete.sshkey();
+      let answers = await Delete.ssh_key(DoAPI, ssh_key);
       spinner.start('Deleting your key...');
       let data = await DoAPI.accountDeleteKey(answers.ssh_key_id);
       spinner.stop();

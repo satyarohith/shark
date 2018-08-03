@@ -1,23 +1,11 @@
 const Create = require('../inquirer/create');
-const { DoAPI, spinner } = require('../util');
+const { DoAPI, spinner, callMatchingMethod } = require('../util');
 const chalk = require('chalk');
 
 module.exports = {
   init: async () => {
     let answers = await Create.init();
-    switch (answers.create) {
-      case 'droplet':
-        module.exports.droplet();
-        break;
-      case 'domain':
-        module.exports.domain();
-        break;
-      case 'ssh_key':
-        module.exports.ssh_key();
-        break;
-      default:
-        break;
-    }
+    callMatchingMethod(module.exports, answers.create);
   },
   domain: async () => {
     try {
@@ -31,30 +19,35 @@ module.exports = {
         );
       }
     } catch (error) {
-      console.error(
-        `An ${error.id} occurred. Please try a valid name ${error.message}`
-      );
+      spinner.stop();
+      console.error(error.message);
     }
   },
   droplet: async () => {
     try {
-      droplet = await Create.droplet();
-      spinner.start(`Creating ${droplet.name}...`);
-      let data = await DoAPI.dropletsCreate(droplet);
+      let answers = await Create.droplet(DoAPI, spinner);
+      spinner.start(`Creating ${answers.name}...`);
+      // The below omits property dropletAddOps
+      let { dropletAddOps, ...dropletconfig } = answers;
+      if (answers.hasOwnProperty('dropletAddOps')) {
+        answers.dropletconfig.map(option => {
+          dropletconfig[option] = true;
+        });
+      }
+      let data = await DoAPI.dropletsCreate(dropletconfig);
       let droplet = data.body.droplet;
       spinner.stop();
       if (droplet.name) {
         console.log(`Created ${droplet.name}! and its id is ${droplet.id}`);
       }
     } catch (error) {
-      console.error(
-        `An ${error.id} occurred while creating droplet: ${error.message}`
-      );
+      spinner.stop();
+      console.error(error.message);
     }
   },
-  sshkey: async () => {
+  ssh_key: async () => {
     try {
-      answers = await Create.sshkey();
+      answers = await Create.ssh_key();
       spinner.start('Adding your key...');
       let data = await DoAPI.accountAddKey(answers);
       spinner.stop();
@@ -71,5 +64,9 @@ module.exports = {
       spinner.stop();
       console.error(`${error.message}`);
     }
+  },
+  domainrecord: async () => {
+    let anwsers = await Create.domainRecord(DoAPI, spinner);
+    console.log(anwsers);
   }
 };
