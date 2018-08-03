@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const {
-  loadDomains,
+  loadAvailableDomains,
   loadAvailableRegions,
   loadAvailableSizes,
   loadAvailableImages,
@@ -112,7 +112,7 @@ module.exports = {
 
     return inquirer.prompt(questions);
   },
-  sshkey: () => {
+  ssh_key: () => {
     const questions = [
       {
         type: 'input',
@@ -134,7 +134,7 @@ module.exports = {
         type: 'list',
         name: 'name',
         message: 'Domain Name:',
-        choices: await loadDomains(DoAPI, spinner)
+        choices: await loadAvailableDomains(DoAPI, spinner)
       }
     ];
 
