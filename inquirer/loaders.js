@@ -1,4 +1,3 @@
-//TODO handle returns if the domains, droplets, .., are 0
 module.exports = {
   // loadDomains loads the domains of the user and returns an array of them.
   loadAvailableDomains: async (DoAPI, spinner) => {
@@ -6,11 +5,16 @@ module.exports = {
       spinner.start('Loading your domains..');
       let data = await DoAPI.domainsGetAll();
       spinner.stop();
-      let choices = [];
-      data.body.domains.map(domain => {
-        choices.push(domain.name);
-      });
-      return choices;
+      if (data.body.meta.total > 0) {
+        let availableDomains = [];
+        data.body.domains.map(domain => {
+          choices.push(domain.name);
+        });
+        return availableDomains;
+      } else {
+        console.log("You don't have any domains!");
+        process.exit();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -36,24 +40,29 @@ module.exports = {
   },
   loadAvailableDroplets: async (DoAPI, spinner) => {
     try {
-      spinner.start('loading your droplets...');
+      spinner.start('Loading your droplets...');
       let data = await DoAPI.dropletsGetAll();
       spinner.stop();
       let availableDroplets = [];
-      data.body.droplets.map(droplet => {
-        availableDroplets.push({
-          name: droplet.name,
-          value: droplet.id
+      if (data.body.meta.total > 0) {
+        data.body.droplets.map(droplet => {
+          availableDroplets.push({
+            name: droplet.name,
+            value: droplet.id
+          });
         });
-      });
-      return availableDroplets;
+        return availableDroplets;
+      } else {
+        console.log("You don't have any droplets");
+        process.exit();
+      }
     } catch (error) {
       console.error(error);
     }
   },
   loadAvailableSizes: async (DoAPI, spinner) => {
     try {
-      spinner.start('loading available sizes...');
+      spinner.start('Loading available sizes...');
       let data = await DoAPI.sizesGetAll();
       spinner.stop();
       let availableSizes = [];
@@ -70,7 +79,7 @@ module.exports = {
   },
   loadAvailableImages: async (DoAPI, spinner) => {
     try {
-      spinner.start('loading available images...');
+      spinner.start('Loading available images...');
       let data = await DoAPI.imagesGetAll({ type: 'distribution', page: 3 });
       spinner.stop();
       let availableImages = [];
@@ -89,17 +98,22 @@ module.exports = {
   },
   loadAvailableSSHKEYS: async (DoAPI, spinner) => {
     try {
-      spinner.start('loading available ssh_keys...');
+      spinner.start('Loading your ssh_keys...');
       let data = await DoAPI.accountGetKeys();
       spinner.stop();
       let availableSSHKEYS = [];
-      data.body.ssh_keys.map(ssh_key => {
-        availableSSHKEYS.push({
-          name: ssh_key.name,
-          value: ssh_key.id
+      if (data.body.meta.total > 0) {
+        data.body.ssh_keys.map(ssh_key => {
+          availableSSHKEYS.push({
+            name: ssh_key.name,
+            value: ssh_key.id
+          });
         });
-      });
-      return availableSSHKEYS;
+        return availableSSHKEYS;
+      } else {
+        console.log("You don't have any ssh_keys!");
+        process.exit();
+      }
     } catch (error) {
       console.error(error);
     }
