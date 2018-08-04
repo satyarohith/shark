@@ -39,7 +39,7 @@ module.exports = {
   },
   ssh_key: async () => {
     try {
-      let answers = await Delete.ssh_key(DoAPI, ssh_key);
+      let answers = await Delete.ssh_key(DoAPI, spinner);
       spinner.start('Deleting your key...');
       let data = await DoAPI.accountDeleteKey(answers.ssh_key_id);
       spinner.stop();
