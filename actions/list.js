@@ -12,7 +12,7 @@ module.exports = {
         module.exports.droplets();
         break;
       case 'ssh_keys':
-        module.exports.sshKeys();
+        module.exports.ssh_Keys();
         break;
       default:
         break;
@@ -64,7 +64,7 @@ module.exports = {
       ${error.id} : ${error.message}`);
     }
   },
-  sshKeys: async () => {
+  ssh_Keys: async () => {
     try {
       spinner.start('Loading sshkeys...');
       let data = await DoAPI.accountGetKeys();
