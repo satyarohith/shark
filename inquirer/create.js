@@ -6,7 +6,7 @@ const {
   loadAvailableSizes,
   loadAvailableImages,
   loadAvailableSSHKEYS
-} = require('./loaders');
+} = require('../loaders');
 
 module.exports = {
   init: () => {
