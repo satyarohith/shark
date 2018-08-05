@@ -53,7 +53,9 @@ module.exports = {
         });
         return availableDroplets;
       } else {
-        console.log("You don't have any droplets");
+        console.log(
+          "You don't have any droplets! Please create ssh_key to proceed!"
+        );
         process.exit();
       }
     } catch (error) {

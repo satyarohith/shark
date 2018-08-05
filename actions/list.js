@@ -1,5 +1,6 @@
 const { DoAPI, spinner } = require('../util');
 const List = require('../inquirer/list');
+const chalk = require('chalk');
 
 module.exports = {
   init: async () => {

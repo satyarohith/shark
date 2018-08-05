@@ -28,12 +28,16 @@ module.exports = {
       let answers = await Create.droplet(DoAPI, spinner);
       spinner.start(`Creating ${answers.name}...`);
       // The below omits property dropletAddOps
-      let { dropletAddOps, ...dropletconfig } = answers;
+      let { dropletAddOps, tags, ...dropletconfig } = answers;
+      if (tags[0].length > 0) {
+        dropletconfig.tags = tags;
+      }
       if (answers.hasOwnProperty('dropletAddOps')) {
-        answers.dropletconfig.map(option => {
+        answers.dropletAddOps.map(option => {
           dropletconfig[option] = true;
         });
       }
+      console.log(dropletconfig);
       let data = await DoAPI.dropletsCreate(dropletconfig);
       let droplet = data.body.droplet;
       spinner.stop();
