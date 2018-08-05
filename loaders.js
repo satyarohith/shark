@@ -80,7 +80,7 @@ module.exports = {
   loadAvailableImages: async (DoAPI, spinner) => {
     try {
       spinner.start('Loading available images...');
-      let data = await DoAPI.imagesGetAll({ type: 'distribution', page: 3 });
+      let data = await DoAPI.imagesGetAll({ type: 'distribution' });
       spinner.stop();
       let availableImages = [];
       data.body.images.map(image => {

@@ -4,7 +4,7 @@ const {
   loadAvailableDroplets,
   loadAvailableDomains,
   loadAvailableSSHKEYS
-} = require('./loaders');
+} = require('../loaders');
 module.exports = {
   init: () => {
     const questions = [
