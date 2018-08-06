@@ -4,7 +4,8 @@ const chalk = require('chalk');
 const {
   loadAvailableDroplets,
   loadAvailableDomains,
-  loadAvailableSSHKEYS
+  loadAvailableSSHKEYS,
+  loadAvailableFloatingIps
 } = require('../loaders');
 module.exports = {
   init: () => {
@@ -55,6 +56,18 @@ module.exports = {
         name: 'ssh_key_id',
         message: 'Select ssh_key you want to delete:',
         choices: await loadAvailableSSHKEYS(DoAPI, spinner)
+      }
+    ];
+
+    return inquirer.prompt(questions);
+  },
+  floating_ip: async (DoAPI, spinner) => {
+    const questions = [
+      {
+        type: 'checkbox',
+        name: 'floating_ip',
+        message: 'Select floating_ips you want to delete:',
+        choices: await loadAvailableFloatingIps(DoAPI, spinner)
       }
     ];
 
