@@ -69,5 +69,24 @@ module.exports = {
       spinner.stop();
       console.error(`${error.message}`);
     }
+  },
+  floating_ip: async () => {
+    try {
+      let answers = await Create.floating_ip(DoAPI, spinner);
+      spinner.start('Creating floating_ip..');
+      let data = await DoAPI.floatingIpsAssignDroplet(answers.droplet_id);
+      if (data.body.floating_ip) {
+        spinner.succeed(
+          `floating ip ${chalk.blue(data.body.floating_ip.ip)} created!`
+        );
+        console.log(
+          `droplet: ${data.body.floating_ip.droplet.name}
+           region: ${data.body.floating_ip.region.name}`
+        );
+      }
+    } catch (error) {
+      spinner.stop();
+      console.error(error.message);
+    }
   }
 };

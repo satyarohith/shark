@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const {
-  loadAvailableDomains,
+  loadAvailableDroplets,
   loadAvailableRegions,
   loadAvailableSizes,
   loadAvailableImages,
@@ -129,13 +129,13 @@ module.exports = {
 
     return inquirer.prompt(questions);
   },
-  domainRecord: async (DoAPI, spinner) => {
+  floating_ip: async (DoAPI, spinner) => {
     const questions = [
       {
         type: 'list',
-        name: 'name',
-        message: 'Domain Name:',
-        choices: await loadAvailableDomains(DoAPI, spinner)
+        name: 'droplet_id',
+        message: 'Select droplet to assign to floating_ip',
+        choices: await loadAvailableDroplets(DoAPI, spinner)
       }
     ];
 
