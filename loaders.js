@@ -54,7 +54,7 @@ module.exports = {
         return availableDroplets;
       } else {
         console.log(
-          "You don't have any droplets! Please create ssh_key to proceed!"
+          "You don't have any droplets! Please create droplet to proceed!"
         );
         process.exit();
       }
@@ -118,6 +118,28 @@ module.exports = {
       }
     } catch (error) {
       console.error(error);
+    }
+  },
+  loadAvailableFloatingIps: async (DoAPI, spinner) => {
+    try {
+      spinner.start('Loading your floating_ips...');
+      let data = await DoAPI.floatingIpsGetAll();
+      spinner.stop();
+      let availableFIps = [];
+      if (data.body.meta.total > 0) {
+        data.body.floating_ips.map(fip => {
+          availableFIps.push({
+            name: `${fip.ip} assign to ${fip.droplet.name}`,
+            value: fip.ip
+          });
+        });
+        return availableFIps;
+      } else {
+        console.log("You don't have any floating_ips under your account");
+        process.exit();
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   }
 };
