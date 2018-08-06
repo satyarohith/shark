@@ -37,6 +37,10 @@ To create ssh_key
 shark create ssh_key
 ```
 
+To create floating_ip
+```sh
+shark create floating_ip
+```
 ## Delete
 
 To delete droplet
@@ -54,6 +58,10 @@ To delete ssh_key
 shark delete ssh_key
 ```
 
+To delete floating_ip
+```sh
+shark delete floating_ip
+```
 ## List
 You can list all available resources under your account.
 <br/>
@@ -70,4 +78,9 @@ shark list droplets
 To list ssh_keys
 ```
 shark list ssh_keys
+```
+
+To list floating_ips
+```sh
+shark list floating_ips
 ```
