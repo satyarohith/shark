@@ -68,6 +68,26 @@ module.exports = {
       console.error(`${error.message}`);
     }
   },
+  floating_ip: async () => {
+    try {
+      let answers = await Delete.floating_ip(DoAPI, spinner);
+      spinner.start('Deleting your key...');
+      answers.floating_ip.map(async fip => {
+        try {
+          let data = await DoAPI.floatingIpsDelete(fip);
+          if ((data.response.statusCode = 204)) {
+            spinner.succeed(`${fip} is deleted!`);
+          }
+        } catch (error) {
+          spinner.fail(`failed to delete ${fip}`);
+          console.log(error.message);
+        }
+      });
+    } catch (error) {
+      spinner.stop();
+      console.error(`${error.message}`);
+    }
+  },
   token: () => {
     if (config.has('do_api_access_token')) {
       config.delete('do_api_access_token');
