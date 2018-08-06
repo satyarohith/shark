@@ -1,23 +1,12 @@
-const { DoAPI, spinner } = require('../util');
+'use strict';
+const { DoAPI, spinner, callMatchingMethod } = require('../util');
 const List = require('../inquirer/list');
 const chalk = require('chalk');
 
 module.exports = {
   init: async () => {
     let answers = await List.init();
-    switch (answers.list) {
-      case 'domains':
-        module.exports.domains();
-        break;
-      case 'droplets':
-        module.exports.droplets();
-        break;
-      case 'ssh_keys':
-        module.exports.ssh_Keys();
-        break;
-      default:
-        break;
-    }
+    callMatchingMethod(module.exports, answers.list);
   },
   domains: async () => {
     try {

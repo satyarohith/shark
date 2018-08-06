@@ -1,3 +1,4 @@
+'use strict';
 const Delete = require('../inquirer/delete');
 const { DoAPI, spinner, config, callMatchingMethod } = require('../util');
 const chalk = require('chalk');
@@ -11,13 +12,17 @@ module.exports = {
     try {
       let answers = await Delete.droplet(DoAPI, spinner);
       spinner.start('Deleting your droplet..');
-      let data = await DoAPI.dropletsDelete(answers.droplet_id);
-      spinner.stop();
-      if (data.response.statusCode === 204) {
-        console.log(
-          `Droplet ${answers.droplet_id} has been deleted successfully!`
-        );
-      }
+      answers.droplet_id.map(async droplet => {
+        try {
+          let data = await DoAPI.dropletsDelete(droplet);
+          if (data.response.statusCode === 204) {
+            spinner.succeed(`${droplet} is deleted!`);
+          }
+        } catch (error) {
+          spinner.fail(`failed to delete ${droplet}`);
+          console.log(error);
+        }
+      });
     } catch (error) {
       spinner.stop();
       console.log('An Error occurred while deleting your droplet:', error);
@@ -27,11 +32,17 @@ module.exports = {
     try {
       let answers = await Delete.domain(DoAPI, spinner);
       spinner.start('Deleting your domain...');
-      let data = await DoAPI.domainsDelete(answers.domain_name);
-      spinner.stop();
-      if ((data.response.statusCode = 204)) {
-        console.log(`${answers.domain_name} has been successfully removed!`);
-      }
+      answers.domain_name.map(async domain => {
+        try {
+          let data = await DoAPI.domainsDelete(domain);
+          if ((data.response.statusCode = 204)) {
+            spinner.succeed(`${domain} is deleted`);
+          }
+        } catch (error) {
+          spinner.fail(`failed to delete ${domain}`);
+          console.log(error.message);
+        }
+      });
     } catch (error) {
       spinner.stop();
       console.log(`${error.id} : ${error.message}`);
@@ -41,15 +52,17 @@ module.exports = {
     try {
       let answers = await Delete.ssh_key(DoAPI, spinner);
       spinner.start('Deleting your key...');
-      let data = await DoAPI.accountDeleteKey(answers.ssh_key_id);
-      spinner.stop();
-      if ((data.response.statusCode = 204)) {
-        console.log(
-          `ssh_key with id: ${
-            answers.ssh_key_id
-          } has been successfully removed!`
-        );
-      }
+      answers.ssh_key_id.map(async ssh_key => {
+        try {
+          let data = await DoAPI.accountDeleteKey(ssh_key);
+          if ((data.response.statusCode = 204)) {
+            spinner.succeed(`${ssh_key} is deleted!`);
+          }
+        } catch (error) {
+          spinner.fail(`failed to delete ${ssh_key}`);
+          console.log(error.message);
+        }
+      });
     } catch (error) {
       spinner.stop();
       console.error(`${error.message}`);
