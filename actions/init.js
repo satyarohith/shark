@@ -1,3 +1,4 @@
+'use strict';
 const { init } = require('../inquirer/init');
 const Create = require('./create');
 const Delete = require('./delete');

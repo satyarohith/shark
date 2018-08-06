@@ -1,3 +1,4 @@
+'use strict';
 const Create = require('../inquirer/create');
 const { DoAPI, spinner, callMatchingMethod } = require('../util');
 const chalk = require('chalk');
@@ -68,9 +69,5 @@ module.exports = {
       spinner.stop();
       console.error(`${error.message}`);
     }
-  },
-  domainrecord: async () => {
-    let anwsers = await Create.domainRecord(DoAPI, spinner);
-    console.log(anwsers);
   }
 };

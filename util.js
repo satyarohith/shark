@@ -1,3 +1,4 @@
+'use strict';
 const DigitalOcean = require('do-wrapper').default;
 const chalk = require('chalk');
 const Create = require('./inquirer/create');

@@ -1,3 +1,4 @@
+'use strict';
 const argv = require('yargs').argv;
 const Create = require('./actions/create');
 const Delete = require('./actions/delete');

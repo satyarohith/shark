@@ -1,3 +1,4 @@
+'use strict';
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const {
