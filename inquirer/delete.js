@@ -1,3 +1,4 @@
+'use strict';
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const {
@@ -26,7 +27,7 @@ module.exports = {
   domain: async (DoAPI, spinner) => {
     const questions = [
       {
-        type: 'list',
+        type: 'checkbox',
         name: 'domain_name',
         message: chalk.red('Select the domain you want to delete:'),
         choices: await loadAvailableDomains(DoAPI, spinner)
@@ -38,7 +39,7 @@ module.exports = {
   droplet: async (DoAPI, spinner) => {
     const questions = [
       {
-        type: 'list',
+        type: 'checkbox',
         name: 'droplet_id',
         message: 'Select the droplet you want to delete:',
         choices: await loadAvailableDroplets(DoAPI, spinner)
@@ -50,7 +51,7 @@ module.exports = {
   ssh_key: async (DoAPI, spinner) => {
     const questions = [
       {
-        type: 'list',
+        type: 'checkbox',
         name: 'ssh_key_id',
         message: 'Select ssh_key you want to delete:',
         choices: await loadAvailableSSHKEYS(DoAPI, spinner)
