@@ -71,5 +71,24 @@ module.exports = {
       An error ocurred while fetching your sshkeys.
       ${error.id} : ${error.message}`);
     }
+  },
+  floating_ips: async () => {
+    try {
+      spinner.start('Loading your floating_ips...');
+      let data = await DoAPI.floatingIpsGetAll();
+      spinner.stop();
+      if (data.body.meta.total === 0) {
+        console.log("You don't have any floating_ips under your account");
+      } else {
+        console.log(`  ip         droplet         region`);
+        data.body.floating_ips.map((ip, index) => {
+          console.log(
+            `${index + 1} ${ip.ip} ${ip.droplet.name} ${ip.region.name}`
+          );
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
