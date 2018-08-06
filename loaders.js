@@ -8,7 +8,7 @@ module.exports = {
       if (data.body.meta.total > 0) {
         let availableDomains = [];
         data.body.domains.map(domain => {
-          choices.push(domain.name);
+          availableDomains.push(domain.name);
         });
         return availableDomains;
       } else {
