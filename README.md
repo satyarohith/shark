@@ -7,7 +7,7 @@
 This package is not yet published.
 
 If you would like to test it out,
-run this command
+Install [Node.js](https://nodejs.org/) and then run this command
 ```sh
 git clone https://github.com/satyarohith/shark && cd shark; npm link
 ```
