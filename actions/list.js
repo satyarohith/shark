@@ -54,7 +54,7 @@ module.exports = {
       ${error.id} : ${error.message}`);
     }
   },
-  ssh_Keys: async () => {
+  ssh_keys: async () => {
     try {
       spinner.start('Loading sshkeys...');
       let data = await DoAPI.accountGetKeys();
