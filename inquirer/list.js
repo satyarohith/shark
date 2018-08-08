@@ -20,6 +20,10 @@ module.exports = {
           {
             name: 'SSh Keys',
             value: 'ssh_keys'
+          },
+          {
+            name: 'Floating Ips',
+            value: 'floating_ips'
           }
         ]
       }

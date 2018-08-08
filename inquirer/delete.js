@@ -16,7 +16,7 @@ module.exports = {
         message: 'What do you want to Delete?',
         choices: [
           { name: 'Droplet', value: 'droplet' },
-          { name: 'Spaces', value: 'spaces' },
+          { name: 'Floating Ip', value: 'floating_ip' },
           { name: 'Domain', value: 'domain' },
           { name: 'SSH Key', value: 'ssh_key' }
         ]
