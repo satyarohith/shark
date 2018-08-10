@@ -21,7 +21,7 @@ module.exports = {
   },
   loadAvailableRegions: async (DoAPI, spinner) => {
     try {
-      spinner.start('Loading Available regions....');
+      spinner.start('Loading available regions....');
       let data = await DoAPI.regionsGetAll();
       spinner.stop();
       let regions = [];
@@ -82,7 +82,10 @@ module.exports = {
   loadAvailableImages: async (DoAPI, spinner) => {
     try {
       spinner.start('Loading available images...');
-      let data = await DoAPI.imagesGetAll({ type: 'distribution' });
+      let data = await DoAPI.imagesGetAll({
+        type: 'distribution',
+        per_page: 50
+      });
       spinner.stop();
       let availableImages = [];
       data.body.images.map(image => {

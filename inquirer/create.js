@@ -66,7 +66,8 @@ module.exports = {
         type: 'list',
         name: 'size',
         message: 'How stronger your computer should be?',
-        choices: await loadAvailableSizes(DoAPI, spinner)
+        choices: await loadAvailableSizes(DoAPI, spinner),
+        pageSize: 2
       },
       {
         type: 'list',
