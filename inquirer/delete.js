@@ -19,7 +19,8 @@ module.exports = {
           { name: 'Droplet', value: 'droplet' },
           { name: 'Floating Ip', value: 'floating_ip' },
           { name: 'Domain', value: 'domain' },
-          { name: 'SSH Key', value: 'ssh_key' }
+          { name: 'SSH Key', value: 'ssh_key' },
+          { name: 'Volume', value: 'volume' }
         ]
       }
     ];
