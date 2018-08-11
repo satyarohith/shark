@@ -5,7 +5,8 @@ const {
   loadAvailableDroplets,
   loadAvailableDomains,
   loadAvailableSSHKEYS,
-  loadAvailableFloatingIps
+  loadAvailableFloatingIps,
+  loadAvailableVolumes
 } = require('../loaders');
 module.exports = {
   init: () => {
@@ -68,6 +69,18 @@ module.exports = {
         name: 'floating_ip',
         message: 'Select floating_ips you want to delete:',
         choices: await loadAvailableFloatingIps(DoAPI, spinner)
+      }
+    ];
+
+    return inquirer.prompt(questions);
+  },
+  volume: async (DoAPI, spinner) => {
+    const questions = [
+      {
+        type: 'checkbox',
+        name: 'volumes',
+        message: 'Select volumes you want to delete:',
+        choices: await loadAvailableVolumes(DoAPI, spinner)
       }
     ];
 

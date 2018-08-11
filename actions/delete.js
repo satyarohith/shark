@@ -88,6 +88,26 @@ module.exports = {
       console.error(`${error.message}`);
     }
   },
+  volume: async () => {
+    try {
+      let answers = await Delete.volume(DoAPI, spinner);
+      spinner.start('Deleting your volume...');
+      answers.volumes.map(async volumeid => {
+        try {
+          let data = await DoAPI.volumesDeleteById(volumeid);
+          if ((data.response.statusCode = 204)) {
+            spinner.succeed(`${volumeid} is deleted!`);
+          }
+        } catch (error) {
+          spinner.fail(`failed to delete ${volumeid}`);
+          console.log(error.message);
+        }
+      });
+    } catch (error) {
+      spinner.stop();
+      console.error(`${error.message}`);
+    }
+  },
   token: () => {
     if (config.has('do_api_access_token')) {
       config.delete('do_api_access_token');
