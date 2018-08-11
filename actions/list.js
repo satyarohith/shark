@@ -90,5 +90,30 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
     }
+  },
+  volumes: async () => {
+    try {
+      spinner.start('Loading your volumes...');
+      let data = await DoAPI.volumes();
+      spinner.stop();
+      if (data.body.meta.total === 0) {
+        console.log("You don't have any Volumes under your account");
+      } else {
+        data.body.volumes.map((volume, index) => {
+          console.log(
+            `${index + 1}. ${chalk.green(volume.name)} ${volume.region.slug} ${
+              volume.size_gigabytes
+            }GB ${volume.filesystem_type ? volume.filesystem_type : ''}`
+          );
+          console.log(
+            `${chalk.blue('desc:')} ${volume.description} ${chalk.blue(
+              'created_at:'
+            )} ${volume.created_at}`
+          );
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
