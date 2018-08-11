@@ -24,6 +24,10 @@ module.exports = {
           {
             name: 'Floating Ips',
             value: 'floating_ips'
+          },
+          {
+            name: 'Volumes',
+            value: 'volumes'
           }
         ]
       }

@@ -144,5 +144,27 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
     }
+  },
+  loadAvailableVolumes: async (DoAPI, spinner) => {
+    try {
+      spinner.start('Loading your volumes...');
+      let data = await DoAPI.volumes();
+      spinner.stop();
+      let availableVolumes = [];
+      if (data.body.meta.total > 0) {
+        data.body.volumes.map(volume => {
+          availableVolumes.push({
+            name: volume.name,
+            value: volume.id
+          });
+        });
+        return availableVolumes;
+      } else {
+        console.log("You don't have any volumes under your account");
+        process.exit();
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
