@@ -88,5 +88,30 @@ module.exports = {
       spinner.stop();
       console.error(error.message);
     }
+  },
+  volume: async () => {
+    try {
+      let answers = await Create.volume(DoAPI, spinner);
+      spinner.start('Creating volume..');
+      console.log(answers);
+      let data = await DoAPI.volumesCreate({
+        size_gigabytes: answers.volume_size,
+        name: answers.volume_name,
+        description: answers.volume_desc,
+        region: answers.volume_region
+      });
+      if (data.body.volume) {
+        spinner.succeed(`Volume ${chalk.blue(data.body.volume.name)} created!`);
+        console.log(
+          `Name: ${data.body.volume.name}
+           Desc: ${data.body.volume.description},
+           Size: ${data.body.volume.size_gigabytes}GB
+           Region: ${data.body.volume.region.slug}`
+        );
+      }
+    } catch (error) {
+      spinner.stop();
+      console.error(error.message);
+    }
   }
 };
