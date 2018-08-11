@@ -141,5 +141,36 @@ module.exports = {
     ];
 
     return inquirer.prompt(questions);
+  },
+  volume: async (DoAPI, spinner) => {
+    const questions = [
+      {
+        type: 'input',
+        name: 'volume_name',
+        message: 'Input your Volume Name'
+      },
+      {
+        type: 'input',
+        name: 'volume_size',
+        message: 'Enter your volume size in GB',
+        filter: input => {
+          let size = parseInt(input, 10);
+          return size;
+        }
+      },
+      {
+        type: 'input',
+        name: 'volume_desc',
+        message: 'Any description about your volume?'
+      },
+      {
+        type: 'list',
+        name: 'volume_region',
+        message: 'Select volume region',
+        choices: await loadAvailableRegions(DoAPI, spinner)
+      }
+    ];
+
+    return inquirer.prompt(questions);
   }
 };
