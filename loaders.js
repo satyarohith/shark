@@ -1,5 +1,9 @@
-const CacheConf = require('cache-conf');
-const config = new CacheConf();
+// const { config } = require('./util');
+
+// console.log(config.get('do_api_access_token'));
+
+// // const CacheConf = require('cache-conf');
+// // const config = new CacheConf();
 
 const deleteKey = key => {
   if (config.isExpired(key)) {
@@ -8,7 +12,7 @@ const deleteKey = key => {
 };
 module.exports = {
   // loadDomains loads the domains of the user and returns an array of them.
-  loadAvailableDomains: async (DoAPI, spinner) => {
+  loadAvailableDomains: async () => {
     try {
       spinner.start('Loading your domains..');
       let data = await DoAPI.domainsGetAll();
@@ -27,7 +31,7 @@ module.exports = {
       console.log(error);
     }
   },
-  loadAvailableRegions: async (DoAPI, spinner) => {
+  loadAvailableRegions: async () => {
     // cache region since they don't change much
     let regions = [];
     // deletes key if key is expired
@@ -56,7 +60,7 @@ module.exports = {
       console.error(error);
     }
   },
-  loadAvailableDroplets: async (DoAPI, spinner) => {
+  loadAvailableDroplets: async () => {
     try {
       spinner.start('Loading your droplets...');
       let data = await DoAPI.dropletsGetAll();
@@ -80,7 +84,7 @@ module.exports = {
       console.error(error);
     }
   },
-  loadAvailableSizes: async (DoAPI, spinner) => {
+  loadAvailableSizes: async () => {
     // cache sizes as they are mostly same
     let availableSizes = [];
     deleteKey('do-sizes');
@@ -108,7 +112,7 @@ module.exports = {
       console.error(error);
     }
   },
-  loadAvailableImages: async (DoAPI, spinner) => {
+  loadAvailableImages: async () => {
     let availableImages = [];
     deleteKey('do-images');
     try {
@@ -139,7 +143,7 @@ module.exports = {
       console.error(error);
     }
   },
-  loadAvailableSSHKEYS: async (DoAPI, spinner) => {
+  loadAvailableSSHKEYS: async () => {
     try {
       spinner.start('Loading your ssh_keys...');
       let data = await DoAPI.accountGetKeys();
@@ -161,7 +165,7 @@ module.exports = {
       console.error(error);
     }
   },
-  loadAvailableFloatingIps: async (DoAPI, spinner) => {
+  loadAvailableFloatingIps: async () => {
     try {
       spinner.start('Loading your floating_ips...');
       let data = await DoAPI.floatingIpsGetAll();
@@ -183,7 +187,7 @@ module.exports = {
       console.log(error.message);
     }
   },
-  loadAvailableVolumes: async (DoAPI, spinner) => {
+  loadAvailableVolumes: async () => {
     try {
       spinner.start('Loading your volumes...');
       let data = await DoAPI.volumes();

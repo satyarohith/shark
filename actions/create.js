@@ -1,6 +1,6 @@
 'use strict';
 const Create = require('../inquirer/create');
-const { DoAPI, spinner, callMatchingMethod } = require('../util');
+const { callMatchingMethod } = require('../util');
 const chalk = require('chalk');
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
   },
   droplet: async () => {
     try {
-      let answers = await Create.droplet(DoAPI, spinner);
+      let answers = await Create.droplet();
       spinner.start(`Creating ${answers.name}...`);
       // The below omits property dropletAddOps
       let { dropletAddOps, tags, ...dropletconfig } = answers;
@@ -69,7 +69,7 @@ module.exports = {
   },
   floating_ip: async () => {
     try {
-      let answers = await Create.floating_ip(DoAPI, spinner);
+      let answers = await Create.floating_ip();
       spinner.start('Creating floating_ip..');
       let data = await DoAPI.floatingIpsAssignDroplet(answers.droplet_id);
       if (data.body.floating_ip) {
@@ -88,7 +88,7 @@ module.exports = {
   },
   volume: async () => {
     try {
-      let answers = await Create.volume(DoAPI, spinner);
+      let answers = await Create.volume();
       spinner.start('Creating volume..');
       console.log(answers);
       let data = await DoAPI.volumesCreate({
