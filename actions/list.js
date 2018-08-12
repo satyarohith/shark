@@ -34,10 +34,8 @@ module.exports = {
       if (list.body.droplets.length === 0) {
         console.log("You don't have any droplets");
       } else {
-        console.log(list.body.droplet);
         console.log(`You have ${chalk.magenta(list.body.meta.total)} Droplets`);
         list.body.droplets.map(droplet => {
-          console.log(JSON.stringify(droplet.networks));
           console.log(
             `--------------------------------
     ${chalk.inverse('Name:')}   ${droplet.name}
@@ -46,7 +44,11 @@ module.exports = {
     ${chalk.inverse('Image:')}  ${droplet.image.slug}
     ${chalk.inverse('Status:')} ${droplet.status}
     ${chalk.inverse('Region:')} ${droplet.region.name}
-    ${chalk.inverse('Ip:')} ${droplet.networks.v4[0].ip_address}
+    ${chalk.inverse('Ip:')} ${
+              droplet.networks.v4.length > 0
+                ? droplet.networks.v4[0].ip_address
+                : droplet.networks.v6[0].ip_address
+            }
              `
           );
         });
