@@ -41,16 +41,7 @@ module.exports = {
       console.log(dropletconfig);
       let data = await DoAPI.dropletsCreate(dropletconfig);
       let droplet = data.body.droplet;
-      spinner.stop();
-      if (droplet.name) {
-        console.log(
-          `Created ${droplet.name}! and its ip is ${
-            droplet.networks.v4.length > 0
-              ? droplet.networks.v4[0].ip_address
-              : droplet.networks.v6[0].ip_address
-          }`
-        );
-      }
+      spinner.succeed(droplet.name);
     } catch (error) {
       spinner.stop();
       console.error(error.message);
