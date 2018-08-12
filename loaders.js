@@ -83,7 +83,6 @@ module.exports = {
     try {
       spinner.start('Loading available images...');
       let data = await DoAPI.imagesGetAll({
-        type: 'distribution',
         per_page: 50
       });
       spinner.stop();
