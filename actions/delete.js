@@ -1,6 +1,6 @@
 'use strict';
 const Delete = require('../inquirer/delete');
-const { DoAPI, spinner, config, callMatchingMethod } = require('../util');
+const { callMatchingMethod } = require('../util');
 const chalk = require('chalk');
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
   },
   droplet: async () => {
     try {
-      let answers = await Delete.droplet(DoAPI, spinner);
+      let answers = await Delete.droplet();
       spinner.start('Deleting your droplet..');
       answers.droplet_id.map(async droplet => {
         try {
@@ -30,7 +30,7 @@ module.exports = {
   },
   domain: async () => {
     try {
-      let answers = await Delete.domain(DoAPI, spinner);
+      let answers = await Delete.domain();
       spinner.start('Deleting your domain...');
       answers.domain_name.map(async domain => {
         try {
@@ -50,7 +50,7 @@ module.exports = {
   },
   ssh_key: async () => {
     try {
-      let answers = await Delete.ssh_key(DoAPI, spinner);
+      let answers = await Delete.ssh_key();
       spinner.start('Deleting your key...');
       answers.ssh_key_id.map(async ssh_key => {
         try {
@@ -70,7 +70,7 @@ module.exports = {
   },
   floating_ip: async () => {
     try {
-      let answers = await Delete.floating_ip(DoAPI, spinner);
+      let answers = await Delete.floating_ip();
       spinner.start('Deleting your key...');
       answers.floating_ip.map(async fip => {
         try {
@@ -90,7 +90,7 @@ module.exports = {
   },
   volume: async () => {
     try {
-      let answers = await Delete.volume(DoAPI, spinner);
+      let answers = await Delete.volume();
       spinner.start('Deleting your volume...');
       answers.volumes.map(async volumeid => {
         try {

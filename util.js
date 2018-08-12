@@ -5,17 +5,25 @@ const Create = require('./inquirer/create');
 const CacheConf = require('cache-conf');
 const Ora = require('ora');
 const config = new CacheConf();
+const spinner = new Ora();
+const ACCESS_TOKEN = config.get('do_api_access_token');
+const DoAPI = new DigitalOcean(ACCESS_TOKEN, 10);
+
+// global variables
+global.config = config;
+global.spinner = spinner;
+global.DoAPI = DoAPI;
 
 module.exports = {
   initAccount: async () => {
     const verifyAccount = async accesstoken => {
       try {
         const DoAPI = new DigitalOcean(accesstoken, 5);
-        module.exports.spinner.start('Verifying your account...');
+        spinner.start('Verifying your account...');
         let data = await DoAPI.account();
         let account = data.body.account;
         if (account) {
-          module.exports.spinner.succeed('Account verified!');
+          spinner.succeed('Account verified!');
           config.set('do_api_access_token', accesstoken);
           console.log(`
           ${chalk.green('Hi! Your access token is valid.')}
@@ -25,7 +33,7 @@ module.exports = {
           `);
         }
       } catch (error) {
-        module.exports.spinner.fail('Verification failed!');
+        spinner.fail('Verification failed!');
         console.error(`
           ${chalk.red('Please make sure you are using a valid access token')}
           `);
@@ -38,12 +46,6 @@ module.exports = {
       await verifyAccount(answers.do_api_access_token);
     }
   },
-  DoAPI: (() => {
-    const ACCESS_TOKEN = config.get('do_api_access_token');
-    return new DigitalOcean(ACCESS_TOKEN, 10);
-  })(),
-  spinner: (() => new Ora())(),
-  config: config,
   callMatchingMethod: (object, method) => {
     if (object.hasOwnProperty(method)) {
       object[method]();

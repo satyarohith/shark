@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-const { initAccount, config } = require('./util');
+const { initAccount } = require('./util');
 const shark = require('./shark');
 
 initAccount();
