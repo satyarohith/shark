@@ -2,11 +2,9 @@
 const DigitalOcean = require('do-wrapper').default;
 const chalk = require('chalk');
 const Create = require('./inquirer/create');
-const pkg = require('./package.json');
-const ConfigStore = require('configstore');
+const CacheConf = require('cache-conf');
 const Ora = require('ora');
-
-const config = new ConfigStore(pkg.name);
+const config = new CacheConf();
 
 module.exports = {
   initAccount: async () => {

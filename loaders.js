@@ -1,3 +1,11 @@
+const CacheConf = require('cache-conf');
+const config = new CacheConf();
+
+const deleteKey = key => {
+  if (config.isExpired(key)) {
+    config.delete(key);
+  }
+};
 module.exports = {
   // loadDomains loads the domains of the user and returns an array of them.
   loadAvailableDomains: async (DoAPI, spinner) => {
@@ -20,20 +28,30 @@ module.exports = {
     }
   },
   loadAvailableRegions: async (DoAPI, spinner) => {
+    // cache region since they don't change much
+    let regions = [];
+    // deletes key if key is expired
+    deleteKey('do-regions');
     try {
       spinner.start('Loading available regions....');
-      let data = await DoAPI.regionsGetAll();
-      spinner.stop();
-      let regions = [];
-      data.body.regions.map(region => {
-        if (region.available) {
-          regions.push({
-            name: region.name,
-            value: region.slug
-          });
-        }
-      });
-      return regions;
+      if (!config.has('do-regions')) {
+        let data = await DoAPI.regionsGetAll();
+        spinner.stop();
+        data.body.regions.map(region => {
+          if (region.available) {
+            regions.push({
+              name: region.name,
+              value: region.slug
+            });
+          }
+        });
+        config.set('do-regions', regions, { maxAge: 8640000 /* 24 hrs */ });
+        return regions;
+      } else {
+        regions = config.get('do-regions');
+        spinner.stop();
+        return regions;
+      }
     } catch (error) {
       console.error(error);
     }
@@ -63,39 +81,60 @@ module.exports = {
     }
   },
   loadAvailableSizes: async (DoAPI, spinner) => {
+    // cache sizes as they are mostly same
+    let availableSizes = [];
+    deleteKey('do-sizes');
     try {
       spinner.start('Loading available sizes...');
-      let data = await DoAPI.sizesGetAll();
-      spinner.stop();
-      let availableSizes = [];
-      data.body.sizes.map(size => {
-        availableSizes.push({
-          name: `${size.slug} - ${size.disk}GB - ${size.price_monthly}$/m`,
-          value: size.slug
+      if (!config.has('do-sizes')) {
+        let data = await DoAPI.sizesGetAll();
+        spinner.stop();
+        data.body.sizes.map(size => {
+          availableSizes.push({
+            name: `${size.slug} - ${size.disk}GB - ${size.price_monthly}$/m`,
+            value: size.slug
+          });
         });
-      });
-      return availableSizes;
+        config.set('do-sizes', availableSizes, {
+          maxAge: 7 * 8640000 /* 7 days */
+        });
+        return availableSizes;
+      } else {
+        availableSizes = config.get('do-sizes');
+        spinner.stop();
+        return availableSizes;
+      }
     } catch (error) {
       console.error(error);
     }
   },
   loadAvailableImages: async (DoAPI, spinner) => {
+    let availableImages = [];
+    deleteKey('do-images');
     try {
       spinner.start('Loading available images...');
-      let data = await DoAPI.imagesGetAll({
-        per_page: 50
-      });
-      spinner.stop();
-      let availableImages = [];
-      data.body.images.map(image => {
-        availableImages.push({
-          name: `${image.distribution} ${image.name} - ${
-            image.size_gigabytes
-          }GB`,
-          value: image.slug
+      if (!config.has('do-images')) {
+        let data = await DoAPI.imagesGetAll({
+          per_page: 50
         });
-      });
-      return availableImages;
+        spinner.stop();
+        data.body.images.map(image => {
+          availableImages.push({
+            name: `${image.distribution} ${image.name} - ${
+              image.size_gigabytes
+            }GB`,
+            value: image.slug
+          });
+        });
+        config.set('do-images', availableImages, {
+          maxAge: 7 * 8640000 /* 24 hrs */
+        });
+        return availableImages;
+      } else {
+        availableImages = config.get('do-images');
+        spinner.stop();
+        return availableImages;
+      }
     } catch (error) {
       console.error(error);
     }
