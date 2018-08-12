@@ -43,7 +43,13 @@ module.exports = {
       let droplet = data.body.droplet;
       spinner.stop();
       if (droplet.name) {
-        console.log(`Created ${droplet.name}! and its id is ${droplet.id}`);
+        console.log(
+          `Created ${droplet.name}! and its ip is ${
+            droplet.networks.v4.length > 0
+              ? droplet.networks.v4[0].ip_address
+              : droplet.networks.v6[0].ip_address
+          }`
+        );
       }
     } catch (error) {
       spinner.stop();
