@@ -1,15 +1,9 @@
-// const { config } = require('./util');
-
-// console.log(config.get('do_api_access_token'));
-
-// // const CacheConf = require('cache-conf');
-// // const config = new CacheConf();
-
 const deleteKey = key => {
   if (config.isExpired(key)) {
     config.delete(key);
   }
 };
+
 module.exports = {
   // loadDomains loads the domains of the user and returns an array of them.
   loadAvailableDomains: async () => {

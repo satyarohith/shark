@@ -120,5 +120,29 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
     }
+  },
+  loadbalancers: async () => {
+    try {
+      spinner.start('Loading your Load Balancers...');
+      let data = await DoAPI.loadBalancers();
+      spinner.stop();
+      if (data.body.meta.total === 0) {
+        console.log("You don't have any Load Balancers under your account");
+      } else {
+        data.body.load_balancers.map((load_balancer, index) => {
+          console.log(
+            `${index + 1}. ${chalk.green(load_balancer.name)} ${
+              load_balancer.region.slug
+            }  IP:${load_balancer.ip}`
+          );
+          console.log(
+            `${chalk.blue('droplets:')}
+             ${load_balancer.droplet_ids}`
+          );
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
