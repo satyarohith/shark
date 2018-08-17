@@ -28,6 +28,10 @@ module.exports = {
           {
             name: 'Volumes',
             value: 'volumes'
+          },
+          {
+            name: 'Load Balancers',
+            value: 'loadbalancers'
           }
         ]
       }

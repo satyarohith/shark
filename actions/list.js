@@ -38,16 +38,16 @@ module.exports = {
         list.body.droplets.map(droplet => {
           console.log(
             `--------------------------------
-    ${chalk.inverse('Name:')}   ${droplet.name}
-    ${chalk.inverse('Id:')}     ${droplet.id}
-    ${chalk.inverse('Memory:')} ${droplet.memory}
-    ${chalk.inverse('Image:')}  ${droplet.image.slug}
-    ${chalk.inverse('Status:')} ${droplet.status}
-    ${chalk.inverse('Region:')} ${droplet.region.name}
-    ${chalk.inverse('Ip:')} ${
+    ${chalk.bold('Name:')}   ${chalk.blue(droplet.name)}
+    ${chalk.bold('Id:')}     ${droplet.id}
+    ${chalk.bold('Memory:')} ${droplet.memory}
+    ${chalk.bold('Image:')}  ${droplet.image.slug}
+    ${chalk.bold('Status:')} ${droplet.status}
+    ${chalk.bold('Region:')} ${droplet.region.name}
+    ${chalk.bold('Ip:')} ${
               droplet.networks.v4.length > 0
-                ? droplet.networks.v4[0].ip_address
-                : droplet.networks.v6[0].ip_address
+                ? chalk.green(droplet.networks.v4[0].ip_address)
+                : chalk.green(droplet.networks.v6[0].ip_address)
             }
              `
           );
