@@ -17,7 +17,9 @@ module.exports = {
         console.log("You don't have any domains");
       } else {
         data.body.domains.map((domain, index) => {
-          console.log(`${index + 1}. ${domain.name}`);
+          console.log(
+            chalk.gray(index + 1 + '. ') + chalk.bold.underline(domain.name)
+          );
         });
       }
     } catch (error) {
@@ -36,20 +38,34 @@ module.exports = {
       } else {
         console.log(`You have ${chalk.magenta(list.body.meta.total)} Droplets`);
         list.body.droplets.map(droplet => {
+          //       console.log(
+          //         `--------------------------------
+          // ${chalk.bold('Name:')}   ${chalk.blue(droplet.name)}
+          // ${chalk.bold('Id:')}     ${droplet.id}
+          // ${chalk.bold('Memory:')} ${droplet.memory}
+          // ${chalk.bold('Image:')}  ${droplet.image.slug}
+          // ${chalk.bold('Status:')} ${droplet.status}
+          // ${chalk.bold('Region:')} ${droplet.region.name}
+          // ${chalk.bold('Ip:')} ${
+          //           droplet.networks.v4.length > 0
+          //             ? chalk.green(droplet.networks.v4[0].ip_address)
+          //             : chalk.green(droplet.networks.v6[0].ip_address)
+          //         }
+          //          `
+          //       );
+
+          console.log('----------------------');
+          console.log(chalk.bold('  Name:'), chalk.blue(droplet.name));
+          console.log(chalk.bold('    Id:'), droplet.id);
+          console.log(chalk.bold('Memory:'), droplet.memory);
+          console.log(chalk.bold(' Image:'), droplet.image.slug);
+          console.log(chalk.bold('Status:'), droplet.status);
+          console.log(chalk.bold('Region:'), droplet.region.name);
           console.log(
-            `--------------------------------
-    ${chalk.bold('Name:')}   ${chalk.blue(droplet.name)}
-    ${chalk.bold('Id:')}     ${droplet.id}
-    ${chalk.bold('Memory:')} ${droplet.memory}
-    ${chalk.bold('Image:')}  ${droplet.image.slug}
-    ${chalk.bold('Status:')} ${droplet.status}
-    ${chalk.bold('Region:')} ${droplet.region.name}
-    ${chalk.bold('Ip:')} ${
-              droplet.networks.v4.length > 0
-                ? chalk.green(droplet.networks.v4[0].ip_address)
-                : chalk.green(droplet.networks.v6[0].ip_address)
-            }
-             `
+            chalk.bold('    Ip:'),
+            droplet.networks.v4.length > 0
+              ? chalk.green(droplet.networks.v4[0].ip_address)
+              : chalk.green(droplet.networks.v6[0].ip_address)
           );
         });
       }
