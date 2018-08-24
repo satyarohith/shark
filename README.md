@@ -44,7 +44,7 @@ shark create floating_ip
 
 To create a volume
 ```sh
-shark create floating_ip
+shark create volume
 ```
 
 ## Delete
