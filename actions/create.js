@@ -38,7 +38,6 @@ module.exports = {
           dropletconfig[option] = true;
         });
       }
-      console.log(dropletconfig);
       let data = await DoAPI.dropletsCreate(dropletconfig);
       let droplet = data.body.droplet;
       spinner.succeed(droplet.name);
