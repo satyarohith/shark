@@ -5,7 +5,6 @@ const deleteKey = key => {
 };
 
 module.exports = {
-  // loadDomains loads the domains of the user and returns an array of them.
   loadAvailableDomains: async () => {
     try {
       spinner.start('Loading your domains..');

@@ -1,12 +1,15 @@
+#!/usr/bin/env node
 'use strict';
 const argv = require('yargs').argv;
 const Create = require('./actions/create');
 const Delete = require('./actions/delete');
 const List = require('./actions/list');
 const { Init } = require('./actions/init');
-const { callMatchingMethod } = require('./util');
+const { initAccount, callMatchingMethod } = require('./util');
 
-module.exports = () => {
+initAccount();
+
+if (config.has('do_api_access_token')) {
   switch (argv._[0]) {
     case 'create':
       callMatchingMethod(Create, argv._[1]);
@@ -21,4 +24,4 @@ module.exports = () => {
       Init();
       break;
   }
-};
+}
