@@ -1,17 +1,15 @@
-# 🦈 Shark
+# Shark
 
-### A Commandline Tool to Interact with Digitalocean API.
+A Commandline Tool to Interact with Digitalocean API.
 
-> This package is in development so most of the stuff might change.
 ## Installation
-This package is not yet published.
 
 If you would like to test it out,
 Install [Node.js](https://nodejs.org/) and then run this command
 ```sh
-git clone https://github.com/satyarohith/shark && cd shark; npm link
+npm install -g shark
 ```
-# Usage
+## Usage
 To get started
 ```sh
 shark
@@ -19,7 +17,7 @@ shark
 It will ask for DigitalOcean Personal Access Token for the first time and then you can perform tasks interactively.
 
 [Learn How to create a Personal Access Token](https://www.digitalocean.com/docs/api/create-personal-access-token/).
-## Create
+### Create
 <br/>
 
 To create droplet
@@ -47,7 +45,7 @@ To create a volume
 shark create volume
 ```
 
-## Delete
+### Delete
 
 To delete droplet
 ```sh
@@ -73,7 +71,7 @@ To delete a volume
 ```sh
 shark delete volume
 ```
-## List
+### List
 You can list all available resources under your account.
 <br/>
 To list domains
@@ -100,3 +98,13 @@ To list volumes
 ```sh
 shark list volumes
 ```
+
+## Todo
+- [ ] Tests
+
+## Thanks to
+ - [Aleafs](https://github.com/aleafs) - For generously donating npm package name `shark`.
+ - [Packages Contributors](https://github.com/satyarohith/shark/network/dependencies)
+
+## License
+MIT
