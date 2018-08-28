@@ -3,8 +3,8 @@
 A Commandline Tool to Interact with Digitalocean API.
 
 ## Installation
+>shark is in beta.
 
-If you would like to test it out,
 Install [Node.js](https://nodejs.org/) and then run this command
 ```sh
 npm install -g shark
