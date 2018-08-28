@@ -1,14 +1,19 @@
 {
   "name": "shark",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "An Interactive command line tool for most operations of DigitalOcean.",
-  "main": "cli.js",
-  "repository": "github.com/satyarohith/unknown",
+  "main": "shark.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/satyarohith/shark.git"
+  },
   "author": "Satya Rohith <satyarohith@gmx.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "jest"
+    "commit": "git-cz",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
   },
   "bin": {
     "shark": "./shark.js"
@@ -19,12 +24,16 @@
     "configstore": "^4.0.0",
     "do-wrapper": "^3.14.3",
     "inquirer": "^6.0.0",
-    "inquirer-autocomplete-prompt": "^1.0.1",
     "ora": "^3.0.0",
     "yargs": "^12.0.1"
   },
   "devDependencies": {
-    "inquirer-test": "^2.0.1",
-    "jest": "^23.5.0"
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "semantic-release": "^15.9.12",
+    "travis-deploy-once": "^5.0.4"
+  },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
   }
 }
