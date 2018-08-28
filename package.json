@@ -33,7 +33,9 @@
     "semantic-release": "^15.9.12",
     "travis-deploy-once": "^5.0.4"
   },
-  "czConfig": {
-    "path": "node_modules/cz-conventional-changelog"
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
