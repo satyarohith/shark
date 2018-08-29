@@ -101,11 +101,9 @@ module.exports = {
       if (data.body.meta.total === 0) {
         console.log("You don't have any floating_ips under your account");
       } else {
-        console.log(`  ip         droplet         region`);
+        console.log('floatingIps assigned to region');
         data.body.floating_ips.map((ip, index) => {
-          console.log(
-            `${index + 1} ${ip.ip} ${ip.droplet.name} ${ip.region.name}`
-          );
+          console.log(`${index + 1}. ${chalk.blue(ip.ip)} ${ip.region.name}`);
         });
       }
     } catch (error) {

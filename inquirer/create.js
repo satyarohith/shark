@@ -131,13 +131,13 @@ module.exports = {
 
     return inquirer.prompt(questions);
   },
-  floating_ip: async (DoAPI, spinner) => {
+  floating_ip: async () => {
     const questions = [
       {
         type: 'list',
-        name: 'droplet_id',
-        message: 'Select droplet to assign to floating_ip',
-        choices: await loadAvailableDroplets(DoAPI, spinner)
+        name: 'region_slug',
+        message: 'Select the region where floating_ip has to be reserved',
+        choices: await loadAvailableRegions()
       }
     ];
 

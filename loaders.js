@@ -167,7 +167,7 @@ module.exports = {
       if (data.body.meta.total > 0) {
         data.body.floating_ips.map(fip => {
           availableFIps.push({
-            name: `${fip.ip} assign to ${fip.droplet.name}`,
+            name: `${fip.ip} reserved at ${fip.region.name}`,
             value: fip.ip
           });
         });

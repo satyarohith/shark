@@ -28,8 +28,9 @@ module.exports = {
     try {
       let answers = await Create.droplet();
       spinner.start(`Creating ${answers.name}...`);
-      // The below omits property dropletAddOps
+      // The below omits property dropletAddOps and tags
       let { dropletAddOps, tags, ...dropletconfig } = answers;
+      // check the if there are any tags
       if (tags[0].length > 0) {
         dropletconfig.tags = tags;
       }
@@ -70,15 +71,14 @@ module.exports = {
     try {
       let answers = await Create.floating_ip();
       spinner.start('Creating floating_ip..');
-      let data = await DoAPI.floatingIpsAssignDroplet(answers.droplet_id);
+      // There are two ways to create floatingIps, we will create
+      // using Region for now https://git.io/fAGUM
+      let data = await DoAPI.floatingIpsAssignRegion(answers.region_slug);
       if (data.body.floating_ip) {
         spinner.succeed(
           `floating ip ${chalk.blue(data.body.floating_ip.ip)} created!`
         );
-        console.log(
-          `droplet: ${data.body.floating_ip.droplet.name}
-           region: ${data.body.floating_ip.region.name}`
-        );
+        console.log(`region: ${data.body.floating_ip.region.name}`);
       }
     } catch (error) {
       spinner.stop();
