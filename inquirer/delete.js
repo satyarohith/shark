@@ -63,13 +63,13 @@ module.exports = {
 
     return inquirer.prompt(questions);
   },
-  floating_ip: async (DoAPI, spinner) => {
+  floating_ip: async () => {
     const questions = [
       {
         type: 'checkbox',
         name: 'floating_ip',
         message: 'Select floating_ips you want to delete:',
-        choices: await loadAvailableFloatingIps(DoAPI, spinner)
+        choices: await loadAvailableFloatingIps()
       }
     ];
 
