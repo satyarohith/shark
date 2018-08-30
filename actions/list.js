@@ -58,9 +58,10 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(`
       An error ocurred while fetching your droplets.
-      ${error.id} : ${error.message}`);
+      ${error.message}`);
     }
   },
   ssh_keys: async () => {
@@ -76,9 +77,10 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(`
       An error ocurred while fetching your sshkeys.
-      ${error.id} : ${error.message}`);
+      ${error.message}`);
     }
   },
   floating_ips: async () => {
@@ -95,6 +97,7 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(error.message);
     }
   },
@@ -120,6 +123,7 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(error.message);
     }
   },
@@ -144,6 +148,7 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(error.message);
     }
   }
