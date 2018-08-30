@@ -71,6 +71,11 @@ To delete a volume
 ```sh
 shark delete volume
 ```
+
+To delete the token you have added
+```sh
+shark delete token
+```
 ### List
 You can list all available resources under your account.
 <br/>
