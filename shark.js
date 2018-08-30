@@ -6,6 +6,11 @@ const Delete = require('./actions/delete');
 const List = require('./actions/list');
 const { Init } = require('./actions/init');
 const { initAccount, callMatchingMethod } = require('./util');
+const updateNotifier = require('update-notifier');
+const pkg = require('./package.json');
+const notifier = updateNotifier({ pkg });
+
+notifier.notify();
 
 initAccount();
 

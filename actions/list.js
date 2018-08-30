@@ -36,24 +36,12 @@ module.exports = {
       if (list.body.droplets.length === 0) {
         console.log("You don't have any droplets");
       } else {
-        console.log(`You have ${chalk.magenta(list.body.meta.total)} Droplets`);
+        console.log(
+          `You have ${chalk.magenta(list.body.meta.total)} ${
+            list.body.meta.total > 1 ? 'Droplets' : 'Droplet'
+          }`
+        );
         list.body.droplets.map(droplet => {
-          //       console.log(
-          //         `--------------------------------
-          // ${chalk.bold('Name:')}   ${chalk.blue(droplet.name)}
-          // ${chalk.bold('Id:')}     ${droplet.id}
-          // ${chalk.bold('Memory:')} ${droplet.memory}
-          // ${chalk.bold('Image:')}  ${droplet.image.slug}
-          // ${chalk.bold('Status:')} ${droplet.status}
-          // ${chalk.bold('Region:')} ${droplet.region.name}
-          // ${chalk.bold('Ip:')} ${
-          //           droplet.networks.v4.length > 0
-          //             ? chalk.green(droplet.networks.v4[0].ip_address)
-          //             : chalk.green(droplet.networks.v6[0].ip_address)
-          //         }
-          //          `
-          //       );
-
           console.log('----------------------');
           console.log(chalk.bold('  Name:'), chalk.blue(droplet.name));
           console.log(chalk.bold('    Id:'), droplet.id);
@@ -70,9 +58,10 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(`
       An error ocurred while fetching your droplets.
-      ${error.id} : ${error.message}`);
+      ${error.message}`);
     }
   },
   ssh_keys: async () => {
@@ -88,9 +77,10 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(`
       An error ocurred while fetching your sshkeys.
-      ${error.id} : ${error.message}`);
+      ${error.message}`);
     }
   },
   floating_ips: async () => {
@@ -107,6 +97,7 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(error.message);
     }
   },
@@ -132,6 +123,7 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(error.message);
     }
   },
@@ -156,6 +148,7 @@ module.exports = {
         });
       }
     } catch (error) {
+      spinner.stop();
       console.log(error.message);
     }
   }
