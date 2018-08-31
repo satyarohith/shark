@@ -1,4 +1,4 @@
-# :bug: Shark
+# Shark
 
 A Commandline Tool to Interact with Digitalocean API.
 
