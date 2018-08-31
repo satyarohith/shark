@@ -1,4 +1,4 @@
-# Shark
+# :bug: Shark
 
 A Commandline Tool to Interact with Digitalocean API.
 
@@ -46,6 +46,8 @@ shark create volume
 ```
 
 ### Delete
+
+### :red_circle: `Shark` will not warn you when you perform `delete` operations, please make sure you know what you are doing.
 
 To delete droplet
 ```sh
