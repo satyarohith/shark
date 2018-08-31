@@ -1,8 +1,11 @@
 'use strict';
 const inquirer = require('inquirer');
+inquirer.registerPrompt(
+  'autocomplete',
+  require('inquirer-autocomplete-prompt')
+);
 const chalk = require('chalk');
 const {
-  loadAvailableDroplets,
   loadAvailableRegions,
   loadAvailableSizes,
   loadAvailableImages,
@@ -58,20 +61,20 @@ module.exports = {
         message: 'What should we call your Droplet?'
       },
       {
-        type: 'list',
+        type: 'autocomplete',
         name: 'image',
         message: 'Which Distribution do you want to use?',
         choices: await loadAvailableImages(DoAPI, spinner)
       },
       {
-        type: 'list',
+        type: 'autocomplete',
         name: 'size',
         message: 'How stronger your computer should be?',
         choices: await loadAvailableSizes(DoAPI, spinner),
         pageSize: 2
       },
       {
-        type: 'list',
+        type: 'autocomplete',
         name: 'region',
         message: 'Choose your data center!',
         choices: await loadAvailableRegions(DoAPI, spinner)
