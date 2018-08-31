@@ -39,13 +39,14 @@ module.exports = {
 
     return inquirer.prompt(questions);
   },
-  droplet: async (DoAPI, spinner) => {
+  droplet: async () => {
     const questions = [
       {
         type: 'checkbox',
-        name: 'droplet_id',
+        name: 'droplets',
         message: 'Select the droplet you want to delete:',
-        choices: await loadAvailableDroplets(DoAPI, spinner)
+        choices: await loadAvailableDroplets()
+        // TODO: handle if no droplet is selected
       }
     ];
 
