@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+
 const deleteKey = key => {
   if (config.isExpired(key)) {
     config.delete(key);
@@ -62,10 +64,22 @@ module.exports = {
       if (data.body.meta.total > 0) {
         data.body.droplets.map(droplet => {
           availableDroplets.push({
-            name: droplet.name,
-            value: droplet.id
+            name: ` ${droplet.name} - ${droplet.size.slug} - ${
+              droplet.networks.v4.length > 0
+                ? droplet.networks.v4[0].ip_address
+                : droplet.networks.v6[0].ip_address
+            }`,
+            value: {
+              id: droplet.id,
+              name: droplet.name,
+              ip:
+                droplet.networks.v4.length > 0
+                  ? droplet.networks.v4[0].ip_address
+                  : droplet.networks.v6[0].ip_address
+            }
           });
         });
+
         return availableDroplets;
       } else {
         console.log(

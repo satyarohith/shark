@@ -12,14 +12,26 @@ module.exports = {
     try {
       let answers = await Delete.droplet();
       spinner.start('Deleting your droplet..');
-      answers.droplet_id.map(async droplet => {
+      //TODO: remove after figuring out how to handle this with inquirer
+      if (answers.droplets.length === 0) {
+        spinner.stop();
+        console.error(chalk.red('Error:') + ' Please select a Droplet');
+        process.exit();
+      }
+      answers.droplets.map(async droplet => {
         try {
-          let data = await DoAPI.dropletsDelete(droplet);
+          let data = await DoAPI.dropletsDelete(droplet.id);
           if (data.response.statusCode === 204) {
-            spinner.succeed(`${droplet} is deleted!`);
+            spinner.succeed(
+              `${chalk.green(droplet.name)} with Ip: ${chalk.red(
+                droplet.ip
+              )} is deleted!`
+            );
           }
         } catch (error) {
-          spinner.fail(`failed to delete ${droplet}`);
+          spinner.fail(
+            `Failed to delete ${droplet.name} with Ip: ${droplet.ip}`
+          );
           console.log(error);
         }
       });
