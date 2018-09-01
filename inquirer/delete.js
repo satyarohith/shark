@@ -8,6 +8,7 @@ const {
   loadAvailableFloatingIps,
   loadAvailableVolumes
 } = require('../loaders');
+
 module.exports = {
   init: () => {
     const questions = [
@@ -20,7 +21,9 @@ module.exports = {
           { name: 'Floating Ip', value: 'floating_ip' },
           { name: 'Domain', value: 'domain' },
           { name: 'SSH Key', value: 'ssh_key' },
-          { name: 'Volume', value: 'volume' }
+          { name: 'Volume', value: 'volume' },
+          { name: '<- Back', value: 'back' },
+          { name: 'Exit', value: 'exit' }
         ]
       }
     ];

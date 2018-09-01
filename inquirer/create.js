@@ -2,7 +2,6 @@
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const {
-  loadAvailableDroplets,
   loadAvailableRegions,
   loadAvailableSizes,
   loadAvailableImages,
@@ -21,7 +20,9 @@ module.exports = {
           { name: 'Floating Ip', value: 'floating_ip' },
           { name: 'Domain', value: 'domain' },
           { name: 'SSH Key', value: 'ssh_key' },
-          { name: 'Volume', value: 'volume' }
+          { name: 'Volume', value: 'volume' },
+          { name: '<- Back', value: 'back' },
+          { name: 'Exit', value: 'exit' }
         ]
       }
     ];

@@ -19,6 +19,10 @@ module.exports.init = () => {
         {
           name: 'List',
           value: 'list'
+        },
+        {
+          name: 'Exit',
+          value: 'exit'
         }
       ]
     }
