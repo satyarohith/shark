@@ -3,6 +3,9 @@ const { init } = require('../inquirer/init');
 const Create = require('./create');
 const Delete = require('./delete');
 const List = require('./list');
+console.log('Create', Create);
+console.log('Delete', Delete);
+console.log('List', List);
 
 module.exports.Init = async () => {
   try {

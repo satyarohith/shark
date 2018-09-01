@@ -2,7 +2,7 @@
 const Delete = require('../inquirer/delete');
 const { callMatchingMethod } = require('../util');
 const chalk = require('chalk');
-const Shark = require('./init');
+const Action = require('./init');
 
 module.exports.init = async () => {
   try {
@@ -136,3 +136,13 @@ module.exports.token = () => {
     console.log(chalk.red('You do not have any access tokens to remove'));
   }
 };
+
+module.exports.back = async () => {
+  try {
+    await Action.Init();
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+module.exports.exit = () => process.exit();

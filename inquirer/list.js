@@ -32,7 +32,9 @@ module.exports = {
           {
             name: 'Load Balancers',
             value: 'loadbalancers'
-          }
+          },
+          { name: '<- Back', value: 'back' },
+          { name: 'Exit', value: 'exit' }
         ]
       }
     ];
