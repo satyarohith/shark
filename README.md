@@ -1,6 +1,6 @@
 # Shark
 
-A Commandline Tool to Interact with Digitalocean API.
+A CLI to Interact with DigitalOcean.
 
 ## Installation
 >shark is in beta.
