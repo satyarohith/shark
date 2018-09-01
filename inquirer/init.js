@@ -8,22 +8,10 @@ module.exports.init = () => {
       name: 'init',
       message: 'What do you want to do?',
       choices: [
-        {
-          name: 'Create',
-          value: 'create'
-        },
-        {
-          name: 'Delete',
-          value: 'delete'
-        },
-        {
-          name: 'List',
-          value: 'list'
-        },
-        {
-          name: 'Exit',
-          value: 'exit'
-        }
+        { name: 'Create', value: 'create' },
+        { name: 'Delete', value: 'delete' },
+        { name: 'List', value: 'list' },
+        { name: 'Exit', value: 'exit' }
       ]
     }
   ];
