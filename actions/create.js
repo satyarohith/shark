@@ -56,9 +56,9 @@ module.exports.droplet = async () => {
 
 module.exports.ssh_key = async () => {
   try {
-    answers = await Create.ssh_key();
+    const answers = await Create.ssh_key();
     spinner.start('Adding your key...');
-    let data = await DoAPI.accountAddKey(answers);
+    const data = await DoAPI.accountAddKey(answers);
     spinner.stop();
     if (data.body.ssh_key.id) {
       console.log(
