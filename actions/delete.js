@@ -1,12 +1,12 @@
 'use strict';
-const Delete = require('../inquirer/delete');
 const { callMatchingMethod, spinner, DoAPI, config } = require('../util');
+const Delete = require('../inquirer/delete');
 const chalk = require('chalk');
 const Action = require('./init');
 
 module.exports.init = async () => {
   try {
-    let answers = await Delete.init();
+    const answers = await Delete.init();
     callMatchingMethod(module.exports, answers.delete);
   } catch (error) {
     console.error(error);
@@ -15,116 +15,157 @@ module.exports.init = async () => {
 
 module.exports.droplet = async () => {
   try {
-    let answers = await Delete.droplet();
-    spinner.start('Deleting your droplet..');
-    //TODO: remove after figuring out how to handle this with inquirer
-    if (answers.droplets.length === 0) {
-      spinner.stop();
-      console.error(chalk.red('Error:') + ' Please select a Droplet');
-      process.exit();
-    }
-    answers.droplets.map(async droplet => {
-      try {
-        let data = await DoAPI.dropletsDelete(droplet.id);
-        if (data.response.statusCode === 204) {
-          spinner.succeed(
-            `${chalk.green(droplet.name)} with Ip: ${chalk.red(
-              droplet.ip
-            )} is deleted!`
-          );
-        }
-      } catch (error) {
-        spinner.fail(`Failed to delete ${droplet.name} with Ip: ${droplet.ip}`);
-        console.log(error);
+    const answers = await Delete.droplet();
+    if (answers.droplets.length > 0) {
+      const { delete_droplet } = await Delete.confirmDelete('droplet');
+      if (delete_droplet) {
+        spinner.start('Deleting your droplet..');
+        answers.droplets.map(async droplet => {
+          try {
+            let data = await DoAPI.dropletsDelete(droplet.id);
+            if (data.response.statusCode === 204) {
+              spinner.succeed(
+                `${chalk.green(droplet.name)} with Ip: ${chalk.red(
+                  droplet.ip
+                )} is deleted!`
+              );
+            }
+          } catch (error) {
+            spinner.fail(
+              `Failed to delete ${droplet.name} with Ip: ${droplet.ip}`
+            );
+            console.error(error.message);
+          }
+        });
       }
-    });
+    } else {
+      console.log(
+        'Please select atleast one droplet to perform this operation!'
+      );
+    }
   } catch (error) {
     spinner.stop();
-    console.log('An Error occurred while deleting your droplet:', error);
+    console.error(error);
   }
 };
 
 module.exports.domain = async () => {
   try {
-    let answers = await Delete.domain();
-    spinner.start('Deleting your domain...');
-    answers.domain_name.map(async domain => {
-      try {
-        let data = await DoAPI.domainsDelete(domain);
-        if (data.response.statusCode === 204) {
-          spinner.succeed(`${domain} is deleted`);
-        }
-      } catch (error) {
-        spinner.fail(`failed to delete ${domain}`);
-        console.log(error.message);
+    const answers = await Delete.domain();
+    if (answers.domains.length > 0) {
+      const { delete_domain } = await Delete.confirmDelete('domain');
+      if (delete_domain) {
+        spinner.start('Deleting your domain...');
+        answers.domain_name.map(async domain => {
+          try {
+            const data = await DoAPI.domainsDelete(domain);
+            if (data.response.statusCode === 204) {
+              spinner.succeed(`${domain} is deleted`);
+            }
+          } catch (error) {
+            spinner.fail(`failed to delete ${domain}`);
+            console.error(error.message);
+          }
+        });
       }
-    });
+    } else {
+      console.log(
+        'Please select atleast one domain to perform this operation!'
+      );
+    }
   } catch (error) {
     spinner.stop();
-    console.log(`${error.id} : ${error.message}`);
+    console.error(error);
   }
 };
 
 module.exports.ssh_key = async () => {
   try {
-    let answers = await Delete.ssh_key();
-    spinner.start('Deleting your key...');
-    answers.ssh_key_id.map(async ssh_key => {
-      try {
-        let data = await DoAPI.accountDeleteKey(ssh_key);
-        if (data.response.statusCode === 204) {
-          spinner.succeed(`${ssh_key} is deleted!`);
-        }
-      } catch (error) {
-        spinner.fail(`failed to delete ${ssh_key}`);
-        console.log(error.message);
+    const answers = await Delete.ssh_key();
+    if (answers.ssh_keys.length > 0) {
+      const { delete_ssh_key } = await Delete.confirmDelete('ssh_key');
+      if (delete_ssh_key) {
+        spinner.start('Deleting your key...');
+        answers.ssh_key_id.map(async ssh_key => {
+          try {
+            const data = await DoAPI.accountDeleteKey(ssh_key);
+            if (data.response.statusCode === 204) {
+              spinner.succeed(`${ssh_key} is deleted!`);
+            }
+          } catch (error) {
+            spinner.fail(`failed to delete ${ssh_key}`);
+            console.log(error.message);
+          }
+        });
       }
-    });
+    } else {
+      console.log(
+        'Please select atleast one ssh_key to perform this operation!'
+      );
+    }
   } catch (error) {
     spinner.stop();
-    console.error(`${error.message}`);
+    console.error(error);
   }
 };
 
 module.exports.floating_ip = async () => {
   try {
-    let answers = await Delete.floating_ip();
-    spinner.start('Deleting your key...');
-    answers.floating_ip.map(async fip => {
-      try {
-        let data = await DoAPI.floatingIpsDelete(fip);
-        if (data.response.statusCode === 204) {
-          spinner.succeed(`${fip} is deleted!`);
-        }
-      } catch (error) {
-        spinner.fail(`failed to delete ${fip}`);
-        console.log(error.message);
+    const answers = await Delete.floating_ip();
+    if (answers.floating_ips.length > 0) {
+      const { delete_floating_ip } = await Delete.confirmDelete('floating_ip');
+      if (delete_floating_ip) {
+        spinner.start('Deleting your key...');
+        answers.floating_ip.map(async fip => {
+          try {
+            const data = await DoAPI.floatingIpsDelete(fip);
+            if (data.response.statusCode === 204) {
+              spinner.succeed(`${fip} is deleted!`);
+            }
+          } catch (error) {
+            spinner.fail(`failed to delete ${fip}`);
+            console.log(error.message);
+          }
+        });
       }
-    });
+    } else {
+      console.log(
+        'Please select atleast one floating_ip to perform this operation!'
+      );
+    }
   } catch (error) {
     spinner.stop();
-    console.error(`${error.message}`);
+    console.error(error);
   }
 };
 
 module.exports.volume = async () => {
   try {
-    let answers = await Delete.volume();
-    spinner.start('Deleting your volume...');
-    answers.volumes.map(async volumeid => {
-      try {
-        let data = await DoAPI.volumesDeleteById(volumeid);
-        if (data.response.statusCode === 204) {
-          spinner.succeed(`${volumeid} is deleted!`);
-        }
-      } catch (error) {
-        spinner.fail(`failed to delete ${volumeid}`);
-        console.log(error.message);
+    const answers = await Delete.volume();
+    if (answers.volumes.length > 0) {
+      const { delete_volume } = await Delete.confirmDelete('volume');
+      if (delete_volume) {
+        spinner.start('Deleting your volume...');
+        answers.volumes.map(async volumeid => {
+          try {
+            const data = await DoAPI.volumesDeleteById(volumeid);
+            if (data.response.statusCode === 204) {
+              spinner.succeed(`${volumeid} is deleted!`);
+            }
+          } catch (error) {
+            spinner.fail(`failed to delete ${volumeid}`);
+            console.log(error.message);
+          }
+        });
       }
-    });
+    } else {
+      console.log(
+        'Please select atleast one volume to perform this operation!'
+      );
+    }
   } catch (error) {
     spinner.stop();
-    console.error(`${error.message}`);
+    console.error(error);
   }
 };
 
