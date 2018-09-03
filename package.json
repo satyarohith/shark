@@ -15,6 +15,13 @@
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
   },
+  "files": [
+    "actions",
+    "inquirer",
+    "loaders.js",
+    "shark.js",
+    "util.js"
+  ],
   "bin": {
     "shark": "./shark.js"
   },
