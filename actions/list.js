@@ -1,5 +1,5 @@
 'use strict';
-const { callMatchingMethod } = require('../util');
+const { callMatchingMethod, DoAPI, spinner } = require('../util');
 const List = require('../inquirer/list');
 const chalk = require('chalk');
 const Action = require('./init');

@@ -1,6 +1,6 @@
 'use strict';
 const Delete = require('../inquirer/delete');
-const { callMatchingMethod } = require('../util');
+const { callMatchingMethod, spinner, DoAPI, config } = require('../util');
 const chalk = require('chalk');
 const Action = require('./init');
 
