@@ -51,7 +51,7 @@ module.exports.domain = async () => {
     answers.domain_name.map(async domain => {
       try {
         let data = await DoAPI.domainsDelete(domain);
-        if ((data.response.statusCode = 204)) {
+        if (data.response.statusCode === 204) {
           spinner.succeed(`${domain} is deleted`);
         }
       } catch (error) {
@@ -72,7 +72,7 @@ module.exports.ssh_key = async () => {
     answers.ssh_key_id.map(async ssh_key => {
       try {
         let data = await DoAPI.accountDeleteKey(ssh_key);
-        if ((data.response.statusCode = 204)) {
+        if (data.response.statusCode === 204) {
           spinner.succeed(`${ssh_key} is deleted!`);
         }
       } catch (error) {
@@ -93,7 +93,7 @@ module.exports.floating_ip = async () => {
     answers.floating_ip.map(async fip => {
       try {
         let data = await DoAPI.floatingIpsDelete(fip);
-        if ((data.response.statusCode = 204)) {
+        if (data.response.statusCode === 204) {
           spinner.succeed(`${fip} is deleted!`);
         }
       } catch (error) {
@@ -114,7 +114,7 @@ module.exports.volume = async () => {
     answers.volumes.map(async volumeid => {
       try {
         let data = await DoAPI.volumesDeleteById(volumeid);
-        if ((data.response.statusCode = 204)) {
+        if (data.response.statusCode === 204) {
           spinner.succeed(`${volumeid} is deleted!`);
         }
       } catch (error) {
