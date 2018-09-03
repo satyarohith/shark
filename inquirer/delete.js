@@ -34,8 +34,8 @@ module.exports.domain = async () => {
   const questions = [
     {
       type: 'checkbox',
-      name: 'domain_name',
-      message: chalk.red('Select the domain you want to delete:'),
+      name: 'domains',
+      message: 'Select the domain you want to delete:',
       choices: await loadAvailableDomains()
     }
   ];
@@ -50,7 +50,6 @@ module.exports.droplet = async () => {
       name: 'droplets',
       message: 'Select the droplet you want to delete:',
       choices: await loadAvailableDroplets()
-      // TODO: handle if no droplet is selected
     }
   ];
 
@@ -61,9 +60,9 @@ module.exports.ssh_key = async () => {
   const questions = [
     {
       type: 'checkbox',
-      name: 'ssh_key_id',
+      name: 'ssh_keys',
       message: 'Select ssh_key you want to delete:',
-      choices: await loadAvailableSSHKEYS(DoAPI, spinner)
+      choices: await loadAvailableSSHKEYS()
     }
   ];
 
@@ -74,7 +73,7 @@ module.exports.floating_ip = async () => {
   const questions = [
     {
       type: 'checkbox',
-      name: 'floating_ip',
+      name: 'floating_ips',
       message: 'Select floating_ips you want to delete:',
       choices: await loadAvailableFloatingIps()
     }
@@ -90,6 +89,21 @@ module.exports.volume = async () => {
       name: 'volumes',
       message: 'Select volumes you want to delete:',
       choices: await loadAvailableVolumes()
+    }
+  ];
+
+  return inquirer.prompt(questions);
+};
+
+module.exports.confirmDelete = (name, defaultValue, customMessage) => {
+  const questions = [
+    {
+      type: 'confirm',
+      name: `delete_${name}`,
+      message:
+        customMessage ||
+        chalk.red(`Are you sure about deleting above ${name}s?`),
+      default: defaultValue || false
     }
   ];
 
