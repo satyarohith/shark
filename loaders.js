@@ -1,3 +1,5 @@
+const { DoAPI, spinner, config } = require('./util');
+
 const deleteKey = key => {
   if (config.isExpired(key)) {
     config.delete(key);
