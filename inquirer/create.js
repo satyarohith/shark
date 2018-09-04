@@ -58,8 +58,7 @@ module.exports.droplet = async () => {
       type: 'list',
       name: 'size',
       message: 'How stronger your computer should be?',
-      choices: await loadAvailableSizes(),
-      pageSize: 2
+      choices: await loadAvailableSizes()
     },
     {
       type: 'list',
@@ -92,7 +91,10 @@ module.exports.droplet = async () => {
       name: 'tags',
       message: 'Add any droplet tags',
       filter: input => {
-        let tags = input.split(' ');
+        let tags = input
+          .trim()
+          .replace('.', '_') // tags donot support `.` so replace them
+          .split(' ');
         return tags;
       }
     },

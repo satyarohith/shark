@@ -32,7 +32,7 @@ module.exports.domain = async () => {
 
 module.exports.droplet = async () => {
   try {
-    let answers = await Create.droplet();
+    const answers = await Create.droplet();
     spinner.start(`Creating ${answers.name}...`);
     // The below omits property dropletAddOps and tags
     let { dropletAddOps, tags, ...dropletconfig } = answers;
@@ -45,9 +45,13 @@ module.exports.droplet = async () => {
         dropletconfig[option] = true;
       });
     }
-    let data = await DoAPI.dropletsCreate(dropletconfig);
-    let droplet = data.body.droplet;
-    spinner.succeed(droplet.name);
+    const data = await DoAPI.dropletsCreate(dropletconfig);
+    const droplet = data.body.droplet;
+    spinner.succeed(
+      `${chalk.bold(droplet.name)} created at ${chalk.blue(
+        droplet.region.name
+      )}`
+    );
   } catch (error) {
     spinner.stop();
     console.error(error.message);
