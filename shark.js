@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 'use strict';
-const argv = require('yargs').argv;
 const Create = require('./actions/create');
 const Delete = require('./actions/delete');
 const List = require('./actions/list');
@@ -10,18 +9,20 @@ const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
 const notifier = updateNotifier({ pkg });
 
+const argv = process.argv.slice(2);
+
 notifier.notify({ isGlobal: true });
 
 if (config.has('do_api_access_token')) {
-  switch (argv._[0]) {
+  switch (argv[0]) {
     case 'create':
-      callMatchingMethod(Create, argv._[1]);
+      callMatchingMethod(Create, argv[1]);
       break;
     case 'delete':
-      callMatchingMethod(Delete, argv._[1]);
+      callMatchingMethod(Delete, argv[1]);
       break;
     case 'list':
-      callMatchingMethod(List, argv._[1]);
+      callMatchingMethod(List, argv[1]);
       break;
     default:
       Init();
