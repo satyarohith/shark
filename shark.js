@@ -12,8 +12,6 @@ const notifier = updateNotifier({ pkg });
 
 notifier.notify({ isGlobal: true });
 
-initAccount();
-
 if (config.has('do_api_access_token')) {
   switch (argv._[0]) {
     case 'create':
@@ -29,4 +27,6 @@ if (config.has('do_api_access_token')) {
       Init();
       break;
   }
+} else {
+  initAccount();
 }
