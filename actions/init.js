@@ -19,7 +19,6 @@ module.exports.Init = async () => {
         break;
       default:
         process.exit();
-        break;
     }
   } catch (error) {
     console.error(error);
