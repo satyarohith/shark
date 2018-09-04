@@ -97,7 +97,7 @@ module.exports.loadAvailableDroplets = async () => {
 
 module.exports.loadAvailableSizes = async () => {
   // cache sizes as they are mostly same
-  const availableSizes = [];
+  let availableSizes = [];
   deleteKey('do-sizes');
   try {
     spinner.start('Loading available sizes...');
