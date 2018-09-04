@@ -15,6 +15,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "test": "npx eslint .",
     "commit": "git-cz",
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
@@ -35,6 +36,13 @@
     "shark",
     "nodejs"
   ],
+  "eslintConfig": {
+    "extends": "standard",
+    "rules": {
+      "camelcase": "off",
+      "semi": "off"
+    }
+  },
   "dependencies": {
     "cache-conf": "^0.6.0",
     "chalk": "^2.4.1",
@@ -46,6 +54,12 @@
   "devDependencies": {
     "commitizen": "^2.10.1",
     "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^5.5.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
     "semantic-release": "^15.9.12",
     "travis-deploy-once": "^5.0.4"
   },
