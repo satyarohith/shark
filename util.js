@@ -20,8 +20,8 @@ module.exports.initAccount = async () => {
     try {
       const DoAPI = new DigitalOcean(accesstoken, 5);
       spinner.start('Verifying your account...');
-      let data = await DoAPI.account();
-      let account = data.body.account;
+      const data = await DoAPI.account();
+      const account = data.body.account;
       if (account) {
         spinner.succeed('Account verified!');
         config.set('do_api_access_token', accesstoken);
@@ -40,11 +40,9 @@ module.exports.initAccount = async () => {
     }
   };
 
-  if (!config.has('do_api_access_token')) {
-    let answers = await Create.accessToken();
-    // If token is valid verifAccount sets the token
-    await verifyAccount(answers.do_api_access_token);
-  }
+  const answers = await Create.accessToken();
+  // If token is valid verifAccount sets the token
+  await verifyAccount(answers.do_api_access_token);
 };
 
 module.exports.callMatchingMethod = (object, method) => {
