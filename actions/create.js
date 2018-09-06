@@ -18,11 +18,8 @@ module.exports.domain = async () => {
     let answers = await Create.domain();
     spinner.start(`Creating ${answers.domain_name}...`);
     let data = await DoAPI.domainsCreate(answers.domain_name);
-    spinner.stop();
     if (data.body.domain.name) {
-      console.log(
-        `Domain ${data.body.domain.name} has been successfully created. 🎉`
-      );
+      spinner.succeed(`${chalk.bold(data.body.domain.name)} is created. 🎉`);
     }
   } catch (error) {
     spinner.stop();
@@ -63,10 +60,9 @@ module.exports.ssh_key = async () => {
     const answers = await Create.ssh_key();
     spinner.start('Adding your key...');
     const data = await DoAPI.accountAddKey(answers);
-    spinner.stop();
     if (data.body.ssh_key.id) {
-      console.log(
-        `SSH_KEY: ${chalk.green(data.body.ssh_key.name)} with Id: ${chalk.blue(
+      spinner.succeed(
+        `${chalk.green(data.body.ssh_key.name)} with Id: ${chalk.blue(
           data.body.ssh_key.id
         )} has been succesfully created!`
       );
@@ -110,9 +106,9 @@ module.exports.volume = async () => {
     if (data.body.volume) {
       spinner.succeed(`Volume ${chalk.blue(data.body.volume.name)} created!`);
       console.log(
-        `Name: ${data.body.volume.name}
-         Desc: ${data.body.volume.description},
-         Size: ${data.body.volume.size_gigabytes}GB
+        `  Name: ${data.body.volume.name}
+           Desc: ${data.body.volume.description},
+           Size: ${data.body.volume.size_gigabytes}GB
          Region: ${data.body.volume.region.slug}`
       );
     }
