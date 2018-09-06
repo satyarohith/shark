@@ -1,10 +1,8 @@
 # Shark
 
 A CLI to Interact with DigitalOcean.
-
+![](shark.gif)
 ## Installation
->shark is in beta.
-
 Install [Node.js](https://nodejs.org/) and then run this command
 ```sh
 npm install -g shark
