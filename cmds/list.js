@@ -5,7 +5,7 @@ const {
   spinner,
   calculateCostAndHours
 } = require('../util');
-const List = require('../inquirer/list');
+const List = require('../prompts/list');
 const chalk = require('chalk');
 const Action = require('./init');
 

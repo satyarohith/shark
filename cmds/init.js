@@ -1,5 +1,5 @@
 'use strict';
-const { init } = require('../inquirer/init');
+const { init } = require('../prompts/init');
 const Create = require('./create');
 const Delete = require('./delete');
 const List = require('./list');

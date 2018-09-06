@@ -1,7 +1,7 @@
 'use strict';
 const DigitalOcean = require('do-wrapper').default;
 const chalk = require('chalk');
-const Create = require('./inquirer/create');
+const Create = require('./prompts/create');
 const CacheConf = require('cache-conf');
 const Ora = require('ora');
 const config = new CacheConf();
