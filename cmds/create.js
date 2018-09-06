@@ -1,5 +1,5 @@
 'use strict';
-const Create = require('../inquirer/create');
+const Create = require('../prompts/create');
 const { callMatchingMethod, spinner, DoAPI } = require('../util');
 const chalk = require('chalk');
 const Action = require('./init');
