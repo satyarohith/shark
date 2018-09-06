@@ -56,7 +56,7 @@ module.exports.domain = async () => {
       const { delete_domain } = await Delete.confirmDelete('domain');
       if (delete_domain) {
         spinner.start('Deleting your domain...');
-        answers.domain_name.map(async domain => {
+        answers.domains.map(async domain => {
           try {
             const data = await DoAPI.domainsDelete(domain);
             if (data.response.statusCode === 204) {
@@ -86,7 +86,7 @@ module.exports.ssh_key = async () => {
       const { delete_ssh_key } = await Delete.confirmDelete('ssh_key');
       if (delete_ssh_key) {
         spinner.start('Deleting your key...');
-        answers.ssh_key_id.map(async ssh_key => {
+        answers.ssh_keys.map(async ssh_key => {
           try {
             const data = await DoAPI.accountDeleteKey(ssh_key);
             if (data.response.statusCode === 204) {
@@ -116,7 +116,7 @@ module.exports.floating_ip = async () => {
       const { delete_floating_ip } = await Delete.confirmDelete('floating_ip');
       if (delete_floating_ip) {
         spinner.start('Deleting your key...');
-        answers.floating_ip.map(async fip => {
+        answers.floating_ips.map(async fip => {
           try {
             const data = await DoAPI.floatingIpsDelete(fip);
             if (data.response.statusCode === 204) {
