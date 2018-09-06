@@ -1,6 +1,7 @@
 # Shark
 
 A CLI to Interact with DigitalOcean.
+
 ![](shark.gif)
 ## Installation
 Install [Node.js](https://nodejs.org/) and then run this command
@@ -45,7 +46,7 @@ shark create volume
 
 ### Delete
 
-### :red_circle: `Shark` will not warn you when you perform `delete` operations, please make sure you know what you are doing.
+Please make sure *you know what you are doing* while performing `delete` operations.
 
 To delete droplet
 ```sh
