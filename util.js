@@ -54,3 +54,10 @@ module.exports.callMatchingMethod = (object, method) => {
     console.error(`Couldn't find the method/property ${method} in ${object} `);
   }
 };
+
+module.exports.calculateCostAndHours = (createdAt, hourlyPrice) => {
+  const createdDate = new Date(createdAt);
+  const totalHours = Math.ceil(Math.abs(Date.now() - createdDate) / 36e5);
+  const totalCost = totalHours * hourlyPrice;
+  return { totalCost, totalHours };
+};
