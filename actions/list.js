@@ -33,9 +33,7 @@ module.exports.domains = async () => {
       });
     }
   } catch (error) {
-    console.log(`
-    An error ocurred while fetching your domains.
-    ${error.id} : ${error.message}`);
+    console.error(error.message);
   }
 };
 
@@ -82,11 +80,10 @@ module.exports.droplets = async () => {
     }
   } catch (error) {
     spinner.stop();
-    console.log(`
-    An error ocurred while fetching your droplets.
-    ${error.message}`);
+    console.error(error.message);
   }
 };
+
 module.exports.ssh_keys = async () => {
   try {
     spinner.start('Loading sshkeys...');
@@ -101,9 +98,7 @@ module.exports.ssh_keys = async () => {
     }
   } catch (error) {
     spinner.stop();
-    console.log(`
-    An error ocurred while fetching your sshkeys.
-    ${error.message}`);
+    console.error(error.message);
   }
 };
 
@@ -149,7 +144,7 @@ module.exports.volumes = async () => {
     }
   } catch (error) {
     spinner.stop();
-    console.log(error.message);
+    console.error(error.message);
   }
 };
 
@@ -175,7 +170,7 @@ module.exports.loadbalancers = async () => {
     }
   } catch (error) {
     spinner.stop();
-    console.log(error.message);
+    console.error(error.message);
   }
 };
 
