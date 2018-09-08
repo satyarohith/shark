@@ -30,6 +30,19 @@ resource_names:
   ssh_key
   volume
   floating_ip
+
+examples:
+
+$ shark
+-> Perform operations interactively
+
+$ shark create
+-> skips to create interactive ui
+
+$ shark create droplet
+-> skips to droplet creation step
+
+same applies to list & delete as well
 `;
 
 if (config.has('do_api_access_token')) {
