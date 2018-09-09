@@ -21,8 +21,8 @@
     "semantic-release": "semantic-release"
   },
   "files": [
-    "actions",
-    "inquirer",
+    "cmds",
+    "prompts",
     "loaders.js",
     "shark.js",
     "util.js"
