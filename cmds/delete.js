@@ -1,7 +1,7 @@
 'use strict';
+const chalk = require('chalk');
 const { callMatchingMethod, spinner, DoAPI, config } = require('../util');
 const Delete = require('../prompts/delete');
-const chalk = require('chalk');
 const Action = require('./init');
 
 module.exports.init = async () => {
@@ -22,7 +22,7 @@ module.exports.droplet = async () => {
         spinner.start('Deleting your droplet..');
         answers.droplets.map(async droplet => {
           try {
-            let data = await DoAPI.dropletsDelete(droplet.id);
+            const data = await DoAPI.dropletsDelete(droplet.id);
             if (data.response.statusCode === 204) {
               spinner.succeed(
                 `${chalk.green(droplet.name)} with Ip: ${chalk.red(
@@ -172,7 +172,7 @@ module.exports.volume = async () => {
 module.exports.token = () => {
   if (config.has('do_api_access_token')) {
     config.delete('do_api_access_token');
-    console.log(`Access token Successfully Removed from your System!`);
+    console.log('Access token Successfully Removed from your System!');
   } else {
     console.log(chalk.red('You do not have any access tokens to remove'));
   }

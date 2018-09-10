@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 'use strict';
+const updateNotifier = require('update-notifier');
 const Create = require('./cmds/create');
 const Delete = require('./cmds/delete');
 const List = require('./cmds/list');
 const { Init } = require('./cmds/init');
 const { initAccount, callMatchingMethod, config } = require('./util');
-const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
+
 const notifier = updateNotifier({ pkg });
 
 notifier.notify({ isGlobal: true });
