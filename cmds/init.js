@@ -6,7 +6,7 @@ const List = require('./list');
 
 module.exports.Init = async () => {
   try {
-    let anwsers = await init();
+    const anwsers = await init();
     switch (anwsers.init) {
       case 'delete':
         Delete.init();
