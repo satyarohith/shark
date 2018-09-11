@@ -19,6 +19,9 @@ shark
 It will ask for DigitalOcean Personal Access Token for the first time and then you can perform tasks interactively.
 
 [Learn How to create a Personal Access Token](https://www.digitalocean.com/docs/api/create-personal-access-token/).
+
+## Skip Prompts
+
 ### Create
 <br/>
 
