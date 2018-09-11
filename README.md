@@ -2,7 +2,9 @@
 
 A CLI to Interact with DigitalOcean.
 
-![](demo.gif)
+<div align="center">
+<img src="demo.gif" >
+</div>
 
 ## Installation
 Install [Node.js](https://nodejs.org/) and then run this command
