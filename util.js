@@ -7,7 +7,7 @@ const Ora = require('ora');
 const config = new CacheConf();
 const spinner = new Ora();
 const ACCESS_TOKEN = config.get('do_api_access_token');
-const DoAPI = new DigitalOcean(ACCESS_TOKEN, 10);
+const DoAPI = new DigitalOcean(ACCESS_TOKEN, 50);
 
 module.exports.config = config;
 
