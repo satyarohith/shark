@@ -1,7 +1,6 @@
 'use strict';
 const DigitalOcean = require('do-wrapper').default;
 const chalk = require('chalk');
-const Create = require('./prompts/create');
 const CacheConf = require('cache-conf');
 const Ora = require('ora');
 const config = new CacheConf();
@@ -39,6 +38,7 @@ module.exports.initAccount = async () => {
           `);
     }
   };
+  const Create = require('./prompts/create');
 
   const answers = await Create.accessToken();
   // If token is valid verifAccount sets the token
