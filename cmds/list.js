@@ -67,7 +67,10 @@ module.exports.droplets = async () => {
         console.log(chalk.bold('      Image:'), droplet.image.slug);
         console.log(chalk.bold('     Status:'), droplet.status);
         console.log(chalk.bold('     Region:'), droplet.region.name);
-        console.log(chalk.bold('         Ip:'), ipAdrs);
+        console.log(
+          chalk.bold('         Ip:'),
+          ipAdrs || 'not available yet'
+        );
         console.log(chalk.bold('Total Hours:'), calData.totalHours);
         console.log(
           chalk.bold('         CE:'),
