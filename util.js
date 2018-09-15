@@ -3,6 +3,8 @@ const DigitalOcean = require('do-wrapper').default;
 const chalk = require('chalk');
 const CacheConf = require('cache-conf');
 const Ora = require('ora');
+const Create = require('./prompts/create');
+
 const config = new CacheConf();
 const spinner = new Ora();
 const ACCESS_TOKEN = config.get('do_api_access_token');
@@ -19,8 +21,7 @@ module.exports.initAccount = async () => {
     try {
       const DoAPI = new DigitalOcean(accesstoken, 5);
       spinner.start('Verifying your account...');
-      const data = await DoAPI.account();
-      const account = data.body.account;
+      const { account } = await DoAPI.account();
       if (account) {
         spinner.succeed('Account verified!');
         config.set('do_api_access_token', accesstoken);
@@ -46,9 +47,9 @@ module.exports.initAccount = async () => {
 };
 
 module.exports.callMatchingMethod = (object, method) => {
-  if (object.hasOwnProperty(method)) {
+  if (Object.prototype.hasOwnProperty.call(object, method)) {
     object[method]();
-  } else if (object.hasOwnProperty('init')) {
+  } else if (Object.prototype.hasOwnProperty.call(object, 'init')) {
     object.init();
   } else {
     console.error(`Couldn't find the method/property ${method} in ${object} `);
