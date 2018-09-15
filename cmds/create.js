@@ -1,12 +1,12 @@
 'use strict';
+const chalk = require('chalk');
 const Create = require('../prompts/create');
 const { callMatchingMethod, spinner, DoAPI } = require('../util');
-const chalk = require('chalk');
 const Action = require('./init');
 
 module.exports.init = async () => {
   try {
-    let answers = await Create.init();
+    const answers = await Create.init();
     callMatchingMethod(module.exports, answers.create);
   } catch (error) {
     console.error(error);
@@ -15,9 +15,9 @@ module.exports.init = async () => {
 
 module.exports.domain = async () => {
   try {
-    let answers = await Create.domain();
+    const answers = await Create.domain();
     spinner.start(`Creating ${answers.domain_name}...`);
-    let data = await DoAPI.domainsCreate(answers.domain_name);
+    const data = await DoAPI.domainsCreate(answers.domain_name);
     if (data.body.domain.name) {
       spinner.succeed(`${chalk.bold(data.body.domain.name)} is created. 🎉`);
     }
@@ -32,18 +32,19 @@ module.exports.droplet = async () => {
     const answers = await Create.droplet();
     spinner.start(`Creating ${answers.name}...`);
     // The below omits property dropletAddOps and tags
-    let { dropletAddOps, tags, ...dropletconfig } = answers;
-    // check the if there are any tags
+    const { dropletAddOps, tags, ...dropletconfig } = answers;
+    //  If there are any tags assign them to dropletconfig
     if (tags[0].length > 0) {
       dropletconfig.tags = tags;
     }
-    if (answers.hasOwnProperty('dropletAddOps')) {
+    if (Object.prototype.hasOwnProperty.call(answers, 'dropletAddOps')) {
       answers.dropletAddOps.map(option => {
         dropletconfig[option] = true;
+        return dropletconfig;
       });
     }
     const data = await DoAPI.dropletsCreate(dropletconfig);
-    const droplet = data.body.droplet;
+    const { droplet } = data.body;
     spinner.succeed(
       `${chalk.bold(droplet.name)} created at ${chalk.blue(
         droplet.region.name
@@ -75,11 +76,11 @@ module.exports.ssh_key = async () => {
 
 module.exports.floating_ip = async () => {
   try {
-    let answers = await Create.floating_ip();
+    const answers = await Create.floating_ip();
     spinner.start('Creating floating_ip..');
     // There are two ways to create floatingIps, we will create
     // using Region for now https://git.io/fAGUM
-    let data = await DoAPI.floatingIpsAssignRegion(answers.region_slug);
+    const data = await DoAPI.floatingIpsAssignRegion(answers.region_slug);
     if (data.body.floating_ip) {
       spinner.succeed(
         `floating ip ${chalk.blue(data.body.floating_ip.ip)} created!`
@@ -94,10 +95,10 @@ module.exports.floating_ip = async () => {
 
 module.exports.volume = async () => {
   try {
-    let answers = await Create.volume();
+    const answers = await Create.volume();
     spinner.start('Creating volume..');
     console.log(answers);
-    let data = await DoAPI.volumesCreate({
+    const data = await DoAPI.volumesCreate({
       size_gigabytes: answers.volume_size,
       name: answers.volume_name,
       description: answers.volume_desc,
