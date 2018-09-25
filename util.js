@@ -3,7 +3,6 @@ const DigitalOcean = require('do-wrapper').default;
 const chalk = require('chalk');
 const CacheConf = require('cache-conf');
 const Ora = require('ora');
-const Create = require('./prompts/create');
 
 const config = new CacheConf();
 const spinner = new Ora();
