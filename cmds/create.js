@@ -17,9 +17,11 @@ module.exports.domain = async () => {
   try {
     const answers = await Create.domain();
     spinner.start(`Creating ${answers.domain_name}...`);
-    const data = await DoAPI.domainsCreate(answers.domain_name);
-    if (data.body.domain.name) {
-      spinner.succeed(`${chalk.bold(data.body.domain.name)} is created. 🎉`);
+    const {
+      body: { domain }
+    } = await DoAPI.domainsCreate(answers.domain_name);
+    if (domain.name) {
+      spinner.succeed(`${chalk.bold(domain.name)} is created. 🎉`);
     }
   } catch (error) {
     spinner.stop();
@@ -43,8 +45,9 @@ module.exports.droplet = async () => {
         return dropletconfig;
       });
     }
-    const data = await DoAPI.dropletsCreate(dropletconfig);
-    const { droplet } = data.body;
+    const {
+      body: { droplet }
+    } = await DoAPI.dropletsCreate(dropletconfig);
     spinner.succeed(
       `${chalk.bold(droplet.name)} created at ${chalk.blue(
         droplet.region.name
@@ -60,11 +63,13 @@ module.exports.ssh_key = async () => {
   try {
     const answers = await Create.ssh_key();
     spinner.start('Adding your key...');
-    const data = await DoAPI.accountAddKey(answers);
-    if (data.body.ssh_key.id) {
+    const {
+      body: { ssh_key }
+    } = await DoAPI.accountAddKey(answers);
+    if (ssh_key.id) {
       spinner.succeed(
-        `${chalk.green(data.body.ssh_key.name)} with Id: ${chalk.blue(
-          data.body.ssh_key.id
+        `${chalk.green(ssh_key.name)} with Id: ${chalk.blue(
+          ssh_key.id
         )} has been succesfully created!`
       );
     }
@@ -80,12 +85,12 @@ module.exports.floating_ip = async () => {
     spinner.start('Creating floating_ip..');
     // There are two ways to create floatingIps, we will create
     // using Region for now https://git.io/fAGUM
-    const data = await DoAPI.floatingIpsAssignRegion(answers.region_slug);
-    if (data.body.floating_ip) {
-      spinner.succeed(
-        `floating ip ${chalk.blue(data.body.floating_ip.ip)} created!`
-      );
-      console.log(`region: ${data.body.floating_ip.region.name}`);
+    const {
+      body: { floating_ip }
+    } = await DoAPI.floatingIpsAssignRegion(answers.region_slug);
+    if (floating_ip) {
+      spinner.succeed(`floating ip ${chalk.blue(floating_ip.ip)} created!`);
+      console.log(`region: ${floating_ip.region.name}`);
     }
   } catch (error) {
     spinner.stop();
@@ -98,19 +103,22 @@ module.exports.volume = async () => {
     const answers = await Create.volume();
     spinner.start('Creating volume..');
     console.log(answers);
-    const data = await DoAPI.volumesCreate({
+    const {
+      body: { volume }
+    } = await DoAPI.volumesCreate({
       size_gigabytes: answers.volume_size,
       name: answers.volume_name,
       description: answers.volume_desc,
       region: answers.volume_region
     });
-    if (data.body.volume) {
-      spinner.succeed(`Volume ${chalk.blue(data.body.volume.name)} created!`);
+
+    if (volume) {
+      spinner.succeed(`Volume ${chalk.blue(volume.name)} created!`);
       console.log(
-        `  Name: ${data.body.volume.name}
-           Desc: ${data.body.volume.description},
-           Size: ${data.body.volume.size_gigabytes}GB
-         Region: ${data.body.volume.region.slug}`
+        `  Name: ${volume.name}
+           Desc: ${volume.description},
+           Size: ${volume.size_gigabytes}GB
+         Region: ${volume.region.slug}`
       );
     }
   } catch (error) {
