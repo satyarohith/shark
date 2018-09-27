@@ -4,6 +4,7 @@ const updateNotifier = require('update-notifier');
 const Create = require('./cmds/create');
 const Delete = require('./cmds/delete');
 const List = require('./cmds/list');
+const Domain = require('./cmds/domain');
 const { Init } = require('./cmds/init');
 const { initAccount, callMatchingMethod, config } = require('./util');
 const pkg = require('./package.json');
@@ -56,6 +57,9 @@ if (config.has('do_api_access_token')) {
       break;
     case 'list':
       callMatchingMethod(List, argv[1]);
+      break;
+    case 'domain':
+      callMatchingMethod(Domain, argv[1]);
       break;
     case '-v':
     case '--version':
