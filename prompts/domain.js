@@ -1,3 +1,4 @@
+const inquirer = require('inquirer');
 const { loadAvailableDomains } = require('../loaders');
 
 module.exports.init = () => {
@@ -5,11 +6,11 @@ module.exports.init = () => {
     {
       type: 'list',
       name: 'domain',
-      message: 'What do you want to create?',
+      message: 'What do you want to do?',
       choices: [
         { name: 'List all domains', value: 'list' },
         { name: 'Create a domain', value: 'create' },
-        { name: 'Delete a domain', value: 'delete' }
+        { name: 'Delete domains', value: 'delete' }
       ]
     }
   ];
