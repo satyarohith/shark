@@ -13,22 +13,6 @@ module.exports.init = async () => {
   }
 };
 
-module.exports.domain = async () => {
-  try {
-    const answers = await Create.domain();
-    spinner.start(`Creating ${answers.domain_name}...`);
-    const {
-      body: { domain }
-    } = await DoAPI.domainsCreate(answers.domain_name);
-    if (domain.name) {
-      spinner.succeed(`${chalk.bold(domain.name)} is created. 🎉`);
-    }
-  } catch (error) {
-    spinner.stop();
-    console.error(error.message);
-  }
-};
-
 module.exports.droplet = async () => {
   try {
     const answers = await Create.droplet();
