@@ -74,6 +74,7 @@ module.exports.list = async () => {
       });
     }
   } catch (error) {
+    spinner.stop();
     console.error(error.message);
   }
 };
