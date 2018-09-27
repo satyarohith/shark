@@ -10,6 +10,7 @@ module.exports.init = () => {
       choices: [
         { name: 'Create', value: 'create' },
         { name: 'Delete', value: 'delete' },
+        { name: 'Domain', value: 'domain' },
         { name: 'List', value: 'list' },
         { name: 'Exit', value: 'exit' }
       ]
