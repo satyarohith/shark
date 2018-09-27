@@ -1,3 +1,5 @@
+const { loadAvailableDomains } = require('../loaders');
+
 module.exports.init = () => {
   const questions = [
     {
@@ -22,6 +24,19 @@ module.exports.create = () => {
       name: 'domain_name',
       message: 'Enter your domain name:',
       filter: input => input.toLowerCase()
+    }
+  ];
+
+  return inquirer.prompt(questions);
+};
+
+module.exports.delete = async () => {
+  const questions = [
+    {
+      type: 'checkbox',
+      name: 'domains',
+      message: 'Select the domain you want to delete:',
+      choices: await loadAvailableDomains()
     }
   ];
 
