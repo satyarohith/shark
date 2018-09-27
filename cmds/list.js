@@ -18,26 +18,6 @@ module.exports.init = async () => {
   }
 };
 
-module.exports.domains = async () => {
-  try {
-    spinner.start('Loading domains...');
-    const data = await DoAPI.domainsGetAll();
-    spinner.stop();
-    if (data.body.meta.total === 0) {
-      /* prettier-ignore */
-      console.log('You don\'t have any domains');
-    } else {
-      data.body.domains.map((domain, index) => {
-        return console.log(
-          chalk.gray(index + 1 + '. ') + chalk.bold.underline(domain.name)
-        );
-      });
-    }
-  } catch (error) {
-    console.error(error.message);
-  }
-};
-
 module.exports.droplets = async () => {
   try {
     spinner.start('Loading Droplets...');
