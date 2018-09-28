@@ -49,36 +49,6 @@ module.exports.droplet = async () => {
   }
 };
 
-module.exports.domain = async () => {
-  try {
-    const answers = await Delete.domain();
-    if (answers.domains.length > 0) {
-      const { delete_domain } = await Delete.confirmDelete('domain');
-      if (delete_domain) {
-        spinner.start('Deleting your domain...');
-        answers.domains.map(async domain => {
-          try {
-            const data = await DoAPI.domainsDelete(domain);
-            if (data.response.statusCode === 204) {
-              spinner.succeed(`${domain} is deleted`);
-            }
-          } catch (error) {
-            spinner.fail(`failed to delete ${domain}`);
-            console.error(error.message);
-          }
-        });
-      }
-    } else {
-      console.log(
-        'Please select atleast one domain to perform this operation!'
-      );
-    }
-  } catch (error) {
-    spinner.stop();
-    console.error(error);
-  }
-};
-
 module.exports.ssh_key = async () => {
   try {
     const answers = await Delete.ssh_key();
