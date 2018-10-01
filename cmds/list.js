@@ -58,9 +58,15 @@ module.exports.droplets = async () => {
           droplet.size.price_hourly
         );
 
-        const IPv4 = droplet.networks.v4[0].ip_address;
-        const privateIPv4 = droplet.networks.v4[1].ip_address;
-        const IPv6 = droplet.networks.v6[0].ip_address;
+        const IPv4 = droplet.networks.v4[0]
+          ? droplet.networks.v4[0].ip_address
+          : '';
+        const privateIPv4 = droplet.networks.v4[1]
+          ? droplet.networks.v4[1].ip_address
+          : '';
+        const IPv6 = droplet.networks.v6[0]
+          ? droplet.networks.v6[0].ip_address
+          : '';
 
         console.log('----------------------');
         console.log(chalk.bold('       Name:'), chalk.blue(droplet.name));
@@ -70,11 +76,8 @@ module.exports.droplets = async () => {
         console.log(chalk.bold('     Status:'), droplet.status);
         console.log(chalk.bold('     Region:'), droplet.region.name);
         console.log(chalk.bold('       IPv4:'), IPv4 || 'not available yet');
-        console.log(
-          chalk.bold('privateIPv4:'),
-          privateIPv4 || 'not available yet'
-        );
-        console.log(chalk.bold('       IPv6:'), IPv6 || 'not available yet');
+        console.log(chalk.bold('privateIPv4:'), privateIPv4 || 'not available');
+        console.log(chalk.bold('       IPv6:'), IPv6 || 'not available');
         console.log(chalk.bold('Total Hours:'), calData.totalHours);
         console.log(
           chalk.bold('         CE:'),
@@ -87,7 +90,7 @@ module.exports.droplets = async () => {
     }
   } catch (error) {
     spinner.stop();
-    console.error(error.message);
+    console.error(error);
   }
 };
 
