@@ -2,7 +2,7 @@
 const chalk = require('chalk');
 const Create = require('../prompts/create');
 const { callMatchingMethod, spinner, DoAPI } = require('../util');
-const Action = require('./init');
+const { init } = require('./init');
 
 module.exports.init = async () => {
   try {
@@ -113,7 +113,7 @@ module.exports.volume = async () => {
 
 module.exports.back = async () => {
   try {
-    await Action.Init();
+    await init();
   } catch (error) {
     console.error(error.message);
   }

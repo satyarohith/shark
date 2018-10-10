@@ -5,7 +5,7 @@ const Create = require('./cmds/create');
 const Delete = require('./cmds/delete');
 const List = require('./cmds/list');
 const Domain = require('./cmds/domain');
-const { Init } = require('./cmds/init');
+const { init } = require('./cmds/init');
 const { initAccount, callMatchingMethod, config } = require('./util');
 const pkg = require('./package.json');
 
@@ -70,7 +70,7 @@ if (config.has('do_api_access_token')) {
       console.log(help);
       break;
     default:
-      Init();
+      init();
       break;
   }
 } else {

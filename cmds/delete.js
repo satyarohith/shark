@@ -1,12 +1,12 @@
 'use strict';
 const chalk = require('chalk');
 const { callMatchingMethod, spinner, DoAPI, config } = require('../util');
-const Delete = require('../prompts/delete');
-const Action = require('./init');
+const deletePrompts = require('../prompts/delete');
+const action = require('./init');
 
 module.exports.init = async () => {
   try {
-    const answers = await Delete.init();
+    const answers = await deletePrompts.init();
     callMatchingMethod(module.exports, answers.delete);
   } catch (error) {
     console.error(error);
@@ -15,9 +15,9 @@ module.exports.init = async () => {
 
 module.exports.droplet = async () => {
   try {
-    const answers = await Delete.droplet();
+    const answers = await deletePrompts.droplet();
     if (answers.droplets.length > 0) {
-      const { delete_droplet } = await Delete.confirmDelete('droplet');
+      const { delete_droplet } = await deletePrompts.confirmDelete('droplet');
       if (delete_droplet) {
         spinner.start('Deleting your droplet..');
         answers.droplets.map(async droplet => {
@@ -51,9 +51,9 @@ module.exports.droplet = async () => {
 
 module.exports.ssh_key = async () => {
   try {
-    const answers = await Delete.ssh_key();
+    const answers = await deletePrompts.ssh_key();
     if (answers.ssh_keys.length > 0) {
-      const { delete_ssh_key } = await Delete.confirmDelete('ssh_key');
+      const { delete_ssh_key } = await deletePrompts.confirmDelete('ssh_key');
       if (delete_ssh_key) {
         spinner.start('Deleting your key...');
         answers.ssh_keys.map(async ssh_key => {
@@ -81,9 +81,11 @@ module.exports.ssh_key = async () => {
 
 module.exports.floating_ip = async () => {
   try {
-    const answers = await Delete.floating_ip();
+    const answers = await deletePrompts.floating_ip();
     if (answers.floating_ips.length > 0) {
-      const { delete_floating_ip } = await Delete.confirmDelete('floating_ip');
+      const { delete_floating_ip } = await deletePrompts.confirmDelete(
+        'floating_ip'
+      );
       if (delete_floating_ip) {
         spinner.start('Deleting your key...');
         answers.floating_ips.map(async fip => {
@@ -111,9 +113,9 @@ module.exports.floating_ip = async () => {
 
 module.exports.volume = async () => {
   try {
-    const answers = await Delete.volume();
+    const answers = await deletePrompts.volume();
     if (answers.volumes.length > 0) {
-      const { delete_volume } = await Delete.confirmDelete('volume');
+      const { delete_volume } = await deletePrompts.confirmDelete('volume');
       if (delete_volume) {
         spinner.start('Deleting your volume...');
         answers.volumes.map(async volumeid => {
@@ -150,7 +152,7 @@ module.exports.token = () => {
 
 module.exports.back = async () => {
   try {
-    await Action.Init();
+    await action.init();
   } catch (error) {
     console.error(error.message);
   }
