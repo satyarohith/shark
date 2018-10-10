@@ -86,6 +86,7 @@ module.exports.confirmDelete = (name, defaultValue, customMessage) => {
       type: 'confirm',
       name: `delete_${name}`,
       message:
+        /* eslint-disable-next-line operator-linebreak */
         customMessage ||
         chalk.red(`Are you sure about deleting above ${name}s?`),
       default: defaultValue || false
