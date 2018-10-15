@@ -15,7 +15,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "xo && ava",
+    "test": "xo && ava -c 1",
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
   },
