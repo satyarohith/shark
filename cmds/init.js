@@ -5,7 +5,7 @@ const Delete = require('./delete');
 const List = require('./list');
 const Domain = require('./domain');
 
-module.exports.Init = async () => {
+module.exports.init = async () => {
   try {
     const anwsers = await init();
     switch (anwsers.init) {

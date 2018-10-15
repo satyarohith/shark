@@ -38,18 +38,23 @@ module.exports.loadAvailableRegions = async () => {
     } else {
       const data = await DoAPI.regionsGetAll();
       spinner.stop();
-      data.body.regions.map(region => {
-        if (region.available) {
-          regions.push({
-            name: region.name,
-            value: region.slug
-          });
-        }
-      });
-      config.set('do-regions', regions, {
-        maxAge: 8640000 // 24 hrs
-      });
+      /* eslint-disable indent */
+      data.body.regions.map(
+        region =>
+          region.available
+            ? regions.push({
+                name: region.name,
+                value: region.slug
+              })
+            : ''
+      );
+      /* eslint-enable */
     }
+
+    config.set('do-regions', regions, {
+      maxAge: 8640000 // 24 hrs
+    });
+
     return regions;
   } catch (error) {
     console.error(error);

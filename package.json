@@ -15,9 +15,14 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "xo && jest",
+    "test": "xo && ava -c 1",
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test"
+    }
   },
   "files": [
     "cmds",
@@ -46,7 +51,11 @@
     "rules": {
       "object-curly-spacing": 0,
       "camelcase": 0,
-      "unicorn/no-process-exit": 0
+      "unicorn/no-process-exit": 0,
+      "operator-linebreak": [
+        "error",
+        "before"
+      ]
     }
   },
   "dependencies": {
@@ -58,8 +67,10 @@
     "update-notifier": "^2.5.0"
   },
   "devDependencies": {
+    "ava": "^0.25.0",
     "eslint-plugin-jest": "^21.22.0",
     "execa": "^1.0.0",
+    "husky": "^1.1.1",
     "semantic-release": "^15.9.12",
     "travis-deploy-once": "^5.0.4",
     "xo": "^0.23.0"
