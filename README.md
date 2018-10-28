@@ -2,6 +2,7 @@
 
 A CLI to Interact with DigitalOcean.
 
+[![npm version](https://img.shields.io/npm/v/shark.svg)](https://npm.im/shark)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 [![npm downloads](https://img.shields.io/npm/dm/shark.svg)](https://npm.im/shark)
 [![Known Vulnerabilities](https://snyk.io/test/github/satyarohith/shark/badge.svg?targetFile=package.json)](https://snyk.io/test/github/satyarohith/shark?targetFile=package.json)
