@@ -10,6 +10,8 @@ A CLI to Interact with DigitalOcean.
 <img src="demo.gif" >
 </div>
 
+A rewrite of `shark` utilising  [oclif](https://oclif.io) is planned.
+
 ## Installation
 Install [Node.js](https://nodejs.org/) and then run this command
 ```sh
@@ -34,10 +36,6 @@ To create droplet
 shark create droplet
 ```
 
-To create domain
-```sh
-shark create domain
-```
 
 To create ssh_key
 ```sh
@@ -54,6 +52,23 @@ To create a volume
 shark create volume
 ```
 
+### Domain
+
+To create domain
+```sh
+shark domain create
+```
+
+To delete domain
+```sh
+shark domain delete
+```
+
+To list domains
+```sh
+shark domains list
+```
+
 ### Delete
 
 Please make sure *you know what you are doing* while performing `delete` operations.
@@ -61,11 +76,6 @@ Please make sure *you know what you are doing* while performing `delete` operati
 To delete droplet
 ```sh
 shark delete droplet
-```
-
-To delete domain
-```sh
-shark delete domain
 ```
 
 To delete ssh_key
@@ -90,10 +100,7 @@ shark delete token
 ### List
 You can list all available resources under your account.
 <br/>
-To list domains
-```sh
-shark list domains
-```
+
 
 To list droplets
 ```
