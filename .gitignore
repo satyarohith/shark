@@ -1,5 +1,10 @@
+*-debug.log
+*-error.log
+/.nyc_output
+/dist
+/tmp
+/yarn.lock
 node_modules
-yarn-error.log
 package-lock.json
 yarn.lock
 .DS_Store

@@ -1,76 +1,55 @@
 {
   "name": "shark",
+  "description": "A CLI to interact with DigitalOcean",
   "version": "0.0.0-development",
-  "description": "A CLI to Interact with DigitalOcean",
-  "main": "shark.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/satyarohith/shark.git"
-  },
-  "bugs": {
-    "url": "https://github.com/satyarohith/shark/issues"
-  },
-  "homepage": "https://github.com/satyarohith/shark#readme",
-  "author": "Satya Rohith <satyarohith@gmx.com>",
-  "license": "MIT",
-  "private": false,
-  "scripts": {
-    "test": "xo",
-    "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn test"
-    }
-  },
-  "files": [
-    "cmds",
-    "prompts",
-    "loaders.js",
-    "shark.js",
-    "util.js"
-  ],
+  "author": "Satya Rohith <gsatyarohith@gmail.com> (https://satyarohith.com)",
   "bin": {
-    "shark": "./shark.js"
+    "shark": "./bin/run"
   },
-  "keywords": [
-    "cli",
-    "digitalocean",
-    "shark",
-    "nodejs"
-  ],
-  "xo": {
-    "space": true,
-    "plugins": [
-      "jest"
-    ],
-    "extends": [
-      "plugin:jest/recommended"
-    ],
-    "rules": {
-      "object-curly-spacing": 0,
-      "camelcase": 0,
-      "unicorn/no-process-exit": 0,
-      "operator-linebreak": [
-        "error",
-        "before"
-      ]
-    }
-  },
+  "bugs": "https://github.com/satyarohith/shark/issues",
   "dependencies": {
-    "cache-conf": "^0.6.0",
-    "chalk": "^2.4.1",
-    "do-wrapper": "^3.14.3",
-    "inquirer": "^6.0.0",
-    "ora": "^3.0.0",
-    "update-notifier": "^2.5.0"
+    "@oclif/command": "^1.5.8",
+    "@oclif/config": "^1.10.2",
+    "@oclif/plugin-help": "^2.1.4"
   },
   "devDependencies": {
-    "eslint-plugin-jest": "^21.22.0",
-    "husky": "^1.1.1",
-    "semantic-release": "^15.9.12",
-    "travis-deploy-once": "^5.0.4",
-    "xo": "^0.23.0"
+    "@oclif/dev-cli": "^1.21.0",
+    "@oclif/test": "^1.2.2",
+    "chai": "^4.2.0",
+    "globby": "^8.0.1",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "homepage": "https://github.com/satyarohith/shark",
+  "keywords": [
+    "oclif",
+    "shark",
+    "digitalocean",
+    "cli"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "shark",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "satyarohith/shark",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
+    "version": "oclif-dev readme && git add README.md"
   }
 }
