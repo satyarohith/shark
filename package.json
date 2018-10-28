@@ -15,7 +15,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "xo && jest",
+    "test": "xo",
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
   },
@@ -68,7 +68,6 @@
   },
   "devDependencies": {
     "eslint-plugin-jest": "^21.22.0",
-    "execa": "^1.0.0",
     "husky": "^1.1.1",
     "semantic-release": "^15.9.12",
     "travis-deploy-once": "^5.0.4",
