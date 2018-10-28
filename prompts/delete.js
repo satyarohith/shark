@@ -3,7 +3,6 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const {
   loadAvailableDroplets,
-  loadAvailableDomains,
   loadAvailableSSHKEYS,
   loadAvailableFloatingIps,
   loadAvailableVolumes
@@ -18,25 +17,11 @@ module.exports.init = () => {
       choices: [
         { name: 'Droplet', value: 'droplet' },
         { name: 'Floating Ip', value: 'floating_ip' },
-        { name: 'Domain', value: 'domain' },
         { name: 'SSH Key', value: 'ssh_key' },
         { name: 'Volume', value: 'volume' },
         { name: '<- Back', value: 'back' },
         { name: 'Exit', value: 'exit' }
       ]
-    }
-  ];
-
-  return inquirer.prompt(questions);
-};
-
-module.exports.domain = async () => {
-  const questions = [
-    {
-      type: 'checkbox',
-      name: 'domains',
-      message: 'Select the domain you want to delete:',
-      choices: await loadAvailableDomains()
     }
   ];
 
@@ -101,6 +86,7 @@ module.exports.confirmDelete = (name, defaultValue, customMessage) => {
       type: 'confirm',
       name: `delete_${name}`,
       message:
+        /* eslint-disable-next-line operator-linebreak */
         customMessage ||
         chalk.red(`Are you sure about deleting above ${name}s?`),
       default: defaultValue || false

@@ -15,10 +15,14 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "npx eslint .",
-    "commit": "git-cz",
+    "test": "xo",
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test"
+    }
   },
   "files": [
     "cmds",
@@ -36,11 +40,22 @@
     "shark",
     "nodejs"
   ],
-  "eslintConfig": {
-    "extends": "standard",
+  "xo": {
+    "space": true,
+    "plugins": [
+      "jest"
+    ],
+    "extends": [
+      "plugin:jest/recommended"
+    ],
     "rules": {
-      "camelcase": "off",
-      "semi": "off"
+      "object-curly-spacing": 0,
+      "camelcase": 0,
+      "unicorn/no-process-exit": 0,
+      "operator-linebreak": [
+        "error",
+        "before"
+      ]
     }
   },
   "dependencies": {
@@ -52,20 +67,10 @@
     "update-notifier": "^2.5.0"
   },
   "devDependencies": {
-    "commitizen": "^2.10.1",
-    "cz-conventional-changelog": "^2.1.0",
-    "eslint": "^5.5.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.0",
-    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-jest": "^21.22.0",
+    "husky": "^1.1.1",
     "semantic-release": "^15.9.12",
-    "travis-deploy-once": "^5.0.4"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+    "travis-deploy-once": "^5.0.4",
+    "xo": "^0.23.0"
   }
 }

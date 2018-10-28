@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 'use strict';
+const updateNotifier = require('update-notifier');
 const Create = require('./cmds/create');
 const Delete = require('./cmds/delete');
 const List = require('./cmds/list');
-const { Init } = require('./cmds/init');
+const Domain = require('./cmds/domain');
+const { init } = require('./cmds/init');
 const { initAccount, callMatchingMethod, config } = require('./util');
-const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
+
 const notifier = updateNotifier({ pkg });
 
 notifier.notify({ isGlobal: true });
@@ -56,6 +58,9 @@ if (config.has('do_api_access_token')) {
     case 'list':
       callMatchingMethod(List, argv[1]);
       break;
+    case 'domain':
+      callMatchingMethod(Domain, argv[1]);
+      break;
     case '-v':
     case '--version':
       console.log(pkg.version);
@@ -65,7 +70,7 @@ if (config.has('do_api_access_token')) {
       console.log(help);
       break;
     default:
-      Init();
+      init();
       break;
   }
 } else {
