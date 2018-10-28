@@ -17,7 +17,6 @@ module.exports.init = () => {
       choices: [
         { name: 'Droplet', value: 'droplet' },
         { name: 'Floating Ip', value: 'floating_ip' },
-        { name: 'Domain', value: 'domain' },
         { name: 'SSH Key', value: 'ssh_key' },
         { name: 'Volume', value: 'volume' },
         { name: '<- Back', value: 'back' },
@@ -91,9 +90,9 @@ module.exports.droplet = async () => {
       name: 'tags',
       message: 'Add any droplet tags',
       filter: input => {
-        let tags = input
+        const tags = input
           .trim()
-          .replace('.', '_') // tags donot support `.` so replace them
+          .replace('.', '_') // `tags` donot support `.` so replace them
           .split(' ');
         return tags;
       }
@@ -103,19 +102,6 @@ module.exports.droplet = async () => {
       name: 'ssh_keys',
       message: 'Select your SSH keys',
       choices: await loadAvailableSSHKEYS()
-    }
-  ];
-
-  return inquirer.prompt(questions);
-};
-
-module.exports.domain = () => {
-  const questions = [
-    {
-      type: 'input',
-      name: 'domain_name',
-      message: 'Enter your domain name:',
-      filter: input => input.toLowerCase()
     }
   ];
 
@@ -164,7 +150,7 @@ module.exports.volume = async () => {
       name: 'volume_size',
       message: 'Enter your volume size in GB',
       filter: input => {
-        let size = parseInt(input, 10);
+        const size = parseInt(input, 10);
         return size;
       }
     },
