@@ -20,7 +20,10 @@ module.exports.initAccount = async () => {
     try {
       const DoAPI = new DigitalOcean(accesstoken, 5);
       spinner.start('Verifying your account...');
-      const { account } = await DoAPI.account();
+      const {
+        body: { account }
+      } = await DoAPI.account();
+
       if (account) {
         spinner.succeed('Account verified!');
         config.set('do_api_access_token', accesstoken);
