@@ -158,6 +158,29 @@ module.exports.loadAvailableImages = async () => {
   }
 };
 
+module.exports.loadAvailableSnapshots = async () => {
+  try {
+    spinner.start('Loading available snapshots...');
+    const data = await DoAPI.snapshots();
+    spinner.stop();
+    const availableSnapshots = [];
+    if (data.body.meta.total === 0) {
+      console.log('You donn\'t have any snapshots');
+      process.exit();
+    } else {
+      data.body.snapshots.map(snapshot =>
+        availableSnapshots.push({
+          name: snapshot.name,
+          value: snapshot.id
+        })
+      );
+      return availableSnapshots;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports.loadAvailableSSHKEYS = async () => {
   try {
     spinner.start('Loading your ssh_keys...');

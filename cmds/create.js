@@ -82,6 +82,29 @@ module.exports.floating_ip = async () => {
   }
 };
 
+module.exports.snapshot = async () => {
+  try {
+    const answers = await Create.snapshot();
+    spinner.start('Creating snapshot..');
+    const {
+      body: { action }
+    } = await DoAPI.dropletsRequestAction(
+      answers.droplet.id,
+      {
+        type: 'snapshot',
+        name: answers.snapshot_name
+      }
+    );
+
+    if (action) {
+      spinner.succeed('Snapshot is being created!');
+    }
+  } catch (error) {
+    spinner.stop();
+    console.log(error.message);
+  }
+};
+
 module.exports.volume = async () => {
   try {
     const answers = await Create.volume();

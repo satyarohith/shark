@@ -5,7 +5,8 @@ const {
   loadAvailableRegions,
   loadAvailableSizes,
   loadAvailableImages,
-  loadAvailableSSHKEYS
+  loadAvailableSSHKEYS,
+  loadAvailableDroplets
 } = require('../loaders');
 
 module.exports.init = () => {
@@ -16,6 +17,7 @@ module.exports.init = () => {
       message: 'What do you want to create?',
       choices: [
         { name: 'Droplet', value: 'droplet' },
+        { name: 'Snapshot', value: 'snapshot' },
         { name: 'Floating Ip', value: 'floating_ip' },
         { name: 'SSH Key', value: 'ssh_key' },
         { name: 'Volume', value: 'volume' },
@@ -132,6 +134,24 @@ module.exports.floating_ip = async () => {
       name: 'region_slug',
       message: 'Select the region where floating_ip has to be reserved',
       choices: await loadAvailableRegions()
+    }
+  ];
+
+  return inquirer.prompt(questions);
+};
+
+module.exports.snapshot = async () => {
+  const questions = [
+    {
+      type: 'list',
+      name: 'droplet',
+      message: 'Select of which droplet you want to create a snapshot',
+      choices: await loadAvailableDroplets()
+    },
+    {
+      type: 'input',
+      name: 'snapshot_name',
+      message: 'Input your Snapshot Name'
     }
   ];
 
