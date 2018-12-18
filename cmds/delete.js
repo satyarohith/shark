@@ -49,6 +49,36 @@ module.exports.droplet = async () => {
   }
 };
 
+module.exports.snapshot = async () => {
+  try {
+    const answers = await deletePrompts.snapshot();
+    if (answers.snapshots.length > 0) {
+      const { delete_snapshot } = await deletePrompts.confirmDelete('snapshot');
+      if (delete_snapshot) {
+        spinner.start('Deleting your snapshot...');
+        answers.snapshots.map(async snapshot => {
+          try {
+            const data = await DoAPI.snapshotsDeleteById(snapshot);
+            if (data.response.statusCode === 204) {
+              spinner.succeed(`${snapshot} is deleted!`);
+            }
+          } catch (error) {
+            spinner.fail(`failed to delete ${snapshot}`);
+            console.log(error.message);
+          }
+        });
+      }
+    } else {
+      console.log(
+        'Please select atleast one snapshot to perform this operation!'
+      );
+    }
+  } catch (error) {
+    spinner.stop();
+    console.error(error);
+  }
+};
+
 module.exports.ssh_key = async () => {
   try {
     const answers = await deletePrompts.ssh_key();
