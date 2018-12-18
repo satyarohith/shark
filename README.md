@@ -119,6 +119,11 @@ To list droplets
 shark list droplets
 ```
 
+To list droplets
+```
+shark list snapshots
+```
+
 To list ssh_keys
 ```
 shark list ssh_keys
