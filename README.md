@@ -38,6 +38,12 @@ shark create droplet
 ```
 
 
+To create snapshot
+```sh
+shark create snapshot
+```
+
+
 To create ssh_key
 ```sh
 shark create ssh_key
@@ -77,6 +83,11 @@ Please make sure *you know what you are doing* while performing `delete` operati
 To delete droplet
 ```sh
 shark delete droplet
+```
+
+To delete snapshot
+```sh
+shark delete snapshot
 ```
 
 To delete ssh_key
