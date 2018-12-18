@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const {
   loadAvailableDroplets,
+  loadAvailableSnapshots,
   loadAvailableSSHKEYS,
   loadAvailableFloatingIps,
   loadAvailableVolumes
@@ -16,6 +17,7 @@ module.exports.init = () => {
       message: 'What do you want to Delete?',
       choices: [
         { name: 'Droplet', value: 'droplet' },
+        { name: 'Snapshot', value: 'snapshot' },
         { name: 'Floating Ip', value: 'floating_ip' },
         { name: 'SSH Key', value: 'ssh_key' },
         { name: 'Volume', value: 'volume' },
@@ -35,6 +37,19 @@ module.exports.droplet = async () => {
       name: 'droplets',
       message: 'Select the droplet you want to delete:',
       choices: await loadAvailableDroplets()
+    }
+  ];
+
+  return inquirer.prompt(questions);
+};
+
+module.exports.snapshot = async () => {
+  const questions = [
+    {
+      type: 'checkbox',
+      name: 'snapshots',
+      message: 'Select the snapshot you want to delete:',
+      choices: await loadAvailableSnapshots()
     }
   ];
 
