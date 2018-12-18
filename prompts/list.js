@@ -9,6 +9,7 @@ module.exports.init = () => {
       message: 'What do you want to list?',
       choices: [
         { name: 'Droplets', value: 'droplets' },
+        { name: 'Snapshots', value: 'snapshots' },
         { name: 'SSH Keys', value: 'ssh_keys' },
         { name: 'Floating Ips', value: 'floating_ips' },
         { name: 'Volumes', value: 'volumes' },

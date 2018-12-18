@@ -75,6 +75,41 @@ ${chalk.bold('         CE:')} ${calData.totalCost.toLocaleString('en-US', {
   }
 };
 
+module.exports.snapshots = async () => {
+  try {
+    spinner.start('Loading Snapshot...');
+    const list = await DoAPI.snapshots();
+    spinner.stop();
+    if (list.body.meta.total === 0) {
+      /* prettier-ignore */
+      console.log('You don\'t have any snapshots');
+    } else {
+      console.log(
+        `You have ${chalk.magenta(list.body.meta.total)} ${
+          list.body.meta.total > 1 ? 'Snapshots' : 'Snapshot'
+        }`
+      );
+      list.body.snapshots.map(snapshot => {
+        /* eslint-disable indent */
+        return console.log(
+          `----------------------
+${chalk.bold('        Name:')} ${chalk.blue(snapshot.name)}
+${chalk.bold('          Id:')} ${snapshot.id}
+${chalk.bold('  Created at:')} ${snapshot.created_at}
+${chalk.bold('Ressource Id:')} ${snapshot.resource_id}
+${chalk.bold('        Size:')} ${snapshot.size_gigabytes}
+${chalk.bold('     Regions:')} ${snapshot.regions}
+          `
+        );
+        /* eslint-enable  */
+      });
+    }
+  } catch (error) {
+    spinner.stop();
+    console.error(error);
+  }
+};
+
 module.exports.ssh_keys = async () => {
   try {
     spinner.start('Loading sshkeys...');
