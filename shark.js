@@ -48,6 +48,8 @@ $ shark domain create
 -> skips to domain creation step
 
 same applies to list & delete as well
+
+To know more please visit https://git.io/sharkcli#shark
 `;
 
 if (config.has('do_api_access_token')) {
