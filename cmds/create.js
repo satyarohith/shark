@@ -97,8 +97,20 @@ module.exports.snapshot = async () => {
     );
 
     if (action) {
-      spinner.succeed('Snapshot is being created!');
+      spinner.succeed('Snapshot is being created...');
+      spinner.start('Waiting to be finished...');
     }
+
+    const ival = setInterval(async () => {
+      const res = await DoAPI.dropletsGetAction(
+        answers.droplet.id,
+        action.id
+      );
+      if (res.body.action.status === 'completed') {
+        spinner.succeed('Snapshot finished!');
+        clearInterval(ival);
+      }
+    }, 10000);
   } catch (error) {
     spinner.stop();
     console.log(error.message);
