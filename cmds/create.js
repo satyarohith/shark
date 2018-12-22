@@ -109,11 +109,13 @@ module.exports.snapshot = async () => {
       if (res.body.action.status === 'completed') {
         spinner.succeed('Snapshot finished!');
         clearInterval(ival);
+      } else if (res.body.action.status === 'errored') {
+        spinner.fail('Snapshot failed!');
+        clearInterval(ival);
       }
     }, 10000);
   } catch (error) {
-    spinner.stop();
-    console.log(error.message);
+    spinner.fail(error.message);
   }
 };
 
