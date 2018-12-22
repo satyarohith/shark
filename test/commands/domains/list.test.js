@@ -1,6 +1,6 @@
 const {expect, test} = require('@oclif/test');
 
-describe('domain:list', () => {
+describe('domains:list', () => {
   test
     .nock('https://api.digitalocean.com/v2', api =>
       api.get('/domains?tag_name=&page=1').reply(200, {
