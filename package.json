@@ -24,11 +24,24 @@
     "husky": "^1.2.1",
     "mocha": "^5.2.0",
     "nock": "^10.0.4",
-    "nyc": "^13.1.0"
+    "nyc": "^13.1.0",
+    "xo": "^0.23.0"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run test"
+    }
+  },
+  "xo": {
+    "space": true,
+    "rules": {
+      "object-curly-spacing": 0,
+      "camelcase": 0,
+      "unicorn/no-process-exit": 0,
+      "operator-linebreak": [
+        "error",
+        "before"
+      ]
     }
   },
   "engines": {
@@ -60,7 +73,7 @@
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "oclif-dev manifest && oclif-dev readme",
-    "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
+    "test": "xo && nyc mocha --forbid-only \"test/**/*.test.js\"",
     "version": "oclif-dev readme && git add README.md"
   }
 }
