@@ -7,6 +7,6 @@ class TokenDeleteCommand extends BaseCommand {
   }
 }
 
-TokenDeleteCommand.description = `Deletes previously set access token`;
+TokenDeleteCommand.description = 'Delete previously set access token';
 
 module.exports = TokenDeleteCommand;
