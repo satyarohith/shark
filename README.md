@@ -28,7 +28,23 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`shark domains:list`](#shark-domainslist)
 * [`shark help [COMMAND]`](#shark-help-command)
+* [`shark token:delete`](#shark-tokendelete)
+
+## `shark domains:list`
+
+List all domains in your account
+
+```
+USAGE
+  $ shark domains:list
+
+OPTIONS
+  --json  output in json format
+```
+
+_See code: [src/commands/domains/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/domains/list.js)_
 
 ## `shark help [COMMAND]`
 
@@ -46,4 +62,15 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4/src/commands/help.ts)_
+
+## `shark token:delete`
+
+Deletes previously set access token
+
+```
+USAGE
+  $ shark token:delete
+```
+
+_See code: [src/commands/token/delete.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/token/delete.js)_
 <!-- commandsstop -->
