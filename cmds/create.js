@@ -97,6 +97,7 @@ module.exports.snapshot = async () => {
     );
 
     if (action) {
+<<<<<<< HEAD
       spinner.succeed('Snapshot is being created...');
       spinner.start('Waiting to be finished...');
     }
@@ -116,6 +117,13 @@ module.exports.snapshot = async () => {
     }, 10000);
   } catch (error) {
     spinner.fail(error.message);
+=======
+      spinner.succeed('Snapshot is being created!');
+    }
+  } catch (error) {
+    spinner.stop();
+    console.log(error.message);
+>>>>>>> 47f3583e1aea38c6169b7d1285455bebfb760a04
   }
 };
 

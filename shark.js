@@ -23,11 +23,11 @@ $ shark [cmds] [resource_name]
 
 cmds:
   create - create resources, you can skip to the resource prompt by passing resource_name
+  domain - all domain related operations.
   delete - delete resources
   list   - list resources (when using list suffix 's' to resource_name)
 
 resource_names:
-  domain
   droplet
   ssh_key
   volume
@@ -44,7 +44,12 @@ $ shark create
 $ shark create droplet
 -> skips to droplet creation step
 
+$ shark domain create
+-> skips to domain creation step
+
 same applies to list & delete as well
+
+To know more please visit https://git.io/sharkcli#shark
 `;
 
 if (config.has('do_api_access_token')) {
