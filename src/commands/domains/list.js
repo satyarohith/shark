@@ -1,5 +1,5 @@
-const BaseCommand = require('../../base');
 const {flags} = require('@oclif/command');
+const BaseCommand = require('../../base');
 
 class DomainsListCommand extends BaseCommand {
   async run() {
@@ -8,12 +8,12 @@ class DomainsListCommand extends BaseCommand {
     const {body} = await api.domainsGetAll();
     if (flags.json) {
       this.log(styledJSON(body));
+    } else if (body.meta.total === 0) {
+      this.log("You don't have any domains");
     } else {
-      !body.meta.total
-        ? this.log("You don't have any domains")
-        : body.domains.map(domain => {
-            this.log(`${domain.name}  ${domain.ttl}`);
-          });
+      body.domains.map(domain => {
+        return this.log(`${domain.name}  ${domain.ttl}`);
+      });
     }
   }
 }

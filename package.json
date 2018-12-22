@@ -35,6 +35,7 @@
   "xo": {
     "space": true,
     "rules": {
+      "quotes": 0,
       "object-curly-spacing": 0,
       "camelcase": 0,
       "unicorn/no-process-exit": 0,
@@ -42,7 +43,10 @@
         "error",
         "before"
       ]
-    }
+    },
+    "ignores": [
+      "test"
+    ]
   },
   "engines": {
     "node": ">=8.0.0"

@@ -1,13 +1,10 @@
 const {Command} = require('@oclif/command');
 const DigitalOcean = require('do-wrapper').default;
 const Conf = require('conf');
+
 const config = new Conf();
 
 class BaseCommand extends Command {
-  constructor(...args) {
-    super(...args);
-  }
-
   async init() {
     let API_TOKEN = '';
 
@@ -53,7 +50,7 @@ class BaseCommand extends Command {
     if (process.stdout.isTTY) {
       const cardinal = require('cardinal');
       const theme = require('cardinal/themes/jq');
-      return cardinal.highlight(JSON.stringify(data, null, 2), {theme: theme});
+      return cardinal.highlight(JSON.stringify(data, null, 2), {theme});
     }
     return JSON.stringify(data, null, 2);
   }
