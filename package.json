@@ -10,15 +10,26 @@
   "dependencies": {
     "@oclif/command": "^1.5.8",
     "@oclif/config": "^1.10.2",
-    "@oclif/plugin-help": "^2.1.4"
+    "@oclif/plugin-help": "^2.1.4",
+    "cardinal": "^2.1.1",
+    "conf": "^2.1.0",
+    "do-wrapper": "^3.18.2",
+    "enquirer": "^2.2.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.21.0",
     "@oclif/test": "^1.2.2",
     "chai": "^4.2.0",
     "globby": "^8.0.1",
+    "husky": "^1.2.1",
     "mocha": "^5.2.0",
+    "nock": "^10.0.4",
     "nyc": "^13.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
   },
   "engines": {
     "node": ">=8.0.0"
