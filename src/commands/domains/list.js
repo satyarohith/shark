@@ -20,6 +20,8 @@ class DomainsListCommand extends BaseCommand {
 
 DomainsListCommand.description = `List all domains in your account`;
 
+DomainsListCommand.strict = false;
+
 DomainsListCommand.flags = {
   json: flags.boolean({description: 'output in json format'})
 };
