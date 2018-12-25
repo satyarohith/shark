@@ -12,6 +12,7 @@
     "@oclif/config": "^1.10.2",
     "@oclif/plugin-help": "^2.1.4",
     "cardinal": "^2.1.1",
+    "cli-ux": "^5.0.0",
     "conf": "^2.1.0",
     "do-wrapper": "^3.18.2",
     "enquirer": "^2.2.0"
