@@ -28,6 +28,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`shark actions:get`](#shark-actionsget)
 * [`shark actions:list`](#shark-actionslist)
 * [`shark domains`](#shark-domains)
 * [`shark domains:create`](#shark-domainscreate)
@@ -36,6 +37,21 @@ USAGE
 * [`shark droplets:list`](#shark-dropletslist)
 * [`shark help [COMMAND]`](#shark-help-command)
 * [`shark token:delete`](#shark-tokendelete)
+
+## `shark actions:get`
+
+get details about a specific action
+
+```
+USAGE
+  $ shark actions:get
+
+OPTIONS
+  -i, --id=id  pass the action id
+  --json       output in json format
+```
+
+_See code: [src/commands/actions/get.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/actions/get.js)_
 
 ## `shark actions:list`
 
