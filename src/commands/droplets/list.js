@@ -37,9 +37,12 @@ class DropletsListCommand extends BaseCommand {
       region: {},
       status: {},
       ce: {
-        header: 'CE'
+        header: 'CE',
+        extended: true
       },
-      hours: {}
+      hours: {
+        extended: true
+      }
     };
 
     try {
