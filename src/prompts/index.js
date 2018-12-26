@@ -19,6 +19,14 @@ const askDomainName = () => {
   });
 };
 
+const askActionID = () => {
+  return prompt({
+    type: 'input',
+    name: 'actionID',
+    message: 'Enter the action ID:'
+  });
+};
+
 const domainsInit = () => {
   return prompt({
     type: 'select',
@@ -36,6 +44,7 @@ const domainsInit = () => {
 
 module.exports = {
   askToken,
-  domainsInit,
-  askDomainName
+  askActionID,
+  askDomainName,
+  domainsInit
 };
