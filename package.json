@@ -21,6 +21,7 @@
     "@oclif/dev-cli": "^1.21.0",
     "@oclif/test": "^1.2.2",
     "chai": "^4.2.0",
+    "codecov": "^3.1.0",
     "globby": "^8.0.1",
     "husky": "^1.2.1",
     "mocha": "^5.2.0",
@@ -79,6 +80,7 @@
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "oclif-dev manifest && oclif-dev readme",
     "test": "xo && nyc mocha --forbid-only \"test/**/*.test.js\"",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "version": "oclif-dev readme && git add README.md"
   }
 }

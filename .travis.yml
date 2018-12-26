@@ -10,7 +10,7 @@ node_js:
 before_script:
   - node ./test/setup_config.js
 after_success:
-  - npm run travis-deploy-once "npm run semantic-release"
+  - npm run coverage
 branches:
   only:
     - master
