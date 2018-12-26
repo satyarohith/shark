@@ -1,5 +1,4 @@
 const {flags} = require('@oclif/command');
-const {cli} = require('cli-ux');
 const BaseCommand = require('../../base');
 
 class ActionsListCommand extends BaseCommand {
@@ -39,7 +38,11 @@ class ActionsListCommand extends BaseCommand {
       } else if (body.meta.total === 0) {
         this.log("You haven't perfomed any actions");
       } else {
+        const {cli} = require('cli-ux');
+        const {calculatePages} = require('../../common');
+
         const data = [];
+
         body.actions.map(action =>
           data.push({
             id: action.id,
@@ -53,34 +56,7 @@ class ActionsListCommand extends BaseCommand {
           })
         );
 
-        let totalPages = 1;
-        let currentPage = 1;
-
-        if (body.links.pages) {
-          if (body.links.pages.next) {
-            const nextPage = new URL(body.links.pages.next).searchParams.get(
-              'page'
-            );
-            currentPage = Number(nextPage) - 1;
-          } else if (body.links.pages.prev && !body.links.pages.next) {
-            const prevPage = new URL(body.links.pages.prev).searchParams.get(
-              'page'
-            );
-            currentPage = Number(prevPage) + 1;
-          }
-
-          if (body.links.pages.last) {
-            const lastPage = new URL(body.links.pages.last).searchParams.get(
-              'page'
-            );
-            totalPages = Number(lastPage);
-          } else if (body.links.pages.prev && !body.links.pages.last) {
-            const prevPage = new URL(body.links.pages.prev).searchParams.get(
-              'page'
-            );
-            totalPages = Number(prevPage) + 1;
-          }
-        }
+        const {currentPage, totalPages} = calculatePages(body.links);
 
         cli.table(data, columns, options);
         this.log('Current Page:', currentPage);
