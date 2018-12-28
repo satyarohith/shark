@@ -36,6 +36,7 @@ USAGE
 * [`shark domains:list`](#shark-domainslist)
 * [`shark droplets:list`](#shark-dropletslist)
 * [`shark help [COMMAND]`](#shark-help-command)
+* [`shark projects:list`](#shark-projectslist)
 * [`shark token:delete`](#shark-tokendelete)
 
 ## `shark actions:get`
@@ -172,6 +173,28 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4/src/commands/help.ts)_
+
+## `shark projects:list`
+
+list projects under your account
+
+```
+USAGE
+  $ shark projects:list
+
+OPTIONS
+  -j, --json         output in json format
+  -p, --page=page    specific page to request
+  -x, --extended     show extra columns
+  --columns=columns  only show provided columns (comma-seperated)
+  --csv              output is csv format
+  --filter=filter    filter property by partial string matching, ex: name=foo
+  --no-header        hide table header from output
+  --no-truncate      do not truncate output to fit screen
+  --sort=sort
+```
+
+_See code: [src/commands/projects/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/projects/list.js)_
 
 ## `shark token:delete`
 
