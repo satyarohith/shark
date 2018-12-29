@@ -37,6 +37,7 @@ USAGE
 * [`shark droplets:list`](#shark-dropletslist)
 * [`shark help [COMMAND]`](#shark-help-command)
 * [`shark projects:list`](#shark-projectslist)
+* [`shark ssh_keys:list`](#shark-ssh-keyslist)
 * [`shark token:delete`](#shark-tokendelete)
 
 ## `shark actions:get`
@@ -195,6 +196,29 @@ OPTIONS
 ```
 
 _See code: [src/commands/projects/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/projects/list.js)_
+
+## `shark ssh_keys:list`
+
+list all SSH Keys under your account
+
+```
+USAGE
+  $ shark ssh_keys:list
+
+OPTIONS
+  -j, --json         output in json format
+  -p, --page=page    specific page to request
+  -t, --tag=tag      pass tag name to retrieve keys associated with the tag
+  -x, --extended     show extra columns
+  --columns=columns  only show provided columns (comma-seperated)
+  --csv              output is csv format
+  --filter=filter    filter property by partial string matching, ex: name=foo
+  --no-header        hide table header from output
+  --no-truncate      do not truncate output to fit screen
+  --sort=sort
+```
+
+_See code: [src/commands/ssh_keys/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/ssh_keys/list.js)_
 
 ## `shark token:delete`
 
