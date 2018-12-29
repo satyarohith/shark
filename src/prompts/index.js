@@ -27,6 +27,14 @@ const askActionID = () => {
   });
 };
 
+const askKeyID = () => {
+  return prompt({
+    type: 'input',
+    name: 'keyID',
+    message: 'Enter the ssh_key ID:'
+  });
+};
+
 const domainsInit = () => {
   return prompt({
     type: 'select',
@@ -46,5 +54,6 @@ module.exports = {
   askToken,
   askActionID,
   askDomainName,
+  askKeyID,
   domainsInit
 };
