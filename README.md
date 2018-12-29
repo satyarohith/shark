@@ -37,6 +37,7 @@ USAGE
 * [`shark droplets:list`](#shark-dropletslist)
 * [`shark help [COMMAND]`](#shark-help-command)
 * [`shark projects:list`](#shark-projectslist)
+* [`shark ssh_keys:delete`](#shark-ssh-keysdelete)
 * [`shark ssh_keys:get`](#shark-ssh-keysget)
 * [`shark ssh_keys:list`](#shark-ssh-keyslist)
 * [`shark token:delete`](#shark-tokendelete)
@@ -197,6 +198,21 @@ OPTIONS
 ```
 
 _See code: [src/commands/projects/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/projects/list.js)_
+
+## `shark ssh_keys:delete`
+
+remove ssh_key from your account
+
+```
+USAGE
+  $ shark ssh_keys:delete
+
+OPTIONS
+  -f, --fingerprint=fingerprint  use fingerprint of the key to delete
+  -i, --id=id                    use id of the key to delete
+```
+
+_See code: [src/commands/ssh_keys/delete.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/ssh_keys/delete.js)_
 
 ## `shark ssh_keys:get`
 
