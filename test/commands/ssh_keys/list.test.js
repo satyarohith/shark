@@ -1,6 +1,6 @@
 const {expect, test} = require('@oclif/test');
 
-describe('projects:list', () => {
+describe('ssh_keys:list', () => {
   test
     .nock('https://api.digitalocean.com/v2', api =>
       api.get('/account/keys?tag_name=&page=1').reply(200, {
