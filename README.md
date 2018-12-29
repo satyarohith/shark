@@ -37,6 +37,7 @@ USAGE
 * [`shark droplets:list`](#shark-dropletslist)
 * [`shark help [COMMAND]`](#shark-help-command)
 * [`shark projects:list`](#shark-projectslist)
+* [`shark ssh_keys:get`](#shark-ssh-keysget)
 * [`shark ssh_keys:list`](#shark-ssh-keyslist)
 * [`shark token:delete`](#shark-tokendelete)
 
@@ -196,6 +197,22 @@ OPTIONS
 ```
 
 _See code: [src/commands/projects/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/projects/list.js)_
+
+## `shark ssh_keys:get`
+
+get public_key by id/fingerprint
+
+```
+USAGE
+  $ shark ssh_keys:get
+
+OPTIONS
+  -f, --fingerprint=fingerprint  get ssh_key by fingerprint
+  -i, --id=id                    get ssh_key by id
+  -j, --json                     output in json format
+```
+
+_See code: [src/commands/ssh_keys/get.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/ssh_keys/get.js)_
 
 ## `shark ssh_keys:list`
 
