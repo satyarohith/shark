@@ -9,8 +9,8 @@ class SSHKeysDeleteCommand extends BaseCommand {
     let {id, fingerprint} = flags;
 
     if (!id && !fingerprint && isTTY) {
-      const {askKeyID} = require('../../prompts');
-      const {keyID} = await askKeyID();
+      const {askID} = require('../../prompts');
+      const {keyID} = await askID('key');
       id = keyID;
     }
 
