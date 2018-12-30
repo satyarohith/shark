@@ -10,8 +10,8 @@ class ActionsGetCommand extends BaseCommand {
     let {id} = flags;
 
     if (!id && isTTY) {
-      const {askActionID} = require('../../prompts');
-      const {actionID} = await askActionID();
+      const {askID} = require('../../prompts');
+      const {actionID} = await askID('action');
       id = actionID;
     }
 

@@ -19,22 +19,6 @@ const askDomainName = () => {
   });
 };
 
-const askActionID = () => {
-  return prompt({
-    type: 'input',
-    name: 'actionID',
-    message: 'Enter the action ID:'
-  });
-};
-
-const askKeyID = () => {
-  return prompt({
-    type: 'input',
-    name: 'keyID',
-    message: 'Enter the ssh_key ID:'
-  });
-};
-
 const domainsInit = () => {
   return prompt({
     type: 'select',
@@ -50,10 +34,22 @@ const domainsInit = () => {
   });
 };
 
+/**
+ * @param {string} resourceName - Name of the resource ex: domain, droplet etc
+ * @returns {Promise} - The name of the prompt is resourceName + 'ID' ex: askID('droplet')
+ * -> name will be 'dropletID'
+ */
+const askID = resourceName => {
+  return prompt({
+    type: 'input',
+    name: `${resourceName}ID`,
+    message: `Enter ${resourceName} ID:`
+  });
+};
+
 module.exports = {
+  askID,
   askToken,
-  askActionID,
   askDomainName,
-  askKeyID,
   domainsInit
 };
