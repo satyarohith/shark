@@ -34,6 +34,7 @@ USAGE
 * [`shark domains:create`](#shark-domainscreate)
 * [`shark domains:delete`](#shark-domainsdelete)
 * [`shark domains:list`](#shark-domainslist)
+* [`shark droplets:delete`](#shark-dropletsdelete)
 * [`shark droplets:list`](#shark-dropletslist)
 * [`shark help [COMMAND]`](#shark-help-command)
 * [`shark projects:list`](#shark-projectslist)
@@ -137,6 +138,20 @@ OPTIONS
 ```
 
 _See code: [src/commands/domains/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/domains/list.js)_
+
+## `shark droplets:delete`
+
+delete a droplet
+
+```
+USAGE
+  $ shark droplets:delete
+
+OPTIONS
+  -n, --id=id  pass the id of the droplet
+```
+
+_See code: [src/commands/droplets/delete.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/droplets/delete.js)_
 
 ## `shark droplets:list`
 
