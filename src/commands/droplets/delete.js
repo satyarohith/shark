@@ -25,12 +25,17 @@ class DropletsDeleteCommand extends BaseCommand {
   }
 }
 
-DropletsDeleteCommand.description = 'delete a droplet';
+DropletsDeleteCommand.description = `delete a droplet
+Examples:
+
+delete a single droplet:
+shark droplets:delete --id 123456`;
 
 DropletsDeleteCommand.flags = {
   id: flags.integer({
-    char: 'n',
-    description: 'pass the id of the droplet'
+    char: 'i',
+    description: 'pass the id of the droplet',
+    multiple: true
   })
 };
 
