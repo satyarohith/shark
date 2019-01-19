@@ -11,7 +11,7 @@ A CLI to Interact with DigitalOcean.
 <img src="demo.gif" >
 </div>
 
-A rewrite of `shark` utilising  [oclif](https://oclif.io) is planned.
+A rewrite of `shark` using [oclif](https://oclif.io) is under progress [#12](https://github.com/satyarohith/shark/pull/12).
 
 ## Installation
 Install [Node.js](https://nodejs.org/) and then run this command
