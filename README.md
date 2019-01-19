@@ -34,9 +34,11 @@ USAGE
 * [`shark domains:create`](#shark-domainscreate)
 * [`shark domains:delete`](#shark-domainsdelete)
 * [`shark domains:list`](#shark-domainslist)
+* [`shark droplets:create`](#shark-dropletscreate)
 * [`shark droplets:delete`](#shark-dropletsdelete)
 * [`shark droplets:list`](#shark-dropletslist)
 * [`shark help [COMMAND]`](#shark-help-command)
+* [`shark projects:create`](#shark-projectscreate)
 * [`shark projects:list`](#shark-projectslist)
 * [`shark ssh_keys:delete`](#shark-ssh-keysdelete)
 * [`shark ssh_keys:get`](#shark-ssh-keysget)
@@ -139,6 +141,32 @@ OPTIONS
 
 _See code: [src/commands/domains/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/domains/list.js)_
 
+## `shark droplets:create`
+
+create a droplet
+
+```
+USAGE
+  $ shark droplets:create
+
+OPTIONS
+  -I, --ipv6                 IPv6 public address
+  -P, --private_networking   private networking
+  -b, --backups
+  -d, --user_data=user_data  user data to upload
+  -i, --image=image          (required) operating system to use
+  -j, --json                 output in json format
+  -k, --ssh_keys=ssh_keys    ssh_key to use
+  -m, --monitoring           enable droplet monitoring
+  -n, --name=name            (required) name of the droplet
+  -r, --region=region        (required) region of the droplet
+  -s, --size=size            (required) size of the droplet
+  --tags=tags
+  --volumes=volumes
+```
+
+_See code: [src/commands/droplets/create.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/droplets/create.js)_
+
 ## `shark droplets:delete`
 
 delete a droplet
@@ -148,7 +176,13 @@ USAGE
   $ shark droplets:delete
 
 OPTIONS
-  -n, --id=id  pass the id of the droplet
+  -i, --id=id  pass the id of the droplet
+
+DESCRIPTION
+  Examples:
+
+  delete a single droplet:
+  shark droplets:delete --id 123456
 ```
 
 _See code: [src/commands/droplets/delete.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/droplets/delete.js)_
@@ -191,6 +225,23 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4/src/commands/help.ts)_
+
+## `shark projects:create`
+
+create a project
+
+```
+USAGE
+  $ shark projects:create
+
+OPTIONS
+  -d, --description=description  The description of the project. (max 255 char)
+  -e, --environment=environment  The environment of the project's resources. (development|staging|production)
+  -n, --name=name                The human-readable name for the project. (unique) (max 175 char)
+  -p, --purpose=purpose          The description of the project. (max 255 char)
+```
+
+_See code: [src/commands/projects/create.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/projects/create.js)_
 
 ## `shark projects:list`
 
