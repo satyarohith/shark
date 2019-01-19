@@ -40,6 +40,7 @@ USAGE
 * [`shark help [COMMAND]`](#shark-help-command)
 * [`shark projects:create`](#shark-projectscreate)
 * [`shark projects:list`](#shark-projectslist)
+* [`shark ssh_keys:create`](#shark-ssh-keyscreate)
 * [`shark ssh_keys:delete`](#shark-ssh-keysdelete)
 * [`shark ssh_keys:get`](#shark-ssh-keysget)
 * [`shark ssh_keys:list`](#shark-ssh-keyslist)
@@ -264,6 +265,22 @@ OPTIONS
 ```
 
 _See code: [src/commands/projects/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/projects/list.js)_
+
+## `shark ssh_keys:create`
+
+add new SSH key in your account
+
+```
+USAGE
+  $ shark ssh_keys:create
+
+OPTIONS
+  -j, --json       Output in json format
+  -k, --key=key    A string containing the entire public key
+  -n, --name=name  The name to give to the new SSH key in your account
+```
+
+_See code: [src/commands/ssh_keys/create.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/ssh_keys/create.js)_
 
 ## `shark ssh_keys:delete`
 
