@@ -7,6 +7,8 @@ A CLI to interact with digitalocean
 [![Version](https://img.shields.io/npm/v/shark.svg)](https://npmjs.org/package/shark)
 [![Downloads/week](https://img.shields.io/npm/dw/shark.svg)](https://npmjs.org/package/shark)
 [![License](https://img.shields.io/npm/l/shark.svg)](https://github.com/satyarohith/shark/blob/master/package.json)
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
+[![Known Vulnerabilities](https://snyk.io/test/github/satyarohith/shark/badge.svg?targetFile=package.json)](https://snyk.io/test/github/satyarohith/shark?targetFile=package.json)
 
 <!-- toc -->
 * [Usage](#usage)
