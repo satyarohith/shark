@@ -4,7 +4,7 @@ const BaseCommand = require('../../base');
 class DropletsListCommand extends BaseCommand {
   async run() {
     const {flags} = this.parse(DropletsListCommand);
-    const {api, styledJSON} = this;
+    const {api, styledJSON, spinner} = this;
     const {json, page} = flags;
 
     const options = {
@@ -46,7 +46,9 @@ class DropletsListCommand extends BaseCommand {
     };
 
     try {
+      spinner.start('Loading your droplets...');
       const {body} = await api.dropletsGetAll({page});
+      spinner.stop();
       if (json) {
         this.log(styledJSON(body));
       } else if (body.meta.total === 0) {
@@ -107,6 +109,7 @@ class DropletsListCommand extends BaseCommand {
         this.log('Total Pages:', totalPages);
       }
     } catch (error) {
+      spinner.stop();
       this.error(error.message);
     }
   }

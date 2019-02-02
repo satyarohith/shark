@@ -1,6 +1,7 @@
 const {Command} = require('@oclif/command');
 const DigitalOcean = require('do-wrapper').default;
 const Conf = require('conf');
+const Ora = require('ora');
 
 const config = new Conf();
 
@@ -19,6 +20,7 @@ class BaseCommand extends Command {
     }
 
     this.api = new DigitalOcean(API_TOKEN);
+    this.spinner = new Ora();
   }
 
   async validateToken(token) {
