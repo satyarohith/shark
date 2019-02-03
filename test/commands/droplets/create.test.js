@@ -1,20 +1,3 @@
-// const {expect, test} = require('@oclif/test')
-
-// describe('droplets:create', () => {
-//   test
-//   .stdout()
-//   .command(['droplets:create'])
-//   .it('runs hello', ctx => {
-//     expect(ctx.stdout).to.contain('hello world')
-//   })
-
-//   test
-//   .stdout()
-//   .command(['droplets:create', '--name', 'jeff'])
-//   .it('runs hello --name jeff', ctx => {
-//     expect(ctx.stdout).to.contain('hello jeff')
-//   })
-// })
 const {expect, test} = require('@oclif/test');
 
 describe('droplets:create', () => {
@@ -46,7 +29,8 @@ describe('droplets:create', () => {
       '--size',
       's-1vcpu-1gb',
       '--region',
-      'blr1'
+      'blr1',
+      '--no-prompts'
     ])
     .it('shows successful create message', ctx => {
       const expectedOutput = `shark created at Bangalore 1\n`;
