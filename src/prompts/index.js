@@ -69,11 +69,38 @@ const askSSHKey = () => {
   });
 };
 
+/**
+ * @param {string} resourceName - Name of the resource ex: domain, droplet etc
+ * @param {Array} regions - An array containing all available regions
+ * @returns {Promise} - The name of the prompt is resourceName + 'Region' ex: askName('droplet')
+ * -> name will be 'dropletRegion'
+ */
+const askRegion = (resourceName, regions) => {
+  return prompt({
+    type: 'autocomplete',
+    name: `${resourceName}Region`,
+    message: `select ${resourceName} region`,
+    choices: regions
+  });
+};
+
+const askVolumeSize = () => {
+  return prompt({
+    type: 'input',
+    name: 'size',
+    message: 'Enter volume size in GiB',
+    validate: input => !isNaN(input),
+    result: input => Number(input)
+  });
+};
+
 module.exports = {
   askID,
+  askRegion,
   askToken,
   askName,
   askSSHKey,
   askDomainName,
+  askVolumeSize,
   domainsInit
 };

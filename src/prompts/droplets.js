@@ -4,21 +4,6 @@ const {prompt} = require('enquirer');
 prompt.on('cancel', () => process.exit());
 
 /**
- * @param {string} resourceName - Name of the resource ex: domain, droplet etc
- * @param {Array} regions - An array containing all available regions
- * @returns {Promise} - The name of the prompt is resourceName + 'Region' ex: askName('droplet')
- * -> name will be 'dropletRegion'
- */
-const askRegion = (resourceName, regions) => {
-  return prompt({
-    type: 'autocomplete',
-    name: `${resourceName}Region`,
-    message: `select ${resourceName} region`,
-    choices: regions
-  });
-};
-
-/**
  * @param  {Array} sizes
  */
 const askDropletSize = sizes =>
@@ -99,7 +84,6 @@ const askAdditionalOptions = () => {
 
 module.exports = {
   askSSHKey,
-  askRegion,
   askDropletSize,
   askDropletImage,
   askAdditionalOptions
