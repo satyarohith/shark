@@ -17,7 +17,7 @@ class DropletsCreateCommand extends BaseCommand {
       }
 
       if (!flags.region) {
-        const {askRegion} = require('../../prompts/droplets');
+        const {askRegion} = require('../../prompts');
         const {loadRegions} = require('../../common/loaders');
         let regions = await loadRegions(api, spinner);
         // Filter unavailable regions
@@ -102,19 +102,19 @@ DropletsCreateCommand.description = 'create a droplet';
 DropletsCreateCommand.flags = {
   name: flags.string({
     char: 'n',
-    description: 'name of the droplet (required)'
+    description: '(required) name of the droplet'
   }),
   region: flags.string({
     char: 'r',
-    description: 'region of the droplet (required)'
+    description: '(required) region of the droplet'
   }),
   size: flags.string({
     char: 's',
-    description: 'size of the droplet (required)'
+    description: '(required) size of the droplet'
   }),
   image: flags.string({
     char: 'i',
-    description: 'operating system to use (required)'
+    description: '(required) operating system to use'
   }),
   ssh_keys: flags.string({
     char: 'k',
