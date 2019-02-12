@@ -36,6 +36,7 @@ USAGE
 * [`shark domains:create`](#shark-domainscreate)
 * [`shark domains:delete`](#shark-domainsdelete)
 * [`shark domains:list`](#shark-domainslist)
+* [`shark droplets:backups`](#shark-dropletsbackups)
 * [`shark droplets:create`](#shark-dropletscreate)
 * [`shark droplets:delete`](#shark-dropletsdelete)
 * [`shark droplets:list`](#shark-dropletslist)
@@ -47,6 +48,12 @@ USAGE
 * [`shark ssh_keys:get`](#shark-ssh-keysget)
 * [`shark ssh_keys:list`](#shark-ssh-keyslist)
 * [`shark token:delete`](#shark-tokendelete)
+* [`shark volumes:attach`](#shark-volumesattach)
+* [`shark volumes:create`](#shark-volumescreate)
+* [`shark volumes:delete`](#shark-volumesdelete)
+* [`shark volumes:detach`](#shark-volumesdetach)
+* [`shark volumes:get`](#shark-volumesget)
+* [`shark volumes:list`](#shark-volumeslist)
 
 ## `shark actions:get`
 
@@ -144,6 +151,23 @@ OPTIONS
 
 _See code: [src/commands/domains/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/domains/list.js)_
 
+## `shark droplets:backups`
+
+enable/disable backups for a droplet
+
+```
+USAGE
+  $ shark droplets:backups
+
+OPTIONS
+  -d, --disable  disable backups
+  -e, --enable   enable backups
+  -i, --id=id    (required) droplet ID
+  -j, --json     output in json format
+```
+
+_See code: [src/commands/droplets/backups.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/droplets/backups.js)_
+
 ## `shark droplets:create`
 
 create a droplet
@@ -154,18 +178,19 @@ USAGE
 
 OPTIONS
   -I, --ipv6                 IPv6 public address
-  -P, --private_networking   private networking
-  -b, --backups
+  -P, --no-prompts           disable interactive prompts
+  -b, --backups              enable automated backups
   -d, --user_data=user_data  user data to upload
   -i, --image=image          (required) operating system to use
   -j, --json                 output in json format
-  -k, --ssh_keys=ssh_keys    ssh_key to use
+  -k, --ssh_keys=ssh_keys    sshkey IDs to attach to the droplet
   -m, --monitoring           enable droplet monitoring
   -n, --name=name            (required) name of the droplet
+  -p, --private_networking   enable private networking
   -r, --region=region        (required) region of the droplet
   -s, --size=size            (required) size of the droplet
-  --tags=tags
-  --volumes=volumes
+  --tags=tags                tags
+  --volumes=volumes          volume IDs
 ```
 
 _See code: [src/commands/droplets/create.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/droplets/create.js)_
@@ -348,4 +373,115 @@ USAGE
 ```
 
 _See code: [src/commands/token/delete.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/token/delete.js)_
+
+## `shark volumes:attach`
+
+attach a volume to a droplet (action)
+
+```
+USAGE
+  $ shark volumes:attach
+
+OPTIONS
+  -d, --droplet-id=droplet-id  droplet ID
+  -i, --id=id                  volume ID
+  -j, --json                   output in json format
+  -r, --region=region          region of the volume
+```
+
+_See code: [src/commands/volumes/attach.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/volumes/attach.js)_
+
+## `shark volumes:create`
+
+create a volume
+
+```
+USAGE
+  $ shark volumes:create
+
+OPTIONS
+  -P, --no-prompts         disable interactive prompts
+  -S, --snap-id=snap-id    provide snapshot_id to create a volume using the snapshot
+  -d, --desc=desc          optional discription
+  -f, --fs-type=fs-type    provide filesystem_type to format the volume ("ext4" or "xfs")
+  -j, --json               output in json format
+  -l, --fs-label=fs-label  The label to be applied to the filesystem
+  -n, --name=name          (required) name for the volume
+  -r, --region=region      (required) region for the volume ex: blr1
+  -s, --size=size          (required) size of the volume in GiB
+  -t, --tags=tags          tags to apply to the volume (new or existing)
+```
+
+_See code: [src/commands/volumes/create.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/volumes/create.js)_
+
+## `shark volumes:delete`
+
+delete a volume
+
+```
+USAGE
+  $ shark volumes:delete
+
+OPTIONS
+  -P, --no-prompts  disable interactive prompts
+  -i, --id=id       id of the volume
+  -j, --json        output in json format
+```
+
+_See code: [src/commands/volumes/delete.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/volumes/delete.js)_
+
+## `shark volumes:detach`
+
+detach a volume from a droplet (action)
+
+```
+USAGE
+  $ shark volumes:detach
+
+OPTIONS
+  -d, --droplet-id=droplet-id  droplet ID
+  -i, --id=id                  volume ID
+  -j, --json                   output in json format
+  -r, --region=region          region of the volume
+```
+
+_See code: [src/commands/volumes/detach.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/volumes/detach.js)_
+
+## `shark volumes:get`
+
+get details of specific volume
+
+```
+USAGE
+  $ shark volumes:get
+
+OPTIONS
+  -P, --no-prompts  disable interactive prompts
+  -i, --id=id       id of the volume
+  -j, --json        output in json format
+```
+
+_See code: [src/commands/volumes/get.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/volumes/get.js)_
+
+## `shark volumes:list`
+
+list volumes
+
+```
+USAGE
+  $ shark volumes:list
+
+OPTIONS
+  -j, --json         output in json format
+  -p, --page=page    specific page to request
+  -x, --extended     show extra columns
+  --columns=columns  only show provided columns (comma-seperated)
+  --csv              output is csv format
+  --filter=filter    filter property by partial string matching, ex: name=foo
+  --no-header        hide table header from output
+  --no-truncate      do not truncate output to fit screen
+  --sort=sort
+```
+
+_See code: [src/commands/volumes/list.js](https://github.com/satyarohith/shark/blob/v0.0.0-development/src/commands/volumes/list.js)_
 <!-- commandsstop -->
