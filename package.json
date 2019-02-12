@@ -1,54 +1,45 @@
 {
   "name": "shark",
+  "description": "A CLI to interact with DigitalOcean",
   "version": "0.0.0-development",
-  "description": "A CLI to Interact with DigitalOcean",
-  "main": "shark.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/satyarohith/shark.git"
+  "author": "Satya Rohith <gsatyarohith@gmail.com> (https://satyarohith.com)",
+  "bin": {
+    "shark": "./bin/run"
   },
-  "bugs": {
-    "url": "https://github.com/satyarohith/shark/issues"
+  "bugs": "https://github.com/satyarohith/shark/issues",
+  "dependencies": {
+    "@oclif/command": "^1.5.8",
+    "@oclif/config": "^1.10.2",
+    "@oclif/plugin-help": "^2.1.4",
+    "cardinal": "^2.1.1",
+    "cli-ux": "^5.0.0",
+    "conf": "^2.1.0",
+    "do-wrapper": "^3.18.2",
+    "enquirer": "^2.2.0",
+    "ora": "^3.0.0",
+    "update-notifier": "^2.5.0"
   },
-  "homepage": "https://github.com/satyarohith/shark#readme",
-  "author": "Satya Rohith <satyarohith@gmx.com>",
-  "license": "MIT",
-  "private": false,
-  "scripts": {
-    "test": "xo",
-    "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.21.0",
+    "@oclif/test": "^1.2.2",
+    "chai": "^4.2.0",
+    "codecov": "^3.1.0",
+    "globby": "^8.0.1",
+    "husky": "^1.2.1",
+    "mocha": "^5.2.0",
+    "nock": "^10.0.4",
+    "nyc": "^13.1.0",
+    "xo": "^0.23.0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test"
+      "pre-commit": "npm run test"
     }
   },
-  "files": [
-    "cmds",
-    "prompts",
-    "loaders.js",
-    "shark.js",
-    "util.js"
-  ],
-  "bin": {
-    "shark": "./shark.js"
-  },
-  "keywords": [
-    "cli",
-    "digitalocean",
-    "shark",
-    "nodejs"
-  ],
   "xo": {
     "space": true,
-    "plugins": [
-      "jest"
-    ],
-    "extends": [
-      "plugin:jest/recommended"
-    ],
     "rules": {
+      "quotes": 0,
       "object-curly-spacing": 0,
       "camelcase": 0,
       "unicorn/no-process-exit": 0,
@@ -56,21 +47,42 @@
         "error",
         "before"
       ]
-    }
+    },
+    "ignores": [
+      "test"
+    ]
   },
-  "dependencies": {
-    "cache-conf": "^0.6.0",
-    "chalk": "^2.4.1",
-    "do-wrapper": "^3.14.3",
-    "inquirer": "^6.0.0",
-    "ora": "^3.0.0",
-    "update-notifier": "^2.5.0"
+  "engines": {
+    "node": ">=8.0.0"
   },
-  "devDependencies": {
-    "eslint-plugin-jest": "^21.22.0",
-    "husky": "^1.1.1",
-    "semantic-release": "^15.9.12",
-    "travis-deploy-once": "^5.0.4",
-    "xo": "^0.23.0"
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "homepage": "https://github.com/satyarohith/shark",
+  "keywords": [
+    "oclif",
+    "shark",
+    "digitalocean",
+    "cli"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "shark",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "satyarohith/shark",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "test": "xo && nyc mocha --forbid-only \"test/**/*.test.js\"",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "readme": "oclif-dev readme"
   }
 }
