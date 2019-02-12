@@ -17,7 +17,7 @@ A CLI to interact with digitalocean
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g shark
+$ npm install -g shark@beta
 $ shark COMMAND
 running command...
 $ shark (-v|--version|version)
