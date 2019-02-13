@@ -15,7 +15,7 @@ describe('actions:list', () => {
       expect(ctx.stdout).to.contain("You haven't perfomed any actions\n");
     });
 
-  const expectedOutput = `ID        Status    Resource type Resource id Type    Started at           Completed at         Region \n593116925 completed droplet       125046402   destroy 2018-12-25T05:35:26Z 2018-12-25T05:35:28Z ncy1   \nCurrent Page: 1\nTotal Pages: 1\n`;
+  const expectedOutput = `ID        Status    Resource type Resource id Type    Started at           Completed at         Region \n593116925 completed droplet       125046402   destroy 2018-12-25T05:35:26Z 2018-12-25T05:35:28Z ncy1   \n`;
 
   test
     .nock('https://api.digitalocean.com/v2', api =>
