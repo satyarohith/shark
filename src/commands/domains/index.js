@@ -33,6 +33,6 @@ class DomainsCommand extends BaseCommand {
   }
 }
 
-DomainsCommand.description = `Perform domain related operations`;
+DomainsCommand.description = `perform domain related operations`;
 
 module.exports = DomainsCommand;
