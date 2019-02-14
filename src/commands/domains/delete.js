@@ -1,4 +1,5 @@
 const {flags} = require('@oclif/command');
+const chalk = require('chalk');
 const BaseCommand = require('../../base');
 
 class DomainsDeleteCommand extends BaseCommand {
@@ -6,7 +7,7 @@ class DomainsDeleteCommand extends BaseCommand {
     const {flags} = this.parse(DomainsDeleteCommand);
     const {isTTY} = process.stdout;
 
-    const {api} = this;
+    const {api, spinner} = this;
     let {name} = flags;
 
     if (!name && isTTY) {
@@ -16,11 +17,14 @@ class DomainsDeleteCommand extends BaseCommand {
     }
 
     try {
+      spinner.start(`Deleting ${name}...`);
       const {response} = await api.domainsDelete(name);
+      spinner.stop();
       if (response.statusCode === 204) {
-        this.log(`Successfully deleted ${name}`);
+        this.log(chalk.green(`Successfully deleted ${name}`));
       }
     } catch (error) {
+      spinner.stop();
       this.error(error.message);
     }
   }
