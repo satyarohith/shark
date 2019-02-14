@@ -5,7 +5,7 @@ class ActionsListCommand extends BaseCommand {
   async run() {
     const {flags} = this.parse(ActionsListCommand);
     const {json, page} = flags;
-    const {api, styledJSON} = this;
+    const {api, styledJSON, spinner} = this;
 
     const options = {
       columns: flags.columns,
@@ -31,8 +31,9 @@ class ActionsListCommand extends BaseCommand {
     };
 
     try {
+      spinner.start('Loading actions...');
       const {body} = await api.accountGetActions({page});
-
+      spinner.stop();
       if (json) {
         this.log(styledJSON(body));
       } else if (body.meta.total === 0) {
@@ -65,7 +66,8 @@ class ActionsListCommand extends BaseCommand {
         }
       }
     } catch (error) {
-      this.error(error);
+      spinner.stop();
+      this.error(error.message);
     }
   }
 }

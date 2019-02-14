@@ -5,7 +5,7 @@ class ActionsGetCommand extends BaseCommand {
   async run() {
     const {flags} = this.parse(ActionsGetCommand);
     const {isTTY} = process.stdout;
-    const {api, styledJSON} = this;
+    const {api, styledJSON, spinner} = this;
     const {json} = flags;
     let {id} = flags;
 
@@ -16,7 +16,9 @@ class ActionsGetCommand extends BaseCommand {
     }
 
     try {
+      spinner.start('Loading action...');
       const {body} = await api.accountGetAction(id);
+      spinner.stop();
       if (json) {
         this.log(styledJSON(body));
       } else {
@@ -30,6 +32,7 @@ class ActionsGetCommand extends BaseCommand {
         this.log('Region:', action.region.name);
       }
     } catch (error) {
+      spinner.stop();
       this.error(error.message);
     }
   }
