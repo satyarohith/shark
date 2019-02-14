@@ -5,7 +5,7 @@ class DropletsDeleteCommand extends BaseCommand {
   async run() {
     const {flags} = this.parse(DropletsDeleteCommand);
     const {isTTY} = process.stdout;
-    const {api} = this;
+    const {api, spinner} = this;
     let {id} = flags;
 
     if (!id && isTTY) {
@@ -15,11 +15,14 @@ class DropletsDeleteCommand extends BaseCommand {
     }
 
     try {
+      spinner.start('Deleting droplet...');
       const {response} = await api.dropletsDelete(id);
+      spinner.stop();
       if (response.statusCode === 204) {
         this.log('successfully deleted!');
       }
     } catch (error) {
+      spinner.stop();
       this.error(error.message);
     }
   }

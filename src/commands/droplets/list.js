@@ -105,8 +105,10 @@ class DropletsListCommand extends BaseCommand {
 
         const {currentPage, totalPages} = calculatePages(body.links);
         cli.table(data, columns, options);
-        this.log('Current Page:', currentPage);
-        this.log('Total Pages:', totalPages);
+        if (totalPages > 1) {
+          this.log('Current Page:', currentPage);
+          this.log('Total Pages:', totalPages);
+        }
       }
     } catch (error) {
       spinner.stop();

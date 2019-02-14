@@ -17,7 +17,7 @@ describe('droplets:list', () => {
       );
     });
 
-  const expectedOutput = `Id        Name Memory VCPUS Disk Public IPv4   Private IPv4  Public IPv6   Region Status \n123456789 test 1024   1     25   111.11.111.11 not available not available ams3   active \nCurrent Page: 1\nTotal Pages: 1\n`;
+  const expectedOutput = `Id        Name Memory VCPUS Disk Public IPv4   Private IPv4  Public IPv6   Region Status \n123456789 test 1024   1     25   111.11.111.11 not available not available ams3   active \n`;
 
   test
     .nock('https://api.digitalocean.com/v2', api =>
