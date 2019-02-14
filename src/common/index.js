@@ -7,7 +7,7 @@ const calculatePages = links => {
   let totalPages = 1;
   let currentPage = 1;
 
-  if (links.pages) {
+  if (links && links.pages) {
     if (links.pages.next) {
       const nextPage = new URL(links.pages.next).searchParams.get('page');
       currentPage = Number(nextPage) - 1;
