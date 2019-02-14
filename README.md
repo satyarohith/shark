@@ -17,7 +17,7 @@ A CLI to interact with digitalocean
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g shark@beta
+$ npm install -g shark
 $ shark COMMAND
 running command...
 $ shark (-v|--version|version)
@@ -44,6 +44,7 @@ USAGE
 * [`shark help [COMMAND]`](#shark-help-command)
 * [`shark projects:create`](#shark-projectscreate)
 * [`shark projects:list`](#shark-projectslist)
+* [`shark records:list`](#shark-recordslist)
 * [`shark ssh_keys:create`](#shark-ssh-keyscreate)
 * [`shark ssh_keys:delete`](#shark-ssh-keysdelete)
 * [`shark ssh_keys:get`](#shark-ssh-keysget)
@@ -147,7 +148,15 @@ USAGE
   $ shark domains:list
 
 OPTIONS
-  --json  output in json format
+  -j, --json         output in json format
+  -p, --page=page    specific page to request
+  -x, --extended     show extra columns
+  --columns=columns  only show provided columns (comma-seperated)
+  --csv              output is csv format
+  --filter=filter    filter property by partial string matching, ex: name=foo
+  --no-header        hide table header from output
+  --no-truncate      do not truncate output to fit screen
+  --sort=sort
 ```
 
 _See code: [src/commands/domains/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/domains/list.js)_
@@ -308,6 +317,21 @@ OPTIONS
 ```
 
 _See code: [src/commands/projects/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/projects/list.js)_
+
+## `shark records:list`
+
+list domain records
+
+```
+USAGE
+  $ shark records:list
+
+OPTIONS
+  -j, --json       output in json format
+  -n, --name=name  domain name
+```
+
+_See code: [src/commands/records/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/records/list.js)_
 
 ## `shark ssh_keys:create`
 

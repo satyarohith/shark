@@ -95,6 +95,9 @@
       },
       "token": {
         "description": "perform token related operations"
+      },
+      "records": {
+        "description": "perform domain records related operations"
       }
     }
   },
