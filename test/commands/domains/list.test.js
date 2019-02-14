@@ -32,7 +32,8 @@ describe('domains:list', () => {
     }
   };
 
-  const expectedOutput = 'satyarohith.com  1800\nexample.com  3600\n';
+  const expectedOutput =
+    'Name            TTL  \nsatyarohith.com 1800 \nexample.com     3600 \n';
 
   test
     .nock('https://api.digitalocean.com/v2', api =>
