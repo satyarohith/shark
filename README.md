@@ -17,11 +17,11 @@ A CLI to interact with digitalocean
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g shark
+$ npm install -g shark@beta
 $ shark COMMAND
 running command...
 $ shark (-v|--version|version)
-shark/2.0.0-beta.1 linux-x64 node-v10.9.0
+shark/2.0.0-beta.2 linux-x64 node-v10.9.0
 $ shark --help [COMMAND]
 USAGE
   $ shark COMMAND
@@ -44,6 +44,8 @@ USAGE
 * [`shark help [COMMAND]`](#shark-help-command)
 * [`shark projects:create`](#shark-projectscreate)
 * [`shark projects:list`](#shark-projectslist)
+* [`shark records:create`](#shark-recordscreate)
+* [`shark records:delete`](#shark-recordsdelete)
 * [`shark records:list`](#shark-recordslist)
 * [`shark ssh_keys:create`](#shark-ssh-keyscreate)
 * [`shark ssh_keys:delete`](#shark-ssh-keysdelete)
@@ -70,7 +72,7 @@ OPTIONS
   --json       output in json format
 ```
 
-_See code: [src/commands/actions/get.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/actions/get.js)_
+_See code: [src/commands/actions/get.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/actions/get.js)_
 
 ## `shark actions:list`
 
@@ -92,7 +94,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/actions/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/actions/list.js)_
+_See code: [src/commands/actions/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/actions/list.js)_
 
 ## `shark domains`
 
@@ -103,7 +105,7 @@ USAGE
   $ shark domains
 ```
 
-_See code: [src/commands/domains/index.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/domains/index.js)_
+_See code: [src/commands/domains/index.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/domains/index.js)_
 
 ## `shark domains:create`
 
@@ -123,7 +125,7 @@ DESCRIPTION
   $ shark domains:create --name=satyarohith.com --ip=1.1.1.1
 ```
 
-_See code: [src/commands/domains/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/domains/create.js)_
+_See code: [src/commands/domains/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/domains/create.js)_
 
 ## `shark domains:delete`
 
@@ -137,7 +139,7 @@ OPTIONS
   -n, --name=name  domain name
 ```
 
-_See code: [src/commands/domains/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/domains/delete.js)_
+_See code: [src/commands/domains/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/domains/delete.js)_
 
 ## `shark domains:list`
 
@@ -159,7 +161,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/domains/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/domains/list.js)_
+_See code: [src/commands/domains/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/domains/list.js)_
 
 ## `shark droplets:backups`
 
@@ -176,7 +178,7 @@ OPTIONS
   -j, --json     output in json format
 ```
 
-_See code: [src/commands/droplets/backups.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/droplets/backups.js)_
+_See code: [src/commands/droplets/backups.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/droplets/backups.js)_
 
 ## `shark droplets:create`
 
@@ -203,7 +205,7 @@ OPTIONS
   --volumes=volumes          volume IDs
 ```
 
-_See code: [src/commands/droplets/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/droplets/create.js)_
+_See code: [src/commands/droplets/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/droplets/create.js)_
 
 ## `shark droplets:delete`
 
@@ -223,7 +225,7 @@ DESCRIPTION
   shark droplets:delete --id 123456
 ```
 
-_See code: [src/commands/droplets/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/droplets/delete.js)_
+_See code: [src/commands/droplets/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/droplets/delete.js)_
 
 ## `shark droplets:list`
 
@@ -245,7 +247,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/droplets/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/droplets/list.js)_
+_See code: [src/commands/droplets/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/droplets/list.js)_
 
 ## `shark droplets:shutdown`
 
@@ -260,7 +262,7 @@ OPTIONS
   -j, --json   output in json format
 ```
 
-_See code: [src/commands/droplets/shutdown.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/droplets/shutdown.js)_
+_See code: [src/commands/droplets/shutdown.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/droplets/shutdown.js)_
 
 ## `shark help [COMMAND]`
 
@@ -294,7 +296,7 @@ OPTIONS
   -p, --purpose=purpose          The description of the project. (max 255 char)
 ```
 
-_See code: [src/commands/projects/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/projects/create.js)_
+_See code: [src/commands/projects/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/projects/create.js)_
 
 ## `shark projects:list`
 
@@ -316,7 +318,51 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/projects/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/projects/list.js)_
+_See code: [src/commands/projects/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/projects/list.js)_
+
+## `shark records:create`
+
+create a domain record
+
+```
+USAGE
+  $ shark records:create
+
+OPTIONS
+  -D, --domain-name=domain-name  The domain name
+  -P, --priority=priority        The priority of the host (for SRV and MX records).
+  -T, --ttl=ttl                  This value is the time to live for the record, in seconds.
+
+  -d, --data=data                The data for the record. For example, the 'data' for an 'A' record would be the IPv4
+                                 Address.
+
+  -j, --json                     output in json format
+
+  -n, --name=name                The host name, alias, or service being defined by the record.
+
+  -p, --port=port                The port that the service is accessible on (for SRV records only).
+
+  -t, --type=type                The type of the record (A, MX, CNAME, etc).
+
+  --tag=tag                      The parameter tag for CAA records. Valid values are "issue", "issuewild", or "iodef"
+```
+
+_See code: [src/commands/records/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/records/create.js)_
+
+## `shark records:delete`
+
+delete a domain record
+
+```
+USAGE
+  $ shark records:delete
+
+OPTIONS
+  -i, --id=id      domain record ID
+  -n, --name=name  domain name
+```
+
+_See code: [src/commands/records/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/records/delete.js)_
 
 ## `shark records:list`
 
@@ -331,7 +377,7 @@ OPTIONS
   -n, --name=name  domain name
 ```
 
-_See code: [src/commands/records/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/records/list.js)_
+_See code: [src/commands/records/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/records/list.js)_
 
 ## `shark ssh_keys:create`
 
@@ -347,7 +393,7 @@ OPTIONS
   -n, --name=name  The name to give to the new SSH key in your account
 ```
 
-_See code: [src/commands/ssh_keys/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/ssh_keys/create.js)_
+_See code: [src/commands/ssh_keys/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/ssh_keys/create.js)_
 
 ## `shark ssh_keys:delete`
 
@@ -362,7 +408,7 @@ OPTIONS
   -i, --id=id                    use id of the key to delete
 ```
 
-_See code: [src/commands/ssh_keys/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/ssh_keys/delete.js)_
+_See code: [src/commands/ssh_keys/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/ssh_keys/delete.js)_
 
 ## `shark ssh_keys:get`
 
@@ -378,7 +424,7 @@ OPTIONS
   -j, --json                     output in json format
 ```
 
-_See code: [src/commands/ssh_keys/get.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/ssh_keys/get.js)_
+_See code: [src/commands/ssh_keys/get.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/ssh_keys/get.js)_
 
 ## `shark ssh_keys:list`
 
@@ -401,7 +447,7 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/ssh_keys/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/ssh_keys/list.js)_
+_See code: [src/commands/ssh_keys/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/ssh_keys/list.js)_
 
 ## `shark token:delete`
 
@@ -412,7 +458,7 @@ USAGE
   $ shark token:delete
 ```
 
-_See code: [src/commands/token/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/token/delete.js)_
+_See code: [src/commands/token/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/token/delete.js)_
 
 ## `shark volumes:attach`
 
@@ -429,7 +475,7 @@ OPTIONS
   -r, --region=region          region of the volume
 ```
 
-_See code: [src/commands/volumes/attach.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/volumes/attach.js)_
+_See code: [src/commands/volumes/attach.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/volumes/attach.js)_
 
 ## `shark volumes:create`
 
@@ -452,7 +498,7 @@ OPTIONS
   -t, --tags=tags          tags to apply to the volume (new or existing)
 ```
 
-_See code: [src/commands/volumes/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/volumes/create.js)_
+_See code: [src/commands/volumes/create.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/volumes/create.js)_
 
 ## `shark volumes:delete`
 
@@ -468,7 +514,7 @@ OPTIONS
   -j, --json        output in json format
 ```
 
-_See code: [src/commands/volumes/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/volumes/delete.js)_
+_See code: [src/commands/volumes/delete.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/volumes/delete.js)_
 
 ## `shark volumes:detach`
 
@@ -485,7 +531,7 @@ OPTIONS
   -r, --region=region          region of the volume
 ```
 
-_See code: [src/commands/volumes/detach.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/volumes/detach.js)_
+_See code: [src/commands/volumes/detach.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/volumes/detach.js)_
 
 ## `shark volumes:get`
 
@@ -501,7 +547,7 @@ OPTIONS
   -j, --json        output in json format
 ```
 
-_See code: [src/commands/volumes/get.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/volumes/get.js)_
+_See code: [src/commands/volumes/get.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/volumes/get.js)_
 
 ## `shark volumes:list`
 
@@ -523,5 +569,5 @@ OPTIONS
   --sort=sort
 ```
 
-_See code: [src/commands/volumes/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.1/src/commands/volumes/list.js)_
+_See code: [src/commands/volumes/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.2/src/commands/volumes/list.js)_
 <!-- commandsstop -->
