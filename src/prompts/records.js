@@ -11,6 +11,25 @@ const askRecordID = records => {
   });
 };
 
+const askRecordType = () => {
+  return prompt({
+    type: 'select',
+    message: 'Select record type',
+    name: 'recordType',
+    choices: ['A', 'AAAA', 'CNAME', 'TXT', 'NS', 'MX', 'SRV']
+  });
+};
+
+const askRecordData = () => {
+  return prompt({
+    type: 'input',
+    message: 'Enter record data',
+    name: 'recordData'
+  });
+};
+
 module.exports = {
-  askRecordID
+  askRecordData,
+  askRecordID,
+  askRecordType
 };
