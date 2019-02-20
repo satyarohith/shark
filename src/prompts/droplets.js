@@ -4,7 +4,8 @@ const {prompt} = require('enquirer');
 prompt.on('cancel', () => process.exit());
 
 /**
- * @param  {Array} sizes
+ * @param  {Array} sizes - Available droplet sizes
+ * @returns {Promise} prompt - Returns a prompt
  */
 const askDropletSize = sizes =>
   prompt({

@@ -8,7 +8,7 @@ prompt.on('cancel', () => process.exit());
  * @param {string} description - The description of the project
  * @param {string} purpose - The purpose of the project
  * @param {string} environment - The environment of the project's resources
- * @returns {*}
+ * @returns {Promise} prompt - Returns a prompt
  */
 const askProjectDetails = (name, description, purpose, environment) => {
   return prompt({
