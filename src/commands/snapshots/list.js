@@ -5,7 +5,7 @@ class SnapshotsListCommand extends BaseCommand {
   async run() {
     const {flags} = this.parse(SnapshotsListCommand);
     const {api, styledJSON, spinner} = this;
-    const {json} = flags;
+    const {json, droplets, volumes} = flags;
 
     const options = {
       columns: flags.columns,
@@ -32,7 +32,16 @@ class SnapshotsListCommand extends BaseCommand {
 
     try {
       spinner.start('Loading snapshots....');
-      const {body} = await api.snapshots();
+      let data;
+      if (droplets) {
+        data = await api.snapshotsDroplets();
+      } else if (volumes) {
+        data = await api.snapshotsVolumes();
+      } else {
+        data = await api.snapshots();
+      }
+
+      const {body} = data;
       spinner.stop();
       if (json) {
         this.log(styledJSON(body));
@@ -69,7 +78,15 @@ class SnapshotsListCommand extends BaseCommand {
 SnapshotsListCommand.description = `list all snapshots`;
 
 SnapshotsListCommand.flags = {
-  json: flags.boolean({char: 'j', description: 'output in json format'})
+  json: flags.boolean({char: 'j', description: 'output in json format'}),
+  droplets: flags.boolean({
+    char: 'd',
+    description: 'list all droplet snapshots'
+  }),
+  volumes: flags.boolean({
+    char: 'v',
+    description: 'list all volumes snapshots'
+  })
 };
 
 module.exports = SnapshotsListCommand;
