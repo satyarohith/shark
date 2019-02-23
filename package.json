@@ -98,6 +98,9 @@
       },
       "records": {
         "description": "perform domain records related operations"
+      },
+      "snapshots": {
+        "description": "perform snapshots related operations"
       }
     }
   },
