@@ -13,6 +13,10 @@ A CLI to interact with digitalocean
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
+* [Contribute](#contribute)
+* [Donate](#donate)
+* [Credits](#credits)
+* [License](#license)
 <!-- tocstop -->
 # Usage
 <!-- usage -->
