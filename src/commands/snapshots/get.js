@@ -39,7 +39,7 @@ class SnapshotsGetCommand extends BaseCommand {
   }
 }
 
-SnapshotsGetCommand.description = `get details of a snapshot`;
+SnapshotsGetCommand.description = `get details about a snapshot`;
 
 SnapshotsGetCommand.flags = {
   id: flags.integer({char: 'i', description: 'pass the action id'}),
