@@ -660,3 +660,25 @@ OPTIONS
 
 _See code: [src/commands/volumes/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.3/src/commands/volumes/list.js)_
 <!-- commandsstop -->
+
+# Contribute
+
+1. Fork this project
+2. Create a new branch related to the bug/feature
+3. Write tests where necessary
+4. Open a pull request and be proud
+
+New to Open-source? Learn how to contribute [here](https://opensource.guide/how-to-contribute/).
+
+# Donate
+
+Love this project? You can donate to me [here](https://paypal.me/satyarohith/15).
+
+# Credits
+
+* [Aleafs](https://github.com/aleafs) - For donating npm package name `shark`
+* [Packages Contributors](https://github.com/satyarohith/shark/network/dependencies)
+
+# License
+
+MIT © [Satya Rohith](https://satyarohith.com)
