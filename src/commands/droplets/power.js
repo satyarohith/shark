@@ -5,9 +5,16 @@ class DropletsPowerCommand extends BaseCommand {
   async run() {
     const {flags} = this.parse(DropletsPowerCommand);
     const {api, spinner, styledJSON} = this;
-    const {json, id, on, off} = flags;
+    const {json, id, cycle, on, off} = flags;
 
-    const userChoice = on ? 'on' : off ? 'off' : null;
+    let userChoice;
+    if (cycle) {
+      userChoice = 'cycle';
+    } else if (on) {
+      userChoice = 'on';
+    } else if (off) {
+      userChoice = 'off';
+    }
 
     try {
       const action = {
@@ -19,6 +26,8 @@ class DropletsPowerCommand extends BaseCommand {
       spinner.stop();
       if (json) {
         this.log(styledJSON(body));
+      } else if (cycle === true) {
+        this.log(`Your droplet will go through a power cycle.`);
       } else {
         this.log(`Your droplet will be powered ${userChoice} shortly.`);
       }
@@ -29,13 +38,17 @@ class DropletsPowerCommand extends BaseCommand {
   }
 }
 
-DropletsPowerCommand.description = `power on/off a droplet`;
+DropletsPowerCommand.description = `power on/off/cycle a droplet`;
 
 DropletsPowerCommand.flags = {
   json: flags.boolean({char: 'j', description: 'output in json format'}),
   id: flags.integer({char: 'i', description: 'droplet ID', required: true}),
   on: flags.boolean({char: 'o', description: 'power on droplet'}),
-  off: flags.boolean({char: 'f', description: 'power off droplet'})
+  off: flags.boolean({char: 'f', description: 'power off droplet'}),
+  cycle: flags.boolean({
+    char: 'c',
+    description: 'power cycle (off and on) a droplet'
+  })
 };
 
 module.exports = DropletsPowerCommand;
