@@ -1,3 +1,10 @@
+const Cache = require('cache-conf');
+
+const cache = new Cache();
+
+const DAY = 86400000; // 1 day in ms
+const WEEK = 604800000; // 1 week in ms
+
 const loadSSHKeys = async (api, spinner) => {
   try {
     spinner.start('Loading your ssh_keys...');
@@ -24,25 +31,28 @@ const loadSSHKeys = async (api, spinner) => {
 };
 
 const loadDropletSizes = async (api, spinner) => {
-  const availableSizes = [];
   try {
     spinner.start('Loading available sizes...');
-    // If (config.has('do-sizes')) {
-    //   availableSizes = config.get('do-sizes');
-    //   spinner.stop();
-    // } else {
-    const data = await api.sizesGetAll();
+
+    let data;
+
+    if (cache.has('loadDropletSizes_data')) {
+      data = cache.get('loadDropletSizes_data');
+    } else {
+      data = await api.sizesGetAll();
+      cache.set('loadDropletSizes_data', data, {maxAge: WEEK});
+    }
+
     spinner.stop();
+
+    const availableSizes = [];
     data.body.sizes.map(size =>
       availableSizes.push({
         name: `${size.slug} - ${size.disk}GB - ${size.price_monthly}$/m`,
         value: size.slug
       })
     );
-    // Config.set('do-sizes', availableSizes, {
-    //   maxAge: 7 * 8640000 /* 7 days */
-    // });
-    // }
+
     return availableSizes;
   } catch (error) {
     console.error(error);
@@ -50,27 +60,30 @@ const loadDropletSizes = async (api, spinner) => {
 };
 
 const loadDropletImages = async (api, spinner) => {
-  const availableImages = [];
   try {
     spinner.start('Loading available images...');
-    // If (config.has('do-images')) {
-    // availableImages = config.get('do-images');
-    // spinner.stop();
-    // } else {
-    const data = await api.imagesGetAll({
-      per_page: 50
-    });
+
+    let data;
+
+    if (cache.has('loadDropletImages_data')) {
+      data = cache.get('loadDropletImages_data');
+    } else {
+      data = await api.imagesGetAll({
+        per_page: 50
+      });
+      cache.set('loadDropletImages_data', data, {maxAge: WEEK});
+    }
+
     spinner.stop();
+
+    const availableImages = [];
     data.body.images.map(image =>
       availableImages.push({
         name: `${image.distribution} ${image.name} - ${image.size_gigabytes}GB`,
         value: image.slug
       })
     );
-    // Config.set('do-images', availableImages, {
-    //   maxAge: 7 * 8640000 /* 7 days */
-    // });
-    // }
+
     return availableImages;
   } catch (error) {
     console.error(error);
@@ -80,10 +93,20 @@ const loadDropletImages = async (api, spinner) => {
 const loadRegions = async (api, spinner) => {
   try {
     spinner.start('Loading regions...');
+    let data;
+
+    if (cache.has('loadRegions_data')) {
+      data = cache.get('loadRegions_data');
+    } else {
+      data = await api.regionsGetAll();
+      cache.set('loadRegions_data', data, {maxAge: DAY});
+    }
+
+    spinner.stop();
     const {
       body: {regions}
-    } = await api.regionsGetAll();
-    spinner.stop();
+    } = data;
+
     return regions;
   } catch (error) {
     spinner.stop();
