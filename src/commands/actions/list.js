@@ -21,13 +21,13 @@ class ActionsListCommand extends BaseCommand {
       id: {
         header: 'ID'
       },
-      status: {},
-      resource_type: {},
       resource_id: {},
+      resource_type: {},
+      region: {},
+      status: {},
       type: {},
       started_at: {},
-      completed_at: {},
-      region: {}
+      completed_at: {}
     };
 
     try {
@@ -51,8 +51,8 @@ class ActionsListCommand extends BaseCommand {
             resource_type: action.resource_type,
             resource_id: action.resource_id,
             type: action.type,
-            started_at: action.started_at,
-            completed_at: action.completed_at,
+            started_at: new Date(action.started_at).toLocaleString(),
+            completed_at: new Date(action.completed_at).toLocaleString(),
             region: action.region_slug
           })
         );
