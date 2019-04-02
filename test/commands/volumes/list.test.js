@@ -28,7 +28,7 @@ describe('volumes:list', () => {
           {
             id: 'a12b123b-45cd-67e8-91f2-3g45hi67j8910',
             name: 'shark',
-            created_at: '2019-02-03T12:10:12Z',
+            created_at: '2019-04-02T02:01:35Z',
             description: "It's a test volume",
             droplet_ids: [],
             region: {
@@ -49,4 +49,4 @@ describe('volumes:list', () => {
     });
 });
 
-const expectedOutput = `Name  ID                                    Region      Description        Size gigabytes \nshark a12b123b-45cd-67e8-91f2-3g45hi67j8910 Bangalore 1 It\'s a test volume 10             \n`;
+const expectedOutput = `Name  ID                                    Created at           Region      Size (GiB) \nshark a12b123b-45cd-67e8-91f2-3g45hi67j8910 4/2/2019, 7:31:35 AM Bangalore 1 10         \n`;
