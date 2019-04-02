@@ -25,12 +25,14 @@ class ListCommand extends BaseCommand {
       droplet_ids: {
         extended: true
       },
-      created_at: {
+      created_at: {},
+      region: {},
+      description: {
         extended: true
       },
-      region: {},
-      description: {},
-      size_gigabytes: {},
+      size_gigabytes: {
+        header: 'Size (GiB)'
+      },
       filesystem_type: {
         extended: true
       },
@@ -58,10 +60,13 @@ class ListCommand extends BaseCommand {
 
         body.volumes.map(volume => {
           const regionName = volume.region.name;
+          const createdAt = volume.created_at;
           delete volume.region;
+          delete volume.created_at;
 
           return data.push({
             region: regionName,
+            created_at: new Date(createdAt).toLocaleString(),
             ...volume
           });
         });
