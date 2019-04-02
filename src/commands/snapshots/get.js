@@ -27,7 +27,7 @@ class SnapshotsGetCommand extends BaseCommand {
         this.log('Name:', snapshot.name);
         this.log('Size Gigabytes:', snapshot.size_gigabytes);
         this.log('Min disk size:', snapshot.min_disk_size);
-        this.log('Created At:', new Date(snapshot.completed_at).toUTCString());
+        this.log('Created At:', new Date(snapshot.completed_at).toLocaleString());
         this.log('Resource Type:', snapshot.resource_type);
         this.log('Resource ID:', snapshot.resource_id);
         this.log('Regions:', snapshot.regions);
