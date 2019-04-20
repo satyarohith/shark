@@ -32,8 +32,8 @@ VolumesAttachCommand.description = `attach a volume to a droplet (action)`;
 
 VolumesAttachCommand.flags = {
   json: flags.boolean({char: 'j', description: 'output in json format'}),
-  id: flags.string({char: 'i', description: 'volume ID'}),
-  'droplet-id': flags.integer({char: 'd', description: 'droplet ID'}),
+  id: flags.string({char: 'i', description: 'volume ID', required: true}),
+  'droplet-id': flags.integer({char: 'd', description: 'droplet ID', required: true}),
   region: flags.string({char: 'r', description: 'region of the volume'})
 };
 
