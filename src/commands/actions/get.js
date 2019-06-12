@@ -26,8 +26,8 @@ class ActionsGetCommand extends BaseCommand {
         this.log('ID:', action.id);
         this.log('Status:', action.status);
         this.log('Type:', action.type);
-        this.log('Started At:', new Date(action.started_at).toUTCString());
-        this.log('Completed At:', new Date(action.completed_at).toUTCString());
+        this.log('Started At:', new Date(action.started_at).toLocaleString());
+        this.log('Completed At:', new Date(action.completed_at).toLocaleString());
         this.log('Resource ID:', action.resource_id);
         this.log('Region:', action.region.name);
       }
