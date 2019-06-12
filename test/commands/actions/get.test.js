@@ -24,5 +24,5 @@ describe('actions:get', () => {
       expect(ctx.stdout).to.equal(expectedOutput);
     });
 
-  const expectedOutput = `ID: 123456789\nStatus: completed\nType: destroy\nStarted At: Wed, 26 Dec 2018 10:22:15 GMT\nCompleted At: Wed, 26 Dec 2018 10:22:23 GMT\nResource ID: 123456789\nRegion: Bangalore 1\n`;
+  const expectedOutput = `ID: 123456789\nStatus: completed\nType: destroy\nStarted At: 12/26/2018, 3:52:15 PM\nCompleted At: 12/26/2018, 3:52:23 PM\nResource ID: 123456789\nRegion: Bangalore 1\n`;
 });
