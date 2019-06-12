@@ -1,7 +1,7 @@
 {
   "name": "shark",
   "description": "A CLI to interact with DigitalOcean",
-  "version": "2.0.0",
+  "version": "2.0.0-beta.5",
   "author": "Satya Rohith <gsatyarohith@gmail.com> (https://satyarohith.com)",
   "bin": {
     "shark": "./bin/run"
