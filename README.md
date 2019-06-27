@@ -14,7 +14,6 @@ A CLI to interact with digitalocean
 * [Usage](#usage)
 * [Commands](#commands)
 * [Contribute](#contribute)
-* [Donate](#donate)
 * [Credits](#credits)
 * [License](#license)
 <!-- tocstop -->
@@ -674,10 +673,6 @@ _See code: [src/commands/volumes/list.js](https://github.com/satyarohith/shark/b
 4. Open a pull request and be proud
 
 New to Open-source? Learn how to contribute [here](https://opensource.guide/how-to-contribute/).
-
-# Donate
-
-Love this project? You can donate to me [here](https://paypal.me/satyarohith/15).
 
 # Credits
 
