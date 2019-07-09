@@ -43,6 +43,7 @@ USAGE
 * [`shark droplets:create`](#shark-dropletscreate)
 * [`shark droplets:delete`](#shark-dropletsdelete)
 * [`shark droplets:list`](#shark-dropletslist)
+* [`shark droplets:password`](#shark-dropletspassword)
 * [`shark droplets:power`](#shark-dropletspower)
 * [`shark droplets:shutdown`](#shark-dropletsshutdown)
 * [`shark droplets:snapshot`](#shark-dropletssnapshot)
@@ -256,6 +257,21 @@ OPTIONS
 ```
 
 _See code: [src/commands/droplets/list.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.5/src/commands/droplets/list.js)_
+
+## `shark droplets:password`
+
+password reset a droplet
+
+```
+USAGE
+  $ shark droplets:password
+
+OPTIONS
+  -i, --id=id  droplet ID
+  -j, --json   output in json format
+```
+
+_See code: [src/commands/droplets/password.js](https://github.com/satyarohith/shark/blob/v2.0.0-beta.5/src/commands/droplets/password.js)_
 
 ## `shark droplets:power`
 
