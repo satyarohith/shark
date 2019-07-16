@@ -49,4 +49,4 @@ describe('volumes:list', () => {
     });
 });
 
-const expectedOutput = `Name  ID                                    Created at           Region      Size (GiB) \nshark a12b123b-45cd-67e8-91f2-3g45hi67j8910 4/2/2019, 7:31:35 AM Bangalore 1 10         \n`;
+const expectedOutput = `Name  ID                                    Created at                    Region      Size (GiB) \nshark a12b123b-45cd-67e8-91f2-3g45hi67j8910 Tue, 02 Apr 2019 02:01:35 GMT Bangalore 1 10         \n`;

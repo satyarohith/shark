@@ -15,8 +15,6 @@ describe('actions:list', () => {
       expect(ctx.stdout).to.contain("You haven't perfomed any actions\n");
     });
 
-  const expectedOutput = `ID        Resource id Resource type Region Status    Type    Started at              Completed at            \n593116925 125046402   droplet       ncy1   completed destroy 12/25/2018, 11:05:26 AM 12/25/2018, 11:05:28 AM \n`;
-
   test
     .nock('https://api.digitalocean.com/v2', api =>
       api.get('/actions?tag_name=&page=1').reply(200, {
@@ -43,4 +41,6 @@ describe('actions:list', () => {
     .it('lists actions successfully', ctx => {
       expect(ctx.stdout).to.equal(expectedOutput);
     });
+
+  const expectedOutput = `ID        Resource id Resource type Region Status    Type    Started at                    Completed at                  \n593116925 125046402   droplet       ncy1   completed destroy Tue, 25 Dec 2018 05:35:26 GMT Tue, 25 Dec 2018 05:35:28 GMT \n`;
 });

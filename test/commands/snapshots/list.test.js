@@ -15,7 +15,6 @@ describe('snapshots:list', () => {
       expect(ctx.stdout).to.contain("You didn't take any snapshots\n");
     });
 
-  const expectedOutput = `ID       Name  Created at            Resource type Resource id Regions    Min disk size Size gigabytes \n12345678 shark 2/20/2019, 7:25:28 PM droplet       876543210   [ \'blr1\' ] 25            1.22           \n`;
 
   test
     .nock('https://api.digitalocean.com/v2', api =>
@@ -43,4 +42,6 @@ describe('snapshots:list', () => {
     .it('lists actions successfully', ctx => {
       expect(ctx.stdout).to.equal(expectedOutput);
     });
+
+  const expectedOutput = `ID       Name  Created at                    Resource type Resource id Regions    Min disk size Size gigabytes \n12345678 shark Wed, 20 Feb 2019 13:55:28 GMT droplet       876543210   [ \'blr1\' ] 25            1.22           \n`;
 });
