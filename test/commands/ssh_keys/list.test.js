@@ -33,7 +33,7 @@ describe('ssh_keys:list', () => {
       })
     )
     .stdout()
-    .command(['ssh_keys:list'])
+    .command(['ssh_keys:list', '--no-truncate'])
     .it('lists ssh_keys', ctx => {
       expect(ctx.stdout).to.equal(expectedOutput);
     });

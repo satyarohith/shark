@@ -39,7 +39,7 @@ describe('records:list', () => {
       })
     )
     .stdout()
-    .command(['records:list', '-n', 'satyarohith.com'])
+    .command(['records:list', '-n', 'satyarohith.com', '--no-truncate'])
     .it('lists records', ctx => {
       expect(ctx.stdout).to.equal(expectedOutput);
     });

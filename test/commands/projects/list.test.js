@@ -37,7 +37,7 @@ describe('projects:list', () => {
       })
     )
     .stdout()
-    .command(['projects:list'])
+    .command(['projects:list', '--no-truncate'])
     .it('lists projects', ctx => {
       expect(ctx.stdout).to.equal(expectedOutput);
     });

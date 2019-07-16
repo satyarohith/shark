@@ -38,7 +38,7 @@ describe('snapshots:list', () => {
       })
     )
     .stdout()
-    .command(['snapshots:list'])
+    .command(['snapshots:list', '--no-truncate'])
     .it('lists actions successfully', ctx => {
       expect(ctx.stdout).to.equal(expectedOutput);
     });

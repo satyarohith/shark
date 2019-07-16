@@ -86,7 +86,7 @@ describe('droplets:list', () => {
       })
     )
     .stdout()
-    .command(['droplets:list'])
+    .command(['droplets:list', '--no-truncate'])
     .it('lists droplets successfully', ctx => {
       expect(ctx.stdout).to.contain(expectedOutput);
     });

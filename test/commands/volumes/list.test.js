@@ -43,7 +43,7 @@ describe('volumes:list', () => {
       })
     )
     .stdout()
-    .command(['volumes:list'])
+    .command(['volumes:list', '--no-truncate'])
     .it('lists volume successfully', ctx => {
       expect(ctx.stdout).to.equal(expectedOutput);
     });
