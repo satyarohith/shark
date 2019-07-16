@@ -51,8 +51,8 @@ class ActionsListCommand extends BaseCommand {
             resource_type: action.resource_type,
             resource_id: action.resource_id,
             type: action.type,
-            started_at: new Date(action.started_at).toLocaleString(),
-            completed_at: new Date(action.completed_at).toLocaleString(),
+            started_at: new Date(action.started_at).toUTCString(),
+            completed_at: new Date(action.completed_at).toUTCString(),
             region: action.region_slug
           })
         );

@@ -66,7 +66,7 @@ class ListCommand extends BaseCommand {
 
           return data.push({
             region: regionName,
-            created_at: new Date(createdAt).toLocaleString(),
+            created_at: new Date(createdAt).toUTCString(),
             ...volume
           });
         });

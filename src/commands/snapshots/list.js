@@ -56,7 +56,7 @@ class SnapshotsListCommand extends BaseCommand {
         body.snapshots.map(snapshot =>
           data.push({
             ...snapshot,
-            created_at: new Date(snapshot.created_at).toLocaleString()
+            created_at: new Date(snapshot.created_at).toUTCString()
           })
         );
 
