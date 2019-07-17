@@ -3,7 +3,7 @@ const DigitalOcean = require('do-wrapper').default;
 const Conf = require('conf');
 const Ora = require('ora');
 
-const config = new Conf();
+const config = new Conf({projectName: 'shark'});
 
 class BaseCommand extends Command {
   async init() {
