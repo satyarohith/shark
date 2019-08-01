@@ -69,6 +69,7 @@ const loadDropletImages = async (api, spinner) => {
       data = cache.get('loadDropletImages_data');
     } else {
       data = await api.imagesGetAll({
+        type: 'distribution',
         per_page: 50
       });
       cache.set('loadDropletImages_data', data, {maxAge: WEEK});
