@@ -79,7 +79,7 @@ const askRegion = (resourceName, regions) => {
   return prompt({
     type: 'autocomplete',
     name: `${resourceName}Region`,
-    message: `select ${resourceName} region`,
+    message: `Select ${resourceName} region`,
     choices: regions
   });
 };

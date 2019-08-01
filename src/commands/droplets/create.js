@@ -1,4 +1,5 @@
 const {flags} = require('@oclif/command');
+const {green} = require('chalk');
 const BaseCommand = require('../../base');
 
 class DropletsCreateCommand extends BaseCommand {
@@ -82,13 +83,17 @@ class DropletsCreateCommand extends BaseCommand {
     };
 
     try {
-      spinner.start(`creating ${flags.name}`);
+      spinner.start(`Creating ${flags.name}...`);
       const {body} = await api.dropletsCreate(config);
       spinner.stop();
       if (flags.json) {
         this.log(this.styledJSON(body));
       } else {
-        this.log(body.droplet.name, 'created at', body.droplet.region.name);
+        this.log(
+          `${green(`✔ ${body.droplet.name}`)} created at ${
+            body.droplet.region.name
+          }`
+        );
       }
     } catch (error) {
       spinner.stop();

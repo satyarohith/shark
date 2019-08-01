@@ -11,16 +11,16 @@ const askDropletSize = sizes =>
   prompt({
     type: 'select',
     name: 'dropletSize',
-    message: 'select droplet size:',
+    message: 'Select droplet size',
     choices: sizes
   });
 
-const askDropletImage = () => {
+const askDropletImage = images => {
   return prompt({
     type: 'autocomplete',
     name: 'dropletImage',
-    message: 'select droplet image',
-    choices: [
+    message: 'Select droplet image',
+    choices: images || [
       'coreos-beta',
       'freebsd-10-3-x64-zfs',
       'freebsd-10-3-x64',
@@ -56,7 +56,7 @@ const askSSHKey = keys => {
   return prompt({
     type: 'multiselect',
     name: 'sshKey',
-    message: 'select the keys you want to embed',
+    message: 'Select the SSH keys you want to embed',
     choices: keys
   });
 };
