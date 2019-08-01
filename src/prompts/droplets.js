@@ -20,35 +20,7 @@ const askDropletImage = images => {
     type: 'autocomplete',
     name: 'dropletImage',
     message: 'Select droplet image',
-    choices: images || [
-      'coreos-beta',
-      'freebsd-10-3-x64-zfs',
-      'freebsd-10-3-x64',
-      'freebsd-11-1-x64',
-      'freebsd-11-1-x64-zfs',
-      'freebsd-10-4-x64-zfs',
-      'freebsd-10-4-x64',
-      'fedora-27-x64',
-      'centos-6-x32',
-      'debian-8-x64',
-      'debian-8-x32',
-      'fedora-28-x64',
-      'fedora-28-x64-atomic',
-      'centos-7-x64',
-      'centos-6-x64',
-      'freebsd-11-2-x64-zfs',
-      'freebsd-11-2-x64',
-      'ubuntu-18-10-x64',
-      'rancheros',
-      'ubuntu-14-04-x32',
-      'ubuntu-14-04-x64',
-      'ubuntu-18-04-x64',
-      'coreos-alpha',
-      'coreos-stable',
-      'ubuntu-16-04-x32',
-      'ubuntu-16-04-x64',
-      'debian-9-x64'
-    ]
+    choices: images
   });
 };
 
