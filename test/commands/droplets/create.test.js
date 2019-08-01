@@ -33,7 +33,7 @@ describe('droplets:create', () => {
       '--no-prompts'
     ])
     .it('shows successful create message', ctx => {
-      const expectedOutput = `shark created at Bangalore 1\n`;
+      const expectedOutput = `✔ shark created at Bangalore 1\n`;
       expect(ctx.stdout).to.equal(expectedOutput);
     });
 });
