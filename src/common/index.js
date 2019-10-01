@@ -24,6 +24,7 @@ const calculatePages = links => {
       totalPages = Number(prevPage) + 1;
     }
   }
+
   return {totalPages, currentPage};
 };
 

@@ -13,11 +13,12 @@ class DropletsSnapshotCommand extends BaseCommand {
         const {dropletID} = await askID('droplet');
         flags.id = dropletID;
       }
+
       if (!flags.name) {
         const {askName} = require('../../prompts');
         const {snapshotName} = await askName(
           'snapshot',
-          'Give name to the new snapshot'
+          'Give a name to the new snapshot'
         );
         flags.name = snapshotName;
       }

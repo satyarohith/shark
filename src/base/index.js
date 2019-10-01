@@ -32,6 +32,7 @@ class BaseCommand extends Command {
       if (account.status === 'active') {
         return true;
       }
+
       return false;
     } catch (error) {
       console.error(error.message);
@@ -54,6 +55,7 @@ class BaseCommand extends Command {
       const theme = require('cardinal/themes/jq');
       return cardinal.highlight(JSON.stringify(data, null, 2), {theme});
     }
+
     return JSON.stringify(data, null, 2);
   }
 }

@@ -7,7 +7,12 @@ class DropletsBackupsCommand extends BaseCommand {
     const {api, spinner, styledJSON} = this;
     const {json, id, enable, disable} = flags;
 
-    const userChoice = enable ? 'enable' : disable ? 'disable' : null;
+    let userChoice;
+    if (enable) {
+      userChoice = 'enable';
+    } else if (disable) {
+      userChoice = 'disable';
+    }
 
     try {
       const action = {

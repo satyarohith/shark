@@ -24,6 +24,7 @@ class VolumesDeleteCommand extends BaseCommand {
       if (response.statusCode === 204) {
         this.log('successfully deleted!');
       }
+
       spinner.stop();
     } catch (error) {
       spinner.stop();

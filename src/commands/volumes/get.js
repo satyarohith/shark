@@ -32,6 +32,7 @@ class VolumesGetCommand extends BaseCommand {
         this.log('Size:', volume.size_gigabytes + 'GiB');
         this.log('FS Type:', volume.filesystem_type);
       }
+
       spinner.stop();
     } catch (error) {
       spinner.stop();
