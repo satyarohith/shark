@@ -16,7 +16,6 @@ const loadSSHKeys = async (api, spinner) => {
       console.log('You don\'t have any ssh_keys!');
       process.exit();
     } else {
-      /* eslint-disable camelcase */
       data.body.ssh_keys.map(ssh_key =>
         availableSSHKEYS.push({
           message: ssh_key.name,

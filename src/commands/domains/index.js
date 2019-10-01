@@ -14,16 +14,19 @@ class DomainsCommand extends BaseCommand {
           await DomainsCreateCommand.run();
           break;
         }
+
         case 'delete': {
           const DomainsDeleteCommand = require('./delete');
           await DomainsDeleteCommand.run();
           break;
         }
+
         case 'list': {
           const DomainsListCommand = require('./list');
           await DomainsListCommand.run();
           break;
         }
+
         default:
           process.exit(0);
       }
