@@ -19,7 +19,7 @@
     "do-wrapper": "^3.25.4",
     "enquirer": "^2.3.4",
     "ora": "^4.0.3",
-    "update-notifier": "^4.1.0"
+    "update-notifier": "^5.0.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
